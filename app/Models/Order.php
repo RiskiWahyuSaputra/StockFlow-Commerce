@@ -146,4 +146,14 @@ class Order extends Model
     {
         return $this->payment_status === self::PAYMENT_PAID;
     }
+
+    public function getSubtotalLabelAttribute(): string
+    {
+        return 'Rp'.number_format((int) round((float) $this->subtotal), 0, ',', '.');
+    }
+
+    public function getGrandTotalLabelAttribute(): string
+    {
+        return 'Rp'.number_format((int) round((float) $this->grand_total), 0, ',', '.');
+    }
 }
