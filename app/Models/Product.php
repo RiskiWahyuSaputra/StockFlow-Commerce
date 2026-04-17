@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Attributes\Computed;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -79,6 +80,40 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function scopeSearchByName(Builder $query, ?string $search): Builder
+    {
+        if (blank($search)) {
+            return $query;
+        }
+
+        return $query->where('name', 'like', '%'.trim($search).'%');
+    }
+
+    public function scopeInCategorySlug(Builder $query, ?string $categorySlug): Builder
+    {
+        if (blank($categorySlug)) {
+            return $query;
+        }
+
+        return $query->whereHas('category', function (Builder $categoryQuery) use ($categorySlug): void {
+            $categoryQuery->where('slug', $categorySlug);
+        });
+    }
+
+    public function scopeApplyCatalogSort(Builder $query, ?string $sort): Builder
+    {
+        return match ($sort) {
+            'lowest_price' => $query->orderBy('price')->orderByDesc('published_at')->orderByDesc('id'),
+            'highest_price' => $query->orderByDesc('price')->orderByDesc('published_at')->orderByDesc('id'),
+            default => $query->orderByDesc('published_at')->orderByDesc('id'),
+        };
+    }
+
     public function images(): HasMany
     {
         return $this->hasMany(ProductImage::class)->orderBy('sort_order');
@@ -108,6 +143,31 @@ class Product extends Model
     public function isInStock(): bool
     {
         return $this->stock > 0;
+    }
+
+    public function getPriceLabelAttribute(): string
+    {
+        return 'Rp'.number_format((int) round((float) $this->price), 0, ',', '.');
+    }
+
+    public function getSummaryAttribute(): string
+    {
+        return $this->short_description ?: Str::limit(strip_tags((string) $this->description), 120);
+    }
+
+    public function getPrimaryCategoryNameAttribute(): string
+    {
+        return $this->category?->name ?? 'Uncategorized';
+    }
+
+    public function getStockLabelAttribute(): string
+    {
+        return $this->is_in_stock ? $this->stock.' tersedia' : 'Stok habis';
+    }
+
+    public function getStockBadgeLabelAttribute(): string
+    {
+        return $this->is_in_stock ? 'Stok '.$this->stock : 'Sold Out';
     }
 
     #[Computed]

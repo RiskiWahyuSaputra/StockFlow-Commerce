@@ -2,37 +2,57 @@
     'product',
 ])
 
-<article class="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5">
-    <a href="{{ route('products.show', $product['slug']) }}" class="block">
-        <div class="relative aspect-[4/3] overflow-hidden p-5" style="{{ $product['cover_style'] }}">
-            <div class="flex h-full flex-col justify-between rounded-[1.5rem] border border-white/40 bg-white/10 p-5 backdrop-blur-sm">
-                <span class="inline-flex w-fit rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-700">
-                    {{ $product['tag'] }}
-                </span>
+@php
+    $isModel = $product instanceof \App\Models\Product;
+    $slug = $isModel ? $product->slug : $product['slug'];
+    $name = $isModel ? $product->name : $product['name'];
+    $categoryName = $isModel ? $product->primary_category_name : ($product['category'] ?? 'Catalog');
+    $priceLabel = $isModel ? $product->price_label : $product['price_label'];
+    $summary = $isModel ? $product->summary : ($product['excerpt'] ?? null);
+    $stock = $isModel ? (int) $product->stock : (int) ($product['stock'] ?? 0);
+    $stockLabel = $isModel ? $product->stock_label : ($product['stock_label'] ?? ($stock > 0 ? $stock.' tersedia' : 'Stok habis'));
+    $eyebrow = $isModel ? ($product->is_featured ? 'Featured' : 'Catalog') : ($product['tag'] ?? 'Catalog');
+    $isOutOfStock = $stock < 1;
+@endphp
 
-                <div class="max-w-[14rem]">
-                    <p class="text-sm font-medium text-slate-700/80">{{ $product['category'] }}</p>
-                    <h3 class="mt-2 text-2xl font-black tracking-tight text-slate-950">{{ $product['name'] }}</h3>
-                </div>
-            </div>
-        </div>
+<article @class([
+    'group overflow-hidden rounded-[2rem] border bg-white shadow-sm transition duration-300',
+    'border-slate-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5' => ! $isOutOfStock,
+    'border-rose-100 opacity-95' => $isOutOfStock,
+])>
+    <a href="{{ route('products.show', $slug) }}" class="block">
+        <x-frontend.product-visual :product="$product" variant="card" />
 
         <div class="space-y-4 p-6">
             <div class="flex items-start justify-between gap-4">
-                <div>
-                    <p class="text-sm font-semibold text-slate-950">{{ $product['price_label'] }}</p>
-                    <p class="mt-1 text-sm text-slate-500">{{ $product['stock_label'] }}</p>
+                <div class="min-w-0">
+                    <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">{{ $eyebrow }}</p>
+                    <h3 class="mt-2 text-2xl font-black tracking-tight text-slate-950">{{ $name }}</h3>
+                    <p class="mt-2 text-sm font-medium text-slate-500">{{ $categoryName }}</p>
                 </div>
-                <div class="rounded-full bg-slate-50 px-3 py-1 text-sm font-semibold text-slate-700">
-                    {{ $product['rating'] }} / 5
-                </div>
+
+                <span @class([
+                    'shrink-0 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]',
+                    'bg-emerald-50 text-emerald-700' => ! $isOutOfStock,
+                    'bg-rose-50 text-rose-700' => $isOutOfStock,
+                ])>
+                    {{ $isOutOfStock ? 'Stok Habis' : 'Ready' }}
+                </span>
             </div>
 
-            <p class="text-sm leading-7 text-slate-600">{{ $product['excerpt'] }}</p>
+            <p class="text-sm leading-7 text-slate-600">
+                {{ $summary }}
+            </p>
 
-            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-sm font-semibold">
-                <span class="text-slate-500">{{ $product['reviews'] }} reviews</span>
-                <span class="text-brand-700 transition group-hover:text-brand-600">View details</span>
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4">
+                <div>
+                    <p class="text-lg font-black tracking-tight text-slate-950">{{ $priceLabel }}</p>
+                    <p class="mt-1 text-sm text-slate-500">{{ $stockLabel }}</p>
+                </div>
+
+                <span class="text-sm font-semibold text-brand-700 transition group-hover:text-brand-600">
+                    View details
+                </span>
             </div>
         </div>
     </a>
