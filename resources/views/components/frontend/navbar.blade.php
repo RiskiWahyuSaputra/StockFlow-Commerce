@@ -1,48 +1,46 @@
-@php
-    $links = [
-        ['label' => 'Beranda', 'route' => 'home'],
-    ];
-@endphp
+<header class="sticky top-0 z-30 border-b border-white/60 bg-white/75 backdrop-blur-xl">
+    <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-8">
+            <a href="{{ route('home') }}" class="flex items-center gap-3">
+                <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-sm font-black text-white shadow-lg shadow-slate-900/10">
+                    EC
+                </span>
 
-<header class="border-b border-slate-200/80 bg-white/80 backdrop-blur">
-    <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <a href="{{ route('home') }}" class="flex items-center gap-3">
-            <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-600 text-sm font-bold text-white">
-                EC
-            </span>
+                <span>
+                    <span class="block text-[11px] font-semibold uppercase tracking-[0.35em] text-slate-400">Portfolio Build</span>
+                    <span class="block text-lg font-bold text-slate-950">{{ config('app.name') }}</span>
+                </span>
+            </a>
 
-            <span>
-                <span class="block text-sm font-semibold tracking-[0.2em] text-slate-500 uppercase">Laravel Fullstack</span>
-                <span class="block text-lg font-bold text-slate-900">{{ config('app.name') }}</span>
-            </span>
-        </a>
-
-        <div class="flex items-center gap-3">
-            <nav class="hidden items-center gap-2 rounded-full border border-slate-200 bg-white p-1.5 shadow-sm md:flex">
-                @foreach ($links as $link)
+            <nav class="hidden items-center gap-2 rounded-full border border-slate-200/80 bg-white p-1.5 shadow-sm lg:flex">
+                @foreach ([
+                    ['label' => 'Home', 'route' => 'home'],
+                    ['label' => 'Products', 'route' => 'products.index'],
+                    ['label' => 'Cart', 'route' => 'cart.index'],
+                    ['label' => 'Checkout', 'route' => 'checkout.index'],
+                ] as $item)
                     <a
-                        href="{{ route($link['route']) }}"
+                        href="{{ route($item['route']) }}"
                         @class([
                             'rounded-full px-4 py-2 text-sm font-medium transition',
-                            'bg-slate-900 text-white' => request()->routeIs($link['route']),
-                            'text-slate-600 hover:bg-slate-100' => ! request()->routeIs($link['route']),
+                            'bg-slate-900 text-white' => request()->routeIs($item['route']),
+                            'text-slate-600 hover:bg-slate-100 hover:text-slate-900' => ! request()->routeIs($item['route']),
                         ])
                     >
-                        {{ $link['label'] }}
+                        {{ $item['label'] }}
                     </a>
                 @endforeach
             </nav>
+        </div>
 
+        <div class="flex items-center gap-3">
             @auth
-                @if (auth()->user()->isAdmin())
-                    <a href="{{ route('admin.dashboard') }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900">
-                        Admin Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('dashboard') }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900">
-                        Dashboard Saya
-                    </a>
-                @endif
+                <a
+                    href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('dashboard') }}"
+                    class="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900 sm:inline-flex"
+                >
+                    {{ auth()->user()->isAdmin() ? 'Admin Dashboard' : 'My Dashboard' }}
+                </a>
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

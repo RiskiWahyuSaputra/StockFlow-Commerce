@@ -1,96 +1,118 @@
 @extends('layouts.storefront')
 
-@section('title', 'Storefront Home')
+@section('title', 'Homepage')
+@section('meta_description', 'Homepage storefront modern untuk portfolio ecommerce berbasis Laravel Blade.')
 
 @section('content')
-    <section class="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)] lg:items-start">
-        <div class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
-            <span class="inline-flex rounded-full bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700">
-                Stage 2 • Authentication Setup
+    <section class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(360px,0.8fr)] lg:items-start">
+        <div class="rounded-[2.2rem] border border-slate-200 bg-white/90 p-8 shadow-sm backdrop-blur sm:p-10">
+            <span class="inline-flex rounded-full border border-brand-100 bg-brand-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-700">
+                Portfolio Storefront
             </span>
 
-            <h1 class="mt-6 max-w-3xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
-                Storefront sekarang punya auth flow yang rapi untuk customer dan admin.
+            <h1 class="mt-6 max-w-4xl text-5xl font-black tracking-tight text-slate-950 sm:text-6xl">
+                Minimal commerce experience with a calm, premium feel.
             </h1>
 
-            <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-                Project ini sudah memakai autentikasi resmi Laravel, route grouping yang jelas, middleware role-based,
-                dan redirect otomatis sesuai tipe akun setelah login.
+            <p class="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+                Halaman ini menjadi fondasi visual untuk katalog produk, detail produk, cart, checkout, dan preview admin.
+                Semua komponen dirancang reusable agar enak di-scale saat backend mulai terhubung penuh.
             </p>
 
             <div class="mt-8 flex flex-wrap gap-3">
-                @guest
-                    <a href="{{ route('login') }}" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                        Login
-                    </a>
-                    <a href="{{ route('register') }}" class="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
-                        Buat Akun
-                    </a>
-                @else
-                    <a href="{{ route(auth()->user()->homeRoute()) }}" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                        Buka Dashboard
-                    </a>
-                @endguest
+                <a href="{{ route('products.index') }}" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+                    Explore Products
+                </a>
+                <a href="{{ route('checkout.index') }}" class="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
+                    Preview Checkout
+                </a>
             </div>
 
-            <div class="mt-8 grid gap-4 sm:grid-cols-2">
-                <div class="rounded-3xl bg-slate-50 p-5">
-                    <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">Auth Stack</p>
-                    <p class="mt-3 text-lg font-semibold text-slate-900">Laravel Breeze + Session Guard</p>
-                </div>
-
-                <div class="rounded-3xl bg-slate-50 p-5">
-                    <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">Role Access</p>
-                    <p class="mt-3 text-lg font-semibold text-slate-900">Customer Dashboard + Admin Dashboard</p>
-                </div>
+            <div class="mt-10 grid gap-4 sm:grid-cols-3">
+                @foreach ($stats as $stat)
+                    <x-frontend.metric-card :label="$stat['label']" :value="$stat['value']" />
+                @endforeach
             </div>
         </div>
 
-        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-8 text-white shadow-xl shadow-slate-900/10">
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">Route Structure</p>
+        <aside class="overflow-hidden rounded-[2.2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-xl shadow-slate-900/10 sm:p-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Spotlight Product</p>
 
-            <div class="mt-6 space-y-4">
-                <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
-                    <p class="font-semibold">Public routes</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Landing page dan storefront tetap bisa diakses tanpa login.</p>
-                </div>
-
-                <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
-                    <p class="font-semibold">Customer routes</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">User biasa diarahkan ke dashboard customer dan area profil setelah login.</p>
-                </div>
-
-                <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
-                    <p class="font-semibold">Admin routes</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-300">Akun admin otomatis diarahkan ke `/admin` dan dibatasi middleware admin.</p>
+            <div class="mt-6 rounded-[2rem] p-6" style="{{ $spotlightProduct['cover_style'] }}">
+                <div class="rounded-[1.5rem] border border-white/30 bg-white/15 p-6 backdrop-blur-sm">
+                    <p class="text-sm font-semibold text-slate-800/80">{{ $spotlightProduct['category'] }}</p>
+                    <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">{{ $spotlightProduct['name'] }}</h2>
+                    <p class="mt-4 max-w-md text-sm leading-7 text-slate-800/80">{{ $spotlightProduct['description'] }}</p>
                 </div>
             </div>
+
+            <div class="mt-6 flex items-center justify-between rounded-3xl border border-white/10 bg-white/5 px-5 py-4">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.24em] text-slate-400">Preview Price</p>
+                    <p class="mt-2 text-2xl font-black tracking-tight">{{ $spotlightProduct['price_label'] }}</p>
+                </div>
+                <a href="{{ route('products.show', $spotlightProduct['slug']) }}" class="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-100">
+                    View Product
+                </a>
+            </div>
+        </aside>
+    </section>
+
+    <section class="mt-16">
+        <x-frontend.section-heading
+            eyebrow="Featured Selection"
+            title="Products laid out for a clean, production-like first impression."
+            description="Kartu produk memakai struktur yang konsisten untuk listing page, recommendation block, dan section lain di storefront."
+            :link="route('products.index')"
+            link-label="See all products"
+        />
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            @foreach ($featuredProducts as $product)
+                <x-frontend.product-card :product="$product" />
+            @endforeach
         </div>
     </section>
 
-    <section class="mt-8 grid gap-4 lg:grid-cols-3">
-        <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">Frontend</p>
-            <h2 class="mt-4 text-xl font-bold text-slate-900">Public storefront</h2>
-            <p class="mt-3 text-sm leading-6 text-slate-600">
-                Halaman toko tetap public, sementara area customer yang butuh login dipisah ke route customer.
-            </p>
-        </article>
+    <section class="mt-16 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+            <x-frontend.section-heading
+                eyebrow="Category Preview"
+                title="A storefront structure that stays readable even as catalog grows."
+                description="Category chips ini sengaja dibuat ringan dan editorial agar tidak terasa seperti dashboard."
+            />
 
-        <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">Authorization</p>
-            <h2 class="mt-4 text-xl font-bold text-slate-900">Role-based redirect</h2>
-            <p class="mt-3 text-sm leading-6 text-slate-600">
-                Setelah login, admin masuk ke dashboard admin dan customer masuk ke dashboard customer tanpa package tambahan.
-            </p>
-        </article>
+            <div class="mt-8 flex flex-wrap gap-3">
+                @foreach ($categories as $category)
+                    <span class="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700">
+                        {{ $category['name'] }} <span class="text-slate-400">({{ $category['count'] }})</span>
+                    </span>
+                @endforeach
+            </div>
+        </div>
 
-        <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">Middleware</p>
-            <h2 class="mt-4 text-xl font-bold text-slate-900">Admin & customer guards</h2>
-            <p class="mt-3 text-sm leading-6 text-slate-600">
-                Route admin dan customer sekarang dibatasi dengan middleware role sederhana yang mudah dikembangkan.
-            </p>
-        </article>
+        <div class="grid gap-6 sm:grid-cols-2">
+            <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Cart Flow</p>
+                <h3 class="mt-4 text-2xl font-black tracking-tight text-slate-950">Review cart in a focused summary layout.</h3>
+                <p class="mt-4 text-sm leading-7 text-slate-600">
+                    Cart page dipersiapkan untuk quantity review, promo input, dan order summary tanpa terasa padat.
+                </p>
+                <a href="{{ route('cart.index') }}" class="mt-6 inline-flex rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
+                    Open Cart
+                </a>
+            </article>
+
+            <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Checkout Flow</p>
+                <h3 class="mt-4 text-2xl font-black tracking-tight text-slate-950">A tidy checkout screen ready for Midtrans integration.</h3>
+                <p class="mt-4 text-sm leading-7 text-slate-600">
+                    Checkout didesain dengan summary tetap terlihat, tapi form dan payment selection tetap nyaman dibaca.
+                </p>
+                <a href="{{ route('checkout.index') }}" class="mt-6 inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
+                    Open Checkout
+                </a>
+            </article>
+        </div>
     </section>
 @endsection
