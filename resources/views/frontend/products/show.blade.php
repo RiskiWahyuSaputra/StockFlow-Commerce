@@ -73,9 +73,21 @@
 
             <div class="mt-8 flex flex-wrap items-center gap-3">
                 @if ($product->is_in_stock)
-                    <a href="{{ route('cart.index') }}" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                        Add to Cart
-                    </a>
+                    <form method="POST" action="{{ route('cart.items.store') }}" class="flex flex-wrap items-center gap-3">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input
+                            type="number"
+                            name="quantity"
+                            value="1"
+                            min="1"
+                            max="{{ $product->stock }}"
+                            class="w-24 rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0"
+                        >
+                        <button type="submit" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+                            Add to Cart
+                        </button>
+                    </form>
                     <a href="{{ route('checkout.index') }}" class="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
                         Buy Now
                     </a>

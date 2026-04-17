@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\CartFactory;
 use Illuminate\Database\Eloquent\Attributes\Computed;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -51,6 +52,11 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(CartItem::class);
@@ -65,5 +71,15 @@ class Cart extends Model
     public function isActive(): bool
     {
         return $this->status === self::STATUS_ACTIVE;
+    }
+
+    public function getSubtotalLabelAttribute(): string
+    {
+        return 'Rp'.number_format((int) round((float) $this->subtotal), 0, ',', '.');
+    }
+
+    public function getTotalLabelAttribute(): string
+    {
+        return $this->subtotal_label;
     }
 }

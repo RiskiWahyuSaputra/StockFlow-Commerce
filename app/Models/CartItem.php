@@ -38,6 +38,16 @@ class CartItem extends Model
 
     public function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class)->withTrashed();
+    }
+
+    public function getUnitPriceLabelAttribute(): string
+    {
+        return 'Rp'.number_format((int) round((float) $this->unit_price), 0, ',', '.');
+    }
+
+    public function getSubtotalLabelAttribute(): string
+    {
+        return 'Rp'.number_format((int) round((float) $this->subtotal), 0, ',', '.');
     }
 }

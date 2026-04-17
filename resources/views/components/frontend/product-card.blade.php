@@ -56,4 +56,29 @@
             </div>
         </div>
     </a>
+
+    <div class="flex items-center justify-between gap-3 border-t border-slate-100 px-6 pb-6 pt-5">
+        <a href="{{ route('products.show', $slug) }}" class="inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
+            Detail
+        </a>
+
+        @if (! $isModel)
+            <span class="inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-500">
+                Preview
+            </span>
+        @elseif ($isOutOfStock)
+            <button type="button" disabled class="cursor-not-allowed rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-500">
+                Stok Habis
+            </button>
+        @else
+            <form method="POST" action="{{ route('cart.items.store') }}">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $isModel ? $product->id : '' }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
+                    Add to Cart
+                </button>
+            </form>
+        @endif
+    </div>
 </article>
