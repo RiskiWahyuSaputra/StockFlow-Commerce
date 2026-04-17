@@ -5,8 +5,14 @@
             <h1 class="mt-2 text-2xl font-bold text-slate-900">@yield('heading', 'Dashboard')</h1>
         </div>
 
-        <div class="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
-            {{ now()->translatedFormat('l, d F Y') }}
+        <div class="flex flex-col gap-3 lg:items-end">
+            <div class="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                {{ now()->translatedFormat('l, d F Y') }}
+            </div>
+
+            <div class="text-sm text-slate-500">
+                Login sebagai <span class="font-semibold text-slate-900">{{ auth()->user()->name }}</span>
+            </div>
         </div>
     </div>
 </header>

@@ -1,7 +1,6 @@
 @php
     $links = [
         ['label' => 'Beranda', 'route' => 'home'],
-        ['label' => 'Admin Preview', 'route' => 'admin.dashboard'],
     ];
 @endphp
 
@@ -18,19 +17,47 @@
             </span>
         </a>
 
-        <nav class="flex items-center gap-2 rounded-full border border-slate-200 bg-white p-1.5 shadow-sm">
-            @foreach ($links as $link)
-                <a
-                    href="{{ route($link['route']) }}"
-                    @class([
-                        'rounded-full px-4 py-2 text-sm font-medium transition',
-                        'bg-slate-900 text-white' => request()->routeIs($link['route']),
-                        'text-slate-600 hover:bg-slate-100' => ! request()->routeIs($link['route']),
-                    ])
-                >
-                    {{ $link['label'] }}
+        <div class="flex items-center gap-3">
+            <nav class="hidden items-center gap-2 rounded-full border border-slate-200 bg-white p-1.5 shadow-sm md:flex">
+                @foreach ($links as $link)
+                    <a
+                        href="{{ route($link['route']) }}"
+                        @class([
+                            'rounded-full px-4 py-2 text-sm font-medium transition',
+                            'bg-slate-900 text-white' => request()->routeIs($link['route']),
+                            'text-slate-600 hover:bg-slate-100' => ! request()->routeIs($link['route']),
+                        ])
+                    >
+                        {{ $link['label'] }}
+                    </a>
+                @endforeach
+            </nav>
+
+            @auth
+                @if (auth()->user()->isAdmin())
+                    <a href="{{ route('admin.dashboard') }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900">
+                        Admin Dashboard
+                    </a>
+                @else
+                    <a href="{{ route('dashboard') }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900">
+                        Dashboard Saya
+                    </a>
+                @endif
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
+                        Logout
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900">
+                    Login
                 </a>
-            @endforeach
-        </nav>
+                <a href="{{ route('register') }}" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
+                    Register
+                </a>
+            @endauth
+        </div>
     </div>
 </header>

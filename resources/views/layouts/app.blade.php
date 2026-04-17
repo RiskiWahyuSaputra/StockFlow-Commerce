@@ -3,30 +3,34 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('title', config('app.name'))</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <meta
-            name="description"
-            content="Fondasi awal E-Commerce Platform berbasis Laravel, Blade, MySQL, dan Tailwind CSS."
-        >
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700,800" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @stack('styles')
     </head>
-    <body class="font-sans text-slate-900">
-        <div class="relative min-h-screen">
-            <x-frontend.navbar />
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
 
-            <main class="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 pb-16 pt-8 sm:px-6 lg:px-8">
-                @yield('content')
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
             </main>
-
-            <x-frontend.footer />
         </div>
-
-        @stack('scripts')
     </body>
 </html>

@@ -45,7 +45,20 @@
     <div class="mt-8 rounded-2xl bg-slate-50 p-4">
         <p class="text-sm font-semibold text-slate-900">Catatan setup</p>
         <p class="mt-2 text-sm leading-6 text-slate-600">
-            Route admin ini masih berupa preview layout. Middleware auth dan role admin akan kita aktifkan di tahap autentikasi.
+            Route admin sekarang sudah diproteksi dengan middleware `auth` + `admin`, jadi hanya akun admin yang bisa masuk.
         </p>
+    </div>
+
+    <div class="mt-4 space-y-3">
+        <a href="{{ route('home') }}" class="flex items-center justify-center rounded-2xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+            Lihat Storefront
+        </a>
+
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="flex w-full items-center justify-center rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+                Logout
+            </button>
+        </form>
     </div>
 </aside>

@@ -80,4 +80,14 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_CUSTOMER;
     }
+
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
+    }
+
+    public function homeRoute(): string
+    {
+        return $this->isAdmin() ? 'admin.dashboard' : 'dashboard';
+    }
 }
