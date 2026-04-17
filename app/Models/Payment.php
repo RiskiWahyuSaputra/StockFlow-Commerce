@@ -29,11 +29,17 @@ class Payment extends Model
         'order_id',
         'provider',
         'method',
+        'payment_type',
         'status',
         'amount',
+        'gross_amount',
         'currency',
         'external_id',
         'transaction_id',
+        'transaction_status',
+        'fraud_status',
+        'status_code',
+        'signature_key',
         'snap_token',
         'snap_redirect_url',
         'transaction_time',
@@ -53,6 +59,7 @@ class Payment extends Model
         return [
             'order_id' => 'integer',
             'amount' => 'decimal:2',
+            'gross_amount' => 'decimal:2',
             'transaction_time' => 'datetime',
             'paid_at' => 'datetime',
             'expired_at' => 'datetime',
@@ -69,5 +76,17 @@ class Payment extends Model
     public function isSuccessful(): bool
     {
         return $this->status === self::STATUS_PAID;
+    }
+
+    public function getAmountLabelAttribute(): string
+    {
+        return 'Rp'.number_format((int) round((float) $this->amount), 0, ',', '.');
+    }
+
+    public function getGrossAmountLabelAttribute(): string
+    {
+        $amount = $this->gross_amount ?? $this->amount;
+
+        return 'Rp'.number_format((int) round((float) $amount), 0, ',', '.');
     }
 }

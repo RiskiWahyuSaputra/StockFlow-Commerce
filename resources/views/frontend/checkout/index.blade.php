@@ -122,15 +122,15 @@
                     </section>
 
                     <section class="rounded-[1.8rem] border border-slate-200 bg-slate-950 p-6 text-white">
-                        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Stock Policy</p>
-                        <h3 class="mt-3 text-2xl font-black tracking-tight">Stock direservasi saat order dibuat.</h3>
+                        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Checkout + Payment</p>
+                        <h3 class="mt-3 text-2xl font-black tracking-tight">Stock direservasi saat order dibuat, lalu dibayar lewat Midtrans.</h3>
                         <p class="mt-4 text-sm leading-7 text-slate-300">
-                            Pendekatan ini dipilih untuk mencegah overselling. Saat checkout berhasil, stok langsung dikurangi dan dicatat ke `inventory_logs` sebagai reservasi. Jika nanti payment gagal atau order dibatalkan, stok bisa direlease kembali.
+                            Pendekatan ini dipilih untuk mencegah overselling. Saat checkout berhasil, stok langsung direservasi dan dicatat ke `inventory_logs`. Setelah itu user menyelesaikan pembayaran di Midtrans Snap. Jika payment gagal, expired, atau dibatalkan, stok akan direlease kembali lewat webhook Midtrans.
                         </p>
                     </section>
 
                     <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-4 text-sm font-semibold text-white transition hover:bg-slate-800">
-                        Buat Order Sekarang
+                        Buat Order & Lanjut Bayar
                     </button>
                 </form>
             </div>

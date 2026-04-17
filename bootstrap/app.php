@@ -19,6 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'customer' => EnsureUserIsCustomer::class,
         ]);
 
+        $middleware->validateCsrfTokens(except: [
+            'payments/midtrans/notification',
+        ]);
+
         $middleware->redirectUsersTo(function (Request $request): string {
             return $request->user()?->isAdmin()
                 ? route('admin.dashboard')
