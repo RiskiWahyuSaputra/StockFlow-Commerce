@@ -20,6 +20,18 @@
                 <div class="flex min-w-0 flex-col gap-6">
                     <x-admin.header />
 
+                    @if (session('status'))
+                        <div class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 shadow-sm">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700 shadow-sm">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
+
                     <main class="min-w-0">
                         @yield('content')
                     </main>

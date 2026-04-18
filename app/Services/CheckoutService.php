@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Cart;
-use App\Models\InventoryLog;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -14,8 +13,8 @@ class CheckoutService
 {
     public function __construct(
         protected CartService $cartService,
-    ) {
-    }
+        protected InventoryService $inventoryService,
+    ) {}
 
     public function getCheckoutCart(User $user): Cart
     {
@@ -128,31 +127,7 @@ class CheckoutService
                 })->all()
             );
 
-            foreach ($cart->items as $item) {
-                $product = $products->get($item->product_id);
-                $before = (int) $product->stock;
-                $after = $before - $item->quantity;
-
-                $product->forceFill([
-                    'stock' => $after,
-                ])->save();
-
-                InventoryLog::create([
-                    'product_id' => $product->id,
-                    'user_id' => $user->id,
-                    'order_id' => $order->id,
-                    'type' => InventoryLog::TYPE_RESERVED,
-                    'quantity_before' => $before,
-                    'quantity_change' => -$item->quantity,
-                    'quantity_after' => $after,
-                    'reference' => $order->order_number,
-                    'notes' => 'Stock reserved saat checkout order dibuat.',
-                    'metadata' => [
-                        'source' => 'checkout',
-                        'cart_id' => $cart->id,
-                    ],
-                ]);
-            }
+            $this->inventoryService->reserveOrderStock($order, $cart->items, $user);
 
             $cart->items()->delete();
             $cart->forceFill([

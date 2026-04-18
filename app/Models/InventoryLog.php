@@ -33,9 +33,13 @@ class InventoryLog extends Model
         'type',
         'quantity_before',
         'quantity_change',
+        'quantity_changed',
         'quantity_after',
         'reference',
+        'reference_type',
+        'reference_id',
         'notes',
+        'note',
         'metadata',
     ];
 
@@ -47,7 +51,9 @@ class InventoryLog extends Model
             'order_id' => 'integer',
             'quantity_before' => 'integer',
             'quantity_change' => 'integer',
+            'quantity_changed' => 'integer',
             'quantity_after' => 'integer',
+            'reference_id' => 'integer',
             'metadata' => 'array',
         ];
     }
@@ -65,5 +71,17 @@ class InventoryLog extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function getQuantityChangedLabelAttribute(): string
+    {
+        $value = $this->quantity_changed ?? $this->quantity_change ?? 0;
+
+        return $value > 0 ? '+'.$value : (string) $value;
+    }
+
+    public function getDisplayNoteAttribute(): ?string
+    {
+        return $this->note ?? $this->notes;
     }
 }

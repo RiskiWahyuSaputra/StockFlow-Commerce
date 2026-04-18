@@ -1,9 +1,10 @@
 @php
     $items = [
         ['label' => 'Dashboard', 'route' => 'admin.dashboard', 'state' => 'ready'],
-        ['label' => 'Products', 'route' => null, 'state' => 'next'],
-        ['label' => 'Orders', 'route' => null, 'state' => 'next'],
-        ['label' => 'Inventory', 'route' => null, 'state' => 'next'],
+        ['label' => 'Categories', 'route' => 'admin.categories.index', 'state' => 'ready'],
+        ['label' => 'Products', 'route' => 'admin.products.index', 'state' => 'ready'],
+        ['label' => 'Orders', 'route' => 'admin.orders.index', 'state' => 'ready'],
+        ['label' => 'Inventory', 'route' => 'admin.inventory.index', 'state' => 'ready'],
     ];
 @endphp
 
@@ -26,8 +27,8 @@
                     href="{{ route($item['route']) }}"
                     @class([
                         'flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium transition',
-                        'bg-slate-900 text-white shadow-lg shadow-slate-900/10' => request()->routeIs($item['route']),
-                        'text-slate-600 hover:bg-slate-100' => ! request()->routeIs($item['route']),
+                        'bg-slate-900 text-white shadow-lg shadow-slate-900/10' => request()->routeIs($item['route']) || request()->routeIs(str_replace('.index', '.*', $item['route'])),
+                        'text-slate-600 hover:bg-slate-100' => ! (request()->routeIs($item['route']) || request()->routeIs(str_replace('.index', '.*', $item['route']))),
                     ])
                 >
                     <span>{{ $item['label'] }}</span>
@@ -45,7 +46,7 @@
     <div class="mt-8 rounded-2xl bg-slate-50 p-4">
         <p class="text-sm font-semibold text-slate-900">Catatan setup</p>
         <p class="mt-2 text-sm leading-6 text-slate-600">
-            Route admin sekarang sudah diproteksi dengan middleware `auth` + `admin`, jadi hanya akun admin yang bisa masuk.
+            Panel admin ini sudah tersambung ke CRUD kategori, produk, order management, payment status, dan inventory tracking.
         </p>
     </div>
 

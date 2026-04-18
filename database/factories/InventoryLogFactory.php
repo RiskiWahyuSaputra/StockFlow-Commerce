@@ -27,9 +27,13 @@ class InventoryLogFactory extends Factory
             'type' => InventoryLog::TYPE_ADJUSTMENT,
             'quantity_before' => $before,
             'quantity_change' => $change,
+            'quantity_changed' => $change,
             'quantity_after' => $after,
             'reference' => fake()->optional()->bothify('INV-###??'),
+            'reference_type' => 'factory',
+            'reference_id' => null,
             'notes' => fake()->optional()->sentence(),
+            'note' => fake()->optional()->sentence(),
             'metadata' => [
                 'source' => 'factory',
             ],

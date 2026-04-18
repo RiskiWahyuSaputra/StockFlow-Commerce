@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\InventoryLog;
 use App\Models\Order;
 use App\Models\Payment;
-use App\Models\Product;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -16,6 +14,10 @@ use RuntimeException;
 
 class MidtransService
 {
+    public function __construct(
+        protected InventoryService $inventoryService,
+    ) {}
+
     public function createSnapPayment(Order $order): Payment
     {
         $order->loadMissing(['items', 'user', 'latestPayment']);
@@ -242,8 +244,16 @@ class MidtransService
         $orderPaymentStatus = $this->resolveOrderPaymentStatus($payment->status);
         $orderStatus = $this->resolveOrderStatus($payment->status, $payload['transaction_status']);
 
+        if ($payment->status === Payment::STATUS_PAID) {
+            $this->inventoryService->confirmOrderPayment($order, $order->user);
+        }
+
         if ($this->shouldReleaseReservedStock($order, $payment, $payload['transaction_status'])) {
-            $this->releaseReservedStock($order, $payment);
+            $this->inventoryService->releaseOrderStock(
+                $order,
+                $order->user,
+                'Stok dirilis ulang karena payment Midtrans '.$payment->transaction_status.'.',
+            );
         }
 
         $order->forceFill([
@@ -307,48 +317,6 @@ class MidtransService
         }
 
         return in_array($transactionStatus, ['deny', 'expire', 'cancel'], true);
-    }
-
-    protected function releaseReservedStock(Order $order, Payment $payment): void
-    {
-        $order->loadMissing('items');
-
-        $products = Product::query()
-            ->whereIn('id', $order->items->pluck('product_id')->filter())
-            ->lockForUpdate()
-            ->get()
-            ->keyBy('id');
-
-        foreach ($order->items as $item) {
-            $product = $products->get($item->product_id);
-
-            if (! $product) {
-                continue;
-            }
-
-            $before = (int) $product->stock;
-            $after = $before + (int) $item->quantity;
-
-            $product->forceFill([
-                'stock' => $after,
-            ])->save();
-
-            InventoryLog::create([
-                'product_id' => $product->id,
-                'user_id' => $order->user_id,
-                'order_id' => $order->id,
-                'type' => InventoryLog::TYPE_RELEASED,
-                'quantity_before' => $before,
-                'quantity_change' => (int) $item->quantity,
-                'quantity_after' => $after,
-                'reference' => $order->order_number,
-                'notes' => 'Stock dirilis ulang karena payment Midtrans '.$payment->transaction_status.'.',
-                'metadata' => [
-                    'source' => 'midtrans_webhook',
-                    'payment_id' => $payment->id,
-                ],
-            ]);
-        }
     }
 
     protected function parseMidtransTimestamp(?string $value): ?Carbon
