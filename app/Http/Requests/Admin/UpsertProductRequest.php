@@ -3,16 +3,10 @@
 namespace App\Http\Requests\Admin;
 
 use App\Models\Product;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpsertProductRequest extends FormRequest
+class UpsertProductRequest extends AdminFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         /** @var Product|null $product */
@@ -53,6 +47,27 @@ class UpsertProductRequest extends FormRequest
             'delete_image_ids' => ['nullable', 'array'],
             'delete_image_ids.*' => ['integer', Rule::exists('product_images', 'id')],
             'primary_image_id' => ['nullable', 'integer', Rule::exists('product_images', 'id')],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'category_id' => 'kategori',
+            'name' => 'nama produk',
+            'slug' => 'slug',
+            'sku' => 'SKU',
+            'short_description' => 'deskripsi singkat',
+            'description' => 'deskripsi',
+            'price' => 'harga',
+            'stock' => 'stok',
+            'low_stock_threshold' => 'batas low stock',
+            'weight' => 'berat',
+            'status' => 'status',
+            'published_at' => 'tanggal publikasi',
+            'images' => 'gambar produk',
+            'images.*' => 'file gambar',
+            'primary_image_id' => 'gambar utama',
         ];
     }
 }

@@ -20,21 +20,7 @@
 
             <x-frontend.navbar />
 
-            @if (session('status'))
-                <div class="mx-auto mt-4 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700">
-                        {{ session('status') }}
-                    </div>
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="mx-auto mt-4 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
-                        {{ $errors->first() }}
-                    </div>
-                </div>
-            @endif
+            <x-shared.flash-messages class="mx-auto mt-4 flex w-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8" />
 
             <main class="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
                 @yield('content')

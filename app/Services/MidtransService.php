@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Midtrans\Config;
@@ -76,6 +77,13 @@ class MidtransService
             $order->forceFill([
                 'payment_status' => Order::PAYMENT_PENDING,
             ])->save();
+
+            Log::info('Midtrans Snap payment session prepared.', [
+                'order_id' => $order->id,
+                'order_number' => $order->order_number,
+                'payment_id' => $payment->id,
+                'snap_token_ready' => filled($payment->snap_token),
+            ]);
 
             return $payment->fresh();
         });
@@ -218,6 +226,11 @@ class MidtransService
     {
         foreach (['order_id', 'status_code', 'gross_amount', 'transaction_status', 'signature_key'] as $key) {
             if (blank($payload[$key] ?? null)) {
+                Log::warning('Midtrans notification payload is incomplete.', [
+                    'payload_keys' => array_keys($payload),
+                    'missing_key' => $key,
+                ]);
+
                 throw ValidationException::withMessages([
                     'notification' => 'Payload notifikasi Midtrans tidak lengkap.',
                 ]);
@@ -233,6 +246,11 @@ class MidtransService
         );
 
         if (! hash_equals($expectedSignature, (string) $payload['signature_key'])) {
+            Log::warning('Midtrans signature verification failed.', [
+                'order_id' => $payload['order_id'] ?? null,
+                'status_code' => $payload['status_code'] ?? null,
+            ]);
+
             throw ValidationException::withMessages([
                 'notification' => 'Signature Midtrans tidak valid.',
             ]);
@@ -266,6 +284,15 @@ class MidtransService
                 ? ($order->cancelled_at ?? now())
                 : $order->cancelled_at,
         ])->save();
+
+        Log::info('Midtrans payment status synchronized.', [
+            'order_id' => $order->id,
+            'order_number' => $order->order_number,
+            'payment_id' => $payment->id,
+            'payment_status' => $payment->status,
+            'transaction_status' => $payment->transaction_status,
+            'order_status' => $order->order_status,
+        ]);
     }
 
     protected function resolveLocalPaymentStatus(string $transactionStatus, ?string $fraudStatus): string

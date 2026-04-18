@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class InventoryService
@@ -186,6 +187,15 @@ class InventoryService
         $after = $before + $quantityChanged;
 
         if ($after < 0) {
+            Log::warning('Inventory operation blocked because resulting stock would be negative.', [
+                'product_id' => $product->id,
+                'type' => $type,
+                'quantity_before' => $before,
+                'quantity_changed' => $quantityChanged,
+                'reference_type' => $context['reference_type'] ?? null,
+                'reference_id' => $context['reference_id'] ?? null,
+            ]);
+
             throw ValidationException::withMessages([
                 'stock' => 'Stok tidak cukup untuk operasi inventory ini. Stok saat ini: '.$before.'.',
             ]);
@@ -202,7 +212,7 @@ class InventoryService
         /** @var Order|null $order */
         $order = $context['order'] ?? null;
 
-        return InventoryLog::create([
+        $inventoryLog = InventoryLog::create([
             'product_id' => $product->id,
             'user_id' => $user?->id,
             'order_id' => $order?->id,
@@ -218,5 +228,20 @@ class InventoryService
             'note' => $context['note'] ?? null,
             'metadata' => $context['metadata'] ?? null,
         ]);
+
+        if ($quantityChanged !== 0) {
+            Log::info('Inventory stock changed and logged.', [
+                'inventory_log_id' => $inventoryLog->id,
+                'product_id' => $product->id,
+                'type' => $type,
+                'quantity_before' => $before,
+                'quantity_changed' => $quantityChanged,
+                'quantity_after' => $after,
+                'reference_type' => $context['reference_type'] ?? null,
+                'reference_id' => $context['reference_id'] ?? null,
+            ]);
+        }
+
+        return $inventoryLog;
     }
 }

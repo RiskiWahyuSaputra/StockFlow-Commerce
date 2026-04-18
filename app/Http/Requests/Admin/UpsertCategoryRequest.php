@@ -3,16 +3,10 @@
 namespace App\Http\Requests\Admin;
 
 use App\Models\Category;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpsertCategoryRequest extends FormRequest
+class UpsertCategoryRequest extends AdminFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         /** @var Category|null $category */
@@ -35,6 +29,18 @@ class UpsertCategoryRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:2000'],
             'status' => ['required', Rule::in([Category::STATUS_ACTIVE, Category::STATUS_INACTIVE])],
             'sort_order' => ['required', 'integer', 'min:0', 'max:100000'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'parent_id' => 'parent category',
+            'name' => 'nama kategori',
+            'slug' => 'slug',
+            'description' => 'deskripsi',
+            'status' => 'status',
+            'sort_order' => 'urutan',
         ];
     }
 }

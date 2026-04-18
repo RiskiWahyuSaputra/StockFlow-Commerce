@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CartItemController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\CustomerDashboardController;
+use App\Http\Controllers\Frontend\OrderHistoryController;
 use App\Http\Controllers\Frontend\OrderPaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,9 @@ Route::middleware(['auth', 'customer'])->group(function (): void {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
-    Route::post('/orders/{order}/pay', [OrderPaymentController::class, 'store'])->name('orders.pay');
+    Route::get('/orders', [OrderHistoryController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{orderNumber}', [OrderHistoryController::class, 'show'])->name('orders.show');
+    Route::post('/orders/{orderNumber}/pay', [OrderPaymentController::class, 'store'])->name('orders.pay');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

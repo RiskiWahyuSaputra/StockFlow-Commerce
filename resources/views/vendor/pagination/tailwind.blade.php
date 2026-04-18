@@ -1,13 +1,13 @@
 @if ($paginator->hasPages())
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div class="text-sm text-slate-500">
-            {!! __('Showing') !!}
+            {{ __('Showing') }}
             <span class="font-semibold text-slate-900">{{ $paginator->firstItem() }}</span>
-            {!! __('to') !!}
+            {{ __('to') }}
             <span class="font-semibold text-slate-900">{{ $paginator->lastItem() }}</span>
-            {!! __('of') !!}
+            {{ __('of') }}
             <span class="font-semibold text-slate-900">{{ $paginator->total() }}</span>
-            {!! __('results') !!}
+            {{ __('results') }}
         </div>
 
         <div class="flex flex-wrap items-center gap-2">

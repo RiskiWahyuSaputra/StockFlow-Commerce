@@ -2,19 +2,19 @@
 
 namespace App\Http\Requests\Frontend;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateCartItemRequest extends FormRequest
+class UpdateCartItemRequest extends CustomerFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
             'quantity' => ['required', 'integer', 'min:1', 'max:999'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'quantity' => 'quantity',
         ];
     }
 }

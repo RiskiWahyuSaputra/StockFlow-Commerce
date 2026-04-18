@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CheckoutRequest;
 use App\Models\Order;
 use App\Services\CheckoutService;
+use App\Services\CustomerOrderService;
 use App\Services\MidtransService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Throwable;
 
@@ -16,6 +18,7 @@ class CheckoutController extends Controller
 {
     public function __construct(
         protected CheckoutService $checkoutService,
+        protected CustomerOrderService $customerOrderService,
         protected MidtransService $midtransService,
     ) {}
 
@@ -57,12 +60,16 @@ class CheckoutController extends Controller
             $this->midtransService->createSnapPayment($order);
         } catch (Throwable $throwable) {
             report($throwable);
+            Log::error('Failed to prepare Midtrans payment after checkout.', [
+                'order_id' => $order->id,
+                'order_number' => $order->order_number,
+                'user_id' => $request->user()->id,
+                'exception' => $throwable->getMessage(),
+            ]);
 
             return redirect()
                 ->route('checkout.success', $order)
-                ->withErrors([
-                    'payment' => 'Order berhasil dibuat, tetapi sesi pembayaran Midtrans belum berhasil dipersiapkan. Kamu masih bisa menyiapkannya dari halaman order.',
-                ]);
+                ->with('error', 'Order berhasil dibuat, tetapi sesi pembayaran Midtrans belum berhasil dipersiapkan. Kamu masih bisa menyiapkannya dari halaman order.');
         }
 
         return redirect()
@@ -74,8 +81,8 @@ class CheckoutController extends Controller
     {
         abort_unless($order->user_id === $request->user()->id, 404);
 
-        return view('frontend.checkout.success', [
-            'order' => $order->load(['items', 'latestPayment']),
+        return view('frontend.orders.show', [
+            'order' => $this->customerOrderService->getUserOrderById($request->user(), $order->id),
         ]);
     }
 }

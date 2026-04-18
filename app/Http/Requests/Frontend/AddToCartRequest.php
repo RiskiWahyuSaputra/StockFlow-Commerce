@@ -3,16 +3,10 @@
 namespace App\Http\Requests\Frontend;
 
 use App\Models\Product;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AddToCartRequest extends FormRequest
+class AddToCartRequest extends CustomerFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -22,6 +16,14 @@ class AddToCartRequest extends FormRequest
                 Rule::exists('products', 'id')->where(fn ($query) => $query->where('status', Product::STATUS_ACTIVE)),
             ],
             'quantity' => ['required', 'integer', 'min:1', 'max:999'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'product_id' => 'produk',
+            'quantity' => 'quantity',
         ];
     }
 }

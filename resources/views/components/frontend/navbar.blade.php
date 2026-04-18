@@ -1,3 +1,16 @@
+@php
+    $navItems = [
+        ['label' => 'Home', 'route' => 'home'],
+        ['label' => 'Products', 'route' => 'products.index'],
+        ['label' => 'Cart', 'route' => 'cart.index'],
+        ['label' => 'Checkout', 'route' => 'checkout.index'],
+    ];
+
+    if (auth()->check() && auth()->user()->isCustomer()) {
+        $navItems[] = ['label' => 'Orders', 'route' => 'orders.index'];
+    }
+@endphp
+
 <header class="sticky top-0 z-30 border-b border-white/60 bg-white/75 backdrop-blur-xl">
     <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <div class="flex items-center gap-8">
@@ -13,12 +26,7 @@
             </a>
 
             <nav class="hidden items-center gap-2 rounded-full border border-slate-200/80 bg-white p-1.5 shadow-sm lg:flex">
-                @foreach ([
-                    ['label' => 'Home', 'route' => 'home'],
-                    ['label' => 'Products', 'route' => 'products.index'],
-                    ['label' => 'Cart', 'route' => 'cart.index'],
-                    ['label' => 'Checkout', 'route' => 'checkout.index'],
-                ] as $item)
+                @foreach ($navItems as $item)
                     <a
                         href="{{ route($item['route']) }}"
                         @class([

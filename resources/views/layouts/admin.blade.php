@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title', 'Admin Panel').' | '.config('app.name')</title>
         <meta name="description" content="Minimal admin dashboard preview for the E-Commerce Platform.">
 
@@ -20,17 +21,7 @@
                 <div class="flex min-w-0 flex-col gap-6">
                     <x-admin.header />
 
-                    @if (session('status'))
-                        <div class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 shadow-sm">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    @if ($errors->any())
-                        <div class="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700 shadow-sm">
-                            {{ $errors->first() }}
-                        </div>
-                    @endif
+                    <x-shared.flash-messages class="flex flex-col gap-3" />
 
                     <main class="min-w-0">
                         @yield('content')

@@ -3,16 +3,10 @@
 namespace App\Http\Requests\Admin;
 
 use App\Models\Order;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateOrderStatusRequest extends FormRequest
+class UpdateOrderStatusRequest extends AdminFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -25,6 +19,13 @@ class UpdateOrderStatusRequest extends FormRequest
                 Order::STATUS_CANCELLED,
                 Order::STATUS_REFUNDED,
             ])],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'order_status' => 'status order',
         ];
     }
 }
