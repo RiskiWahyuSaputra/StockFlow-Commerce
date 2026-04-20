@@ -43,13 +43,13 @@ class OrderController extends Controller
                 'status' => $status,
             ],
             'statusOptions' => [
-                Order::STATUS_PENDING => 'Pending',
-                Order::STATUS_PAID => 'Paid',
-                Order::STATUS_PROCESSING => 'Processing',
-                Order::STATUS_SHIPPED => 'Shipped',
-                Order::STATUS_COMPLETED => 'Completed',
-                Order::STATUS_CANCELLED => 'Cancelled',
-                Order::STATUS_REFUNDED => 'Refunded',
+                Order::STATUS_PENDING => 'Menunggu',
+                Order::STATUS_PAID => 'Dibayar',
+                Order::STATUS_PROCESSING => 'Diproses',
+                Order::STATUS_SHIPPED => 'Dikirim',
+                Order::STATUS_COMPLETED => 'Selesai',
+                Order::STATUS_CANCELLED => 'Dibatalkan',
+                Order::STATUS_REFUNDED => 'Dikembalikan',
             ],
         ]);
     }
@@ -64,13 +64,13 @@ class OrderController extends Controller
                 'inventoryLogs.product',
             ]),
             'statusOptions' => [
-                Order::STATUS_PENDING => 'Pending',
-                Order::STATUS_PAID => 'Paid',
-                Order::STATUS_PROCESSING => 'Processing',
-                Order::STATUS_SHIPPED => 'Shipped',
-                Order::STATUS_COMPLETED => 'Completed',
-                Order::STATUS_CANCELLED => 'Cancelled',
-                Order::STATUS_REFUNDED => 'Refunded',
+                Order::STATUS_PENDING => 'Menunggu',
+                Order::STATUS_PAID => 'Dibayar',
+                Order::STATUS_PROCESSING => 'Diproses',
+                Order::STATUS_SHIPPED => 'Dikirim',
+                Order::STATUS_COMPLETED => 'Selesai',
+                Order::STATUS_CANCELLED => 'Dibatalkan',
+                Order::STATUS_REFUNDED => 'Dikembalikan',
             ],
         ]);
     }

@@ -22,17 +22,17 @@
                     <div>
                         <a href="{{ route('home') }}" class="inline-flex items-center gap-3">
                             <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-sm font-black text-slate-950">
-                                EC
+                                SC
                             </span>
 
                             <span>
-                                <span class="block text-xs font-semibold uppercase tracking-[0.35em] text-slate-400">Laravel Commerce</span>
+                                <span class="block text-xs font-semibold uppercase tracking-[0.35em] text-slate-400">Portal {{ config('app.name') }}</span>
                                 <span class="block text-xl font-bold">{{ config('app.name') }}</span>
                             </span>
                         </a>
 
                         <div class="mt-12 max-w-xl">
-                            <p class="text-sm font-semibold uppercase tracking-[0.35em] text-teal-300">Auth Portal</p>
+                            <p class="text-sm font-semibold uppercase tracking-[0.35em] text-teal-300">Portal Autentikasi</p>
                             <h1 class="mt-5 text-4xl font-black tracking-tight sm:text-5xl">
                                 Masuk ke workflow toko dan dashboard admin dengan alur yang rapi.
                             </h1>
@@ -44,8 +44,8 @@
 
                     <div class="grid gap-4 md:grid-cols-3">
                         <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
-                            <p class="text-sm font-semibold text-white">Customer</p>
-                            <p class="mt-2 text-sm leading-6 text-slate-300">Login akan diarahkan ke dashboard customer dan halaman toko.</p>
+                            <p class="text-sm font-semibold text-white">Pelanggan</p>
+                            <p class="mt-2 text-sm leading-6 text-slate-300">Login akan diarahkan ke dasbor pelanggan dan halaman toko.</p>
                         </div>
                         <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
                             <p class="text-sm font-semibold text-white">Admin</p>

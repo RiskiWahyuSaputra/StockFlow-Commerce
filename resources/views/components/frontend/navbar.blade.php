@@ -1,13 +1,13 @@
 @php
     $navItems = [
-        ['label' => 'Home', 'route' => 'home'],
-        ['label' => 'Products', 'route' => 'products.index'],
-        ['label' => 'Cart', 'route' => 'cart.index'],
+        ['label' => 'Beranda', 'route' => 'home'],
+        ['label' => 'Produk', 'route' => 'products.index'],
+        ['label' => 'Keranjang', 'route' => 'cart.index'],
         ['label' => 'Checkout', 'route' => 'checkout.index'],
     ];
 
     if (auth()->check() && auth()->user()->isCustomer()) {
-        $navItems[] = ['label' => 'Orders', 'route' => 'orders.index'];
+        $navItems[] = ['label' => 'Pesanan', 'route' => 'orders.index'];
     }
 @endphp
 
@@ -16,11 +16,11 @@
         <div class="flex items-center gap-8">
             <a href="{{ route('home') }}" class="flex items-center gap-3">
                 <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-sm font-black text-white shadow-lg shadow-slate-900/10">
-                    EC
+                    SC
                 </span>
 
                 <span>
-                    <span class="block text-[11px] font-semibold uppercase tracking-[0.35em] text-slate-400">Portfolio Build</span>
+                    <span class="block text-[11px] font-semibold uppercase tracking-[0.35em] text-slate-400">Platform E-Commerce</span>
                     <span class="block text-lg font-bold text-slate-950">{{ config('app.name') }}</span>
                 </span>
             </a>
@@ -47,21 +47,21 @@
                     href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('dashboard') }}"
                     class="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900 sm:inline-flex"
                 >
-                    {{ auth()->user()->isAdmin() ? 'Admin Dashboard' : 'My Dashboard' }}
+                    {{ auth()->user()->isAdmin() ? 'Panel Admin' : 'Dasbor Saya' }}
                 </a>
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
-                        Logout
+                        Keluar
                     </button>
                 </form>
             @else
                 <a href="{{ route('login') }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900">
-                    Login
+                    Masuk
                 </a>
                 <a href="{{ route('register') }}" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    Register
+                    Daftar
                 </a>
             @endauth
         </div>

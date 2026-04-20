@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Dashboard')
-@section('heading', 'Admin Dashboard')
+@section('title', 'Dasbor Admin')
+@section('heading', 'Dasbor Admin')
 
 @section('content')
     <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -18,8 +18,8 @@
         <article class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
             <div class="flex items-center justify-between gap-4">
                 <div>
-                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Recent Orders</p>
-                    <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-950">Ringkasan order terbaru</h2>
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Pesanan Terbaru</p>
+                    <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-950">Ringkasan pesanan terbaru</h2>
                 </div>
 
                 <a href="{{ route('admin.orders.index') }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
@@ -32,8 +32,8 @@
                     <table class="min-w-full divide-y divide-slate-200 text-sm">
                         <thead class="bg-slate-50 text-left text-slate-500">
                             <tr>
-                                <th class="px-4 py-4 font-semibold">Order</th>
-                                <th class="px-4 py-4 font-semibold">Customer</th>
+                                <th class="px-4 py-4 font-semibold">Pesanan</th>
+                                <th class="px-4 py-4 font-semibold">Pelanggan</th>
                                 <th class="px-4 py-4 font-semibold">Total</th>
                                 <th class="px-4 py-4 font-semibold">Status</th>
                             </tr>
@@ -70,12 +70,12 @@
         <article class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
             <div class="flex items-center justify-between gap-4">
                 <div>
-                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Low Stock Watch</p>
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Pantauan Stok Menipis</p>
                     <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-950">Produk yang perlu perhatian</h2>
                 </div>
 
                 <a href="{{ route('admin.inventory.index') }}" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
-                    Inventory
+                    Inventaris
                 </a>
             </div>
 

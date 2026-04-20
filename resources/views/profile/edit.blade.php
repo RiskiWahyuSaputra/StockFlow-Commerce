@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Customer Profile</p>
+            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Profil Pelanggan</p>
             <h2 class="mt-2 text-3xl font-black tracking-tight text-slate-950">
                 {{ __('Kelola Profil') }}
             </h2>

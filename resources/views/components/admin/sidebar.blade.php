@@ -1,10 +1,10 @@
 @php
     $items = [
-        ['label' => 'Dashboard', 'route' => 'admin.dashboard', 'state' => 'ready'],
-        ['label' => 'Categories', 'route' => 'admin.categories.index', 'state' => 'ready'],
-        ['label' => 'Products', 'route' => 'admin.products.index', 'state' => 'ready'],
-        ['label' => 'Orders', 'route' => 'admin.orders.index', 'state' => 'ready'],
-        ['label' => 'Inventory', 'route' => 'admin.inventory.index', 'state' => 'ready'],
+        ['label' => 'Dasbor', 'route' => 'admin.dashboard', 'state' => 'ready'],
+        ['label' => 'Kategori', 'route' => 'admin.categories.index', 'state' => 'ready'],
+        ['label' => 'Produk', 'route' => 'admin.products.index', 'state' => 'ready'],
+        ['label' => 'Pesanan', 'route' => 'admin.orders.index', 'state' => 'ready'],
+        ['label' => 'Inventaris', 'route' => 'admin.inventory.index', 'state' => 'ready'],
     ];
 @endphp
 
@@ -32,12 +32,12 @@
                     ])
                 >
                     <span>{{ $item['label'] }}</span>
-                    <span class="rounded-full bg-emerald-100 px-2 py-1 text-xs font-semibold text-emerald-700">Ready</span>
+                    <span class="rounded-full bg-emerald-100 px-2 py-1 text-xs font-semibold text-emerald-700">Siap</span>
                 </a>
             @else
                 <div class="flex items-center justify-between rounded-2xl border border-dashed border-slate-200 px-4 py-3 text-sm font-medium text-slate-400">
                     <span>{{ $item['label'] }}</span>
-                    <span class="rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-700">Next</span>
+                    <span class="rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-700">Berikutnya</span>
                 </div>
             @endif
         @endforeach
@@ -52,13 +52,13 @@
 
     <div class="mt-4 space-y-3">
         <a href="{{ route('home') }}" class="flex items-center justify-center rounded-2xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
-            Lihat Storefront
+            Lihat Toko
         </a>
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="flex w-full items-center justify-center rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                Logout
+                Keluar
             </button>
         </form>
     </div>

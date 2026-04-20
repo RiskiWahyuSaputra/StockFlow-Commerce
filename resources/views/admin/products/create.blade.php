@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Create Product')
-@section('heading', 'Create Product')
+@section('title', 'Buat Produk')
+@section('heading', 'Buat Produk')
 
 @section('content')
     @include('admin.products._form')

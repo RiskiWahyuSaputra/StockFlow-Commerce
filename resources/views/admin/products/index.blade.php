@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Products')
-@section('heading', 'Product Management')
+@section('title', 'Produk')
+@section('heading', 'Manajemen Produk')
 
 @section('content')
     <section class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Catalog Admin</p>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Admin Katalog</p>
                 <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-950">Kelola produk, gambar, dan stok</h2>
             </div>
 
@@ -26,7 +26,7 @@
                 </form>
 
                 <a href="{{ route('admin.products.create') }}" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    Create Product
+                    Buat Produk
                 </a>
             </div>
         </div>
@@ -36,12 +36,12 @@
                 <table class="min-w-full divide-y divide-slate-200 text-sm">
                     <thead class="bg-slate-50 text-left text-slate-500">
                         <tr>
-                            <th class="px-4 py-4 font-semibold">Product</th>
-                            <th class="px-4 py-4 font-semibold">Category</th>
-                            <th class="px-4 py-4 font-semibold">Price</th>
-                            <th class="px-4 py-4 font-semibold">Stock</th>
+                            <th class="px-4 py-4 font-semibold">Produk</th>
+                            <th class="px-4 py-4 font-semibold">Kategori</th>
+                            <th class="px-4 py-4 font-semibold">Harga</th>
+                            <th class="px-4 py-4 font-semibold">Stok</th>
                             <th class="px-4 py-4 font-semibold">Status</th>
-                            <th class="px-4 py-4 font-semibold">Action</th>
+                            <th class="px-4 py-4 font-semibold">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 bg-white">
@@ -76,13 +76,13 @@
                                 <td class="px-4 py-4">
                                     <div class="flex flex-wrap gap-2">
                                         <a href="{{ route('admin.products.edit', $product) }}" class="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
-                                            Edit
+                                            Ubah
                                         </a>
                                         <form method="POST" action="{{ route('admin.products.destroy', $product) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="rounded-full bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-700 transition hover:bg-rose-100">
-                                                Delete
+                                                Hapus
                                             </button>
                                         </form>
                                     </div>

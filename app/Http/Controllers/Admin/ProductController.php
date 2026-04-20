@@ -44,10 +44,10 @@ class ProductController extends Controller
                 'status' => $status,
             ],
             'statusOptions' => [
-                Product::STATUS_DRAFT => 'Draft',
-                Product::STATUS_ACTIVE => 'Active',
-                Product::STATUS_INACTIVE => 'Inactive',
-                Product::STATUS_ARCHIVED => 'Archived',
+                Product::STATUS_DRAFT => 'Draf',
+                Product::STATUS_ACTIVE => 'Aktif',
+                Product::STATUS_INACTIVE => 'Nonaktif',
+                Product::STATUS_ARCHIVED => 'Arsip',
             ],
         ]);
     }

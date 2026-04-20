@@ -1,12 +1,12 @@
 @extends('layouts.storefront')
 
-@section('title', 'Cart')
+@section('title', 'Keranjang')
 
 @section('content')
     <section class="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:items-start">
         <div class="rounded-[2.2rem] border border-slate-200 bg-white p-8 shadow-sm">
             <x-frontend.section-heading
-                eyebrow="Cart Management"
+                eyebrow="Kelola Keranjang"
                 title="Database-backed cart yang siap untuk flow checkout."
                 description="User bisa menambah produk, update quantity, hapus item, dan semua total dihitung ulang dari database."
             />
@@ -52,7 +52,7 @@
                                             >
 
                                             <button type="submit" class="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
-                                                Update
+                                                Perbarui
                                             </button>
                                         </form>
 
@@ -77,13 +77,13 @@
                 </div>
             @else
                 <div class="mt-8 rounded-[2rem] border border-dashed border-slate-200 bg-slate-50 p-10 text-center">
-                    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Cart Empty</p>
-                    <h3 class="mt-4 text-2xl font-black tracking-tight text-slate-950">Cart kamu masih kosong.</h3>
+                    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Keranjang Kosong</p>
+                    <h3 class="mt-4 text-2xl font-black tracking-tight text-slate-950">Keranjang kamu masih kosong.</h3>
                     <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-600">
                         Tambahkan produk dari katalog untuk mulai checkout. Semua item akan disimpan di database berdasarkan user yang login.
                     </p>
                     <a href="{{ route('products.index') }}" class="mt-6 inline-flex rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                        Explore Products
+                        Jelajahi Produk
                     </a>
                 </div>
             @endif
@@ -91,7 +91,7 @@
 
         <div class="space-y-6">
             <aside class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 class="text-lg font-bold text-slate-950">Cart Summary</h3>
+                <h3 class="text-lg font-bold text-slate-950">Ringkasan Keranjang</h3>
 
                 <div class="mt-6 space-y-4">
                     @forelse ($cart->items as $item)
@@ -121,18 +121,18 @@
                 </div>
 
                 <div class="mt-6 flex items-center justify-between rounded-3xl bg-slate-950 px-5 py-4 text-white">
-                    <span class="text-sm font-medium text-slate-300">Total Cart</span>
+                    <span class="text-sm font-medium text-slate-300">Total Keranjang</span>
                     <span class="text-xl font-black tracking-tight">{{ $cart->total_label }}</span>
                 </div>
             </aside>
 
             <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-                <p class="text-sm font-semibold text-slate-900">Next Step</p>
+                <p class="text-sm font-semibold text-slate-900">Langkah Berikutnya</p>
                 <div class="mt-4 rounded-3xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-500">
-                    Cart ini sudah siap disambungkan ke checkout database-based. Saat ini tombol checkout masih menuju preview halaman checkout.
+                    Keranjang ini sudah siap dilanjutkan ke checkout berbasis database agar order bisa dibuat dan dibayar.
                 </div>
                 <a href="{{ route('checkout.index') }}" class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    Proceed to Checkout
+                    Lanjut ke Checkout
                 </a>
             </div>
         </div>

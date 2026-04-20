@@ -2,8 +2,8 @@
     <x-slot name="header">
         <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Customer Area</p>
-                <h1 class="mt-2 text-3xl font-black tracking-tight text-slate-950">Dashboard Customer</h1>
+                <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Area Pelanggan</p>
+                <h1 class="mt-2 text-3xl font-black tracking-tight text-slate-950">Dasbor Pelanggan</h1>
             </div>
 
             <div class="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-medium text-white">
@@ -16,7 +16,7 @@
         <section class="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
             <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
                 <span class="inline-flex rounded-full bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700">
-                    Session Auth Active
+                    Sesi Login Aktif
                 </span>
 
                 <h2 class="mt-6 text-3xl font-black tracking-tight text-slate-950">
@@ -24,8 +24,8 @@
                 </h2>
 
                 <p class="mt-5 max-w-2xl text-base leading-8 text-slate-600">
-                    Area ini adalah landing page untuk user customer setelah login. Nanti dashboard ini bisa kita
-                    kembangkan menjadi riwayat order, status pembayaran, alamat pengiriman, dan wishlist.
+                    Area ini adalah landing page untuk pelanggan setelah login. Nanti dasbor ini bisa kita
+                    kembangkan menjadi riwayat pesanan, status pembayaran, alamat pengiriman, dan wishlist.
                 </p>
 
                 <div class="mt-8 grid gap-4 md:grid-cols-3">
@@ -45,17 +45,17 @@
             </article>
 
             <article class="rounded-[2rem] border border-slate-200 bg-slate-950 p-8 text-white shadow-xl shadow-slate-900/10">
-                <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">Next Build</p>
+                <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-400">Pengembangan Berikutnya</p>
 
                 <ul class="mt-6 space-y-4">
                     <li class="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-slate-300">
-                        Cart management dan mini checkout flow customer
+                        Pengelolaan keranjang dan mini checkout untuk pelanggan
                     </li>
                     <li class="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-slate-300">
-                        Order history, payment status, dan detail transaksi
+                        Riwayat pesanan, status pembayaran, dan detail transaksi
                     </li>
                     <li class="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-slate-300">
-                        Update profil akun dan alamat pengiriman
+                        Pembaruan profil akun dan alamat pengiriman
                     </li>
                 </ul>
             </article>

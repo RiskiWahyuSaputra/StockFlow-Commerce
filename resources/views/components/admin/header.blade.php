@@ -1,8 +1,8 @@
 <header class="rounded-3xl border border-slate-200 bg-white px-6 py-5 shadow-sm">
     <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Admin Overview</p>
-            <h1 class="mt-2 text-2xl font-bold text-slate-900">@yield('heading', 'Dashboard')</h1>
+            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Ringkasan Admin</p>
+            <h1 class="mt-2 text-2xl font-bold text-slate-900">@yield('heading', 'Dasbor')</h1>
         </div>
 
         <div class="flex flex-col gap-3 lg:items-end">

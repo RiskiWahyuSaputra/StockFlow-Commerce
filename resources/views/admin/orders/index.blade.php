@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 
-@section('title', 'Orders')
-@section('heading', 'Order Management')
+@section('title', 'Pesanan')
+@section('heading', 'Manajemen Pesanan')
 
 @section('content')
     <section class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Order Queue</p>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Antrian Pesanan</p>
                 <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-950">Pantau order dan payment status</h2>
             </div>
 
             <form method="GET" action="{{ route('admin.orders.index') }}" class="flex flex-wrap gap-3">
-                <input type="text" name="search" value="{{ $filters['search'] }}" placeholder="Order number / customer" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0">
+                <input type="text" name="search" value="{{ $filters['search'] }}" placeholder="Nomor pesanan / pelanggan" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0">
                 <select name="status" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0">
                     <option value="">Semua status</option>
                     @foreach ($statusOptions as $value => $label)
@@ -30,12 +30,12 @@
                 <table class="min-w-full divide-y divide-slate-200 text-sm">
                     <thead class="bg-slate-50 text-left text-slate-500">
                         <tr>
-                            <th class="px-4 py-4 font-semibold">Order</th>
-                            <th class="px-4 py-4 font-semibold">Customer</th>
+                            <th class="px-4 py-4 font-semibold">Pesanan</th>
+                            <th class="px-4 py-4 font-semibold">Pelanggan</th>
                             <th class="px-4 py-4 font-semibold">Total</th>
-                            <th class="px-4 py-4 font-semibold">Order Status</th>
-                            <th class="px-4 py-4 font-semibold">Payment</th>
-                            <th class="px-4 py-4 font-semibold">Action</th>
+                            <th class="px-4 py-4 font-semibold">Status Pesanan</th>
+                            <th class="px-4 py-4 font-semibold">Pembayaran</th>
+                            <th class="px-4 py-4 font-semibold">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 bg-white">

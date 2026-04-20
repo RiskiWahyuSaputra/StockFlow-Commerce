@@ -14,9 +14,9 @@ class HomeController extends Controller
 
         return view('frontend.home', [
             'stats' => [
-                ['label' => 'Curated Products', 'value' => '64+'],
-                ['label' => 'Fast Delivery Areas', 'value' => '18 Cities'],
-                ['label' => 'Happy Customers', 'value' => '2.4k'],
+                ['label' => 'Produk Kurasi', 'value' => '64+'],
+                ['label' => 'Area Kirim Cepat', 'value' => '18 Kota'],
+                ['label' => 'Pelanggan Puas', 'value' => '2,4k'],
             ],
             'featuredProducts' => StorefrontData::featuredProducts(),
             'categories' => StorefrontData::categories(),

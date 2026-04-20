@@ -1,9 +1,9 @@
 <x-guest-layout>
     <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Register</p>
-        <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Buat akun customer baru</h2>
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Daftar</p>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Buat akun pelanggan baru</h2>
         <p class="mt-3 text-sm leading-7 text-slate-600">
-            Akun yang dibuat dari halaman ini otomatis menjadi `customer` dan akan diarahkan ke dashboard customer setelah login.
+            Akun yang dibuat dari halaman ini otomatis menjadi `customer` dan akan diarahkan ke dasbor pelanggan setelah login.
         </p>
     </div>
 
@@ -57,7 +57,7 @@
             <p class="text-center text-sm text-slate-500">
                 Sudah punya akun?
                 <a href="{{ route('login') }}" class="font-semibold text-brand-700 transition hover:text-brand-600">
-                    Login di sini
+                    Masuk di sini
                 </a>
             </p>
         </div>

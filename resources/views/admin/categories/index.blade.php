@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Categories')
-@section('heading', 'Category Management')
+@section('title', 'Kategori')
+@section('heading', 'Manajemen Kategori')
 
 @section('content')
     <section class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Catalog Structure</p>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Struktur Katalog</p>
                 <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-950">Kelola kategori produk</h2>
             </div>
 
@@ -15,12 +15,12 @@
                 <form method="GET" action="{{ route('admin.categories.index') }}" class="flex gap-3">
                     <input type="text" name="search" value="{{ $filters['search'] }}" placeholder="Cari kategori..." class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0">
                     <button type="submit" class="rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
-                        Search
+                        Cari
                     </button>
                 </form>
 
                 <a href="{{ route('admin.categories.create') }}" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    Create Category
+                    Buat Kategori
                 </a>
             </div>
         </div>
@@ -30,12 +30,12 @@
                 <table class="min-w-full divide-y divide-slate-200 text-sm">
                     <thead class="bg-slate-50 text-left text-slate-500">
                         <tr>
-                            <th class="px-4 py-4 font-semibold">Name</th>
-                            <th class="px-4 py-4 font-semibold">Parent</th>
-                            <th class="px-4 py-4 font-semibold">Products</th>
+                            <th class="px-4 py-4 font-semibold">Nama</th>
+                            <th class="px-4 py-4 font-semibold">Induk</th>
+                            <th class="px-4 py-4 font-semibold">Produk</th>
                             <th class="px-4 py-4 font-semibold">Status</th>
-                            <th class="px-4 py-4 font-semibold">Sort</th>
-                            <th class="px-4 py-4 font-semibold">Action</th>
+                            <th class="px-4 py-4 font-semibold">Urutan</th>
+                            <th class="px-4 py-4 font-semibold">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 bg-white">
@@ -54,13 +54,13 @@
                                 <td class="px-4 py-4">
                                     <div class="flex flex-wrap gap-2">
                                         <a href="{{ route('admin.categories.edit', $category) }}" class="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
-                                            Edit
+                                            Ubah
                                         </a>
                                         <form method="POST" action="{{ route('admin.categories.destroy', $category) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="rounded-full bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-700 transition hover:bg-rose-100">
-                                                Delete
+                                                Hapus
                                             </button>
                                         </form>
                                     </div>

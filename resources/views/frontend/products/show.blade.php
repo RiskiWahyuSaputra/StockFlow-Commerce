@@ -6,17 +6,17 @@
 @section('content')
     @php
         $specs = [
-            ['label' => 'Category', 'value' => $product->primary_category_name],
+            ['label' => 'Kategori', 'value' => $product->primary_category_name],
             ['label' => 'SKU', 'value' => $product->sku],
-            ['label' => 'Weight', 'value' => $product->weight ? $product->weight.' gr' : 'N/A'],
-            ['label' => 'Updated', 'value' => optional($product->updated_at)->format('d M Y') ?? 'N/A'],
+            ['label' => 'Berat', 'value' => $product->weight ? $product->weight.' gr' : 'Tidak ada'],
+            ['label' => 'Diperbarui', 'value' => optional($product->updated_at)->format('d M Y') ?? 'Tidak ada'],
         ];
     @endphp
 
     <div class="mb-6 flex flex-wrap items-center gap-3 text-sm text-slate-500">
-        <a href="{{ route('home') }}" class="transition hover:text-slate-900">Home</a>
+        <a href="{{ route('home') }}" class="transition hover:text-slate-900">Beranda</a>
         <span>/</span>
-        <a href="{{ route('products.index') }}" class="transition hover:text-slate-900">Products</a>
+        <a href="{{ route('products.index') }}" class="transition hover:text-slate-900">Produk</a>
         <span>/</span>
         <span class="font-medium text-slate-900">{{ $product->name }}</span>
     </div>
@@ -85,11 +85,11 @@
                             class="w-24 rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0"
                         >
                         <button type="submit" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                            Add to Cart
+                            Tambah ke Keranjang
                         </button>
                     </form>
                     <a href="{{ route('checkout.index') }}" class="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
-                        Buy Now
+                        Beli Sekarang
                     </a>
                 @else
                     <button type="button" disabled class="cursor-not-allowed rounded-full bg-slate-200 px-5 py-3 text-sm font-semibold text-slate-500">
@@ -102,7 +102,7 @@
 
     <section class="mt-16">
         <x-frontend.section-heading
-            eyebrow="Related Products"
+            eyebrow="Produk Terkait"
             title="Produk lain yang masih satu nuansa katalog"
             description="Related products ini memakai query terpisah yang tetap efisien dan memakai komponen card yang sama."
         />

@@ -157,7 +157,7 @@ class Product extends Model
 
     public function getPrimaryCategoryNameAttribute(): string
     {
-        return $this->category?->name ?? 'Uncategorized';
+        return $this->category?->name ?? 'Tanpa Kategori';
     }
 
     public function getStockLabelAttribute(): string
@@ -167,7 +167,7 @@ class Product extends Model
 
     public function getStockBadgeLabelAttribute(): string
     {
-        return $this->is_in_stock ? 'Stok '.$this->stock : 'Sold Out';
+        return $this->is_in_stock ? 'Stok '.$this->stock : 'Stok Habis';
     }
 
     #[Computed]

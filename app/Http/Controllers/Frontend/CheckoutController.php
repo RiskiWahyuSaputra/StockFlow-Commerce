@@ -36,7 +36,7 @@ class CheckoutController extends Controller
             'cart' => $cart,
             'shippingMethods' => [
                 [
-                    'name' => 'Regular Delivery',
+                    'name' => 'Pengiriman Reguler',
                     'detail' => 'Estimasi 1-2 hari kerja',
                     'price_label' => 'Rp0',
                     'active' => true,

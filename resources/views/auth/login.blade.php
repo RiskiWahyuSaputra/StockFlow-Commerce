@@ -3,7 +3,7 @@
         <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Masuk</p>
         <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Akses akun customer atau admin</h2>
         <p class="mt-3 text-sm leading-7 text-slate-600">
-            Gunakan email dan password yang terdaftar. Admin akan diarahkan ke dashboard admin, customer ke dashboard akun.
+            Gunakan email dan kata sandi yang terdaftar. Admin akan diarahkan ke panel admin, pelanggan ke dasbor akun.
         </p>
     </div>
 
@@ -50,7 +50,7 @@
             <p class="text-center text-sm text-slate-500">
                 Belum punya akun?
                 <a href="{{ route('register') }}" class="font-semibold text-brand-700 transition hover:text-brand-600">
-                    Register sekarang
+                    Daftar sekarang
                 </a>
             </p>
         </div>

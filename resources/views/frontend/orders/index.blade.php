@@ -1,6 +1,6 @@
 @extends('layouts.storefront')
 
-@section('title', 'Order History')
+@section('title', 'Riwayat Pesanan')
 @section('meta_description', 'Riwayat pesanan customer beserta status order dan pembayaran.')
 
 @section('content')
@@ -8,7 +8,7 @@
         <div class="rounded-[2.4rem] border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
             <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-end">
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-[0.34em] text-slate-400">Order History</p>
+                    <p class="text-xs font-semibold uppercase tracking-[0.34em] text-slate-400">Riwayat Pesanan</p>
                     <h1 class="mt-4 max-w-3xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
                         Semua order kamu tersusun rapi dalam satu timeline yang mudah dipantau.
                     </h1>
@@ -19,22 +19,22 @@
 
                 <div class="grid gap-4 sm:grid-cols-2">
                     <x-frontend.metric-card
-                        label="Total Orders"
+                        label="Total Pesanan"
                         :value="number_format($summary['total_orders'])"
                         description="Semua order yang pernah dibuat akun ini."
                     />
                     <x-frontend.metric-card
-                        label="Pending Payment"
+                        label="Menunggu Pembayaran"
                         :value="number_format($summary['pending_payment'])"
-                        description="Order yang masih menunggu pembayaran."
+                        description="Pesanan yang masih menunggu pembayaran."
                     />
                     <x-frontend.metric-card
-                        label="Completed"
+                        label="Selesai"
                         :value="number_format($summary['completed_orders'])"
-                        description="Order yang sudah selesai diproses."
+                        description="Pesanan yang sudah selesai diproses."
                     />
                     <x-frontend.metric-card
-                        label="Total Spent"
+                        label="Total Belanja"
                         :value="'Rp'.number_format((float) $summary['total_spent'], 0, ',', '.')"
                         description="Akumulasi order dengan pembayaran sukses."
                     />
@@ -45,8 +45,8 @@
         <section class="rounded-[2.2rem] border border-slate-200 bg-white p-8 shadow-sm">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">My Orders</p>
-                    <h2 class="mt-2 text-3xl font-black tracking-tight text-slate-950">Riwayat order terbaru</h2>
+                    <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Pesanan Saya</p>
+                    <h2 class="mt-2 text-3xl font-black tracking-tight text-slate-950">Riwayat pesanan terbaru</h2>
                 </div>
 
                 <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
@@ -86,15 +86,15 @@
 
                                     <div class="mt-4 grid gap-4 text-sm text-slate-600 sm:grid-cols-3">
                                         <div class="rounded-2xl bg-white/80 px-4 py-3 ring-1 ring-slate-200/80">
-                                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Placed</p>
+                                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Dibuat</p>
                                             <p class="mt-2 font-semibold text-slate-900">{{ optional($order->placed_at)->format('d M Y H:i') ?? '-' }}</p>
                                         </div>
                                         <div class="rounded-2xl bg-white/80 px-4 py-3 ring-1 ring-slate-200/80">
-                                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Recipient</p>
+                                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Penerima</p>
                                             <p class="mt-2 font-semibold text-slate-900">{{ $order->shipping_recipient_name }}</p>
                                         </div>
                                         <div class="rounded-2xl bg-white/80 px-4 py-3 ring-1 ring-slate-200/80">
-                                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Payment</p>
+                                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Pembayaran</p>
                                             <p class="mt-2 font-semibold text-slate-900">
                                                 {{ $latestPayment ? 'Midtrans '.strtoupper($latestPayment->payment_type ?? 'snap') : 'Belum dibuat' }}
                                             </p>
@@ -118,12 +118,12 @@
 
                                 <div class="flex w-full flex-col gap-4 lg:w-[240px]">
                                     <div class="rounded-[1.8rem] bg-slate-950 px-5 py-5 text-white">
-                                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Grand Total</p>
+                                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Total Akhir</p>
                                         <p class="mt-3 text-2xl font-black tracking-tight">{{ $order->grand_total_label }}</p>
                                     </div>
 
                                     <a href="{{ route('orders.show', $order->order_number) }}" class="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                                        Lihat Detail Order
+                                        Lihat Detail Pesanan
                                     </a>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                 </div>
             @else
                 <div class="mt-8 rounded-[2rem] border border-dashed border-slate-200 bg-slate-50 p-12 text-center">
-                    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">No Orders Yet</p>
+                    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Belum Ada Pesanan</p>
                     <h3 class="mt-4 text-2xl font-black tracking-tight text-slate-950">Belum ada order di akun ini.</h3>
                     <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">
                         Setelah checkout pertama berhasil dibuat, riwayat order akan muncul di sini lengkap dengan status pembayaran dan status pesanan.

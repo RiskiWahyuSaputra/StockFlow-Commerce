@@ -54,13 +54,13 @@ class InventoryController extends Controller
                 'type' => $type,
             ],
             'typeOptions' => [
-                InventoryLog::TYPE_INITIAL => 'Initial',
-                InventoryLog::TYPE_RESTOCK => 'Restock',
-                InventoryLog::TYPE_ADJUSTMENT => 'Adjustment',
-                InventoryLog::TYPE_RESERVED => 'Reserved',
-                InventoryLog::TYPE_DEDUCTED => 'Deducted',
-                InventoryLog::TYPE_RELEASED => 'Released',
-                InventoryLog::TYPE_RETURNED => 'Returned',
+                InventoryLog::TYPE_INITIAL => 'Awal',
+                InventoryLog::TYPE_RESTOCK => 'Restok',
+                InventoryLog::TYPE_ADJUSTMENT => 'Penyesuaian',
+                InventoryLog::TYPE_RESERVED => 'Reservasi',
+                InventoryLog::TYPE_DEDUCTED => 'Finalisasi',
+                InventoryLog::TYPE_RELEASED => 'Dilepas',
+                InventoryLog::TYPE_RETURNED => 'Retur',
             ],
             'summary' => [
                 'total_logs' => InventoryLog::query()->count(),
@@ -84,7 +84,7 @@ class InventoryController extends Controller
 
         return redirect()
             ->route('admin.inventory.index')
-            ->with('status', 'Restock stok berhasil disimpan dan inventory log sudah tercatat.');
+            ->with('status', 'Restok stok berhasil disimpan dan inventory log sudah tercatat.');
     }
 
     public function syncStock(InventorySyncStockRequest $request): RedirectResponse

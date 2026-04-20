@@ -1,30 +1,30 @@
 @extends('layouts.admin')
 
-@section('title', 'Inventory Logs')
-@section('heading', 'Inventory Tracking')
+@section('title', 'Log Inventaris')
+@section('heading', 'Pelacakan Inventaris')
 
 @section('content')
     <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <article class="rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Total Logs</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Total Log</p>
             <p class="mt-4 text-3xl font-black tracking-tight text-slate-950">{{ number_format($summary['total_logs']) }}</p>
             <p class="mt-2 text-sm text-slate-500">Semua histori pergerakan stok yang tersimpan.</p>
         </article>
 
         <article class="rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Restock Events</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Aktivitas Restok</p>
             <p class="mt-4 text-3xl font-black tracking-tight text-slate-950">{{ number_format($summary['restock_logs']) }}</p>
             <p class="mt-2 text-sm text-slate-500">Penambahan stok dari admin/manual restock.</p>
         </article>
 
         <article class="rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Reserved Events</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Aktivitas Reservasi</p>
             <p class="mt-4 text-3xl font-black tracking-tight text-slate-950">{{ number_format($summary['reserved_logs']) }}</p>
             <p class="mt-2 text-sm text-slate-500">Reservasi stok ketika order dibuat dari checkout.</p>
         </article>
 
         <article class="rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Low Stock Products</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Produk Stok Menipis</p>
             <p class="mt-4 text-3xl font-black tracking-tight text-slate-950">{{ number_format($summary['low_stock_products']) }}</p>
             <p class="mt-2 text-sm text-slate-500">Produk yang stoknya sudah menyentuh threshold.</p>
         </article>
@@ -34,7 +34,7 @@
         <article class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
             <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Inventory Ledger</p>
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Buku Besar Inventaris</p>
                     <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-950">Riwayat pergerakan stok yang bisa diaudit.</h2>
                 </div>
 
@@ -68,14 +68,14 @@
                     <table class="min-w-full divide-y divide-slate-200 text-sm">
                         <thead class="bg-slate-50">
                             <tr class="text-left text-slate-500">
-                                <th class="px-4 py-4 font-semibold">Product</th>
-                                <th class="px-4 py-4 font-semibold">Type</th>
-                                <th class="px-4 py-4 font-semibold">Before</th>
-                                <th class="px-4 py-4 font-semibold">Changed</th>
-                                <th class="px-4 py-4 font-semibold">After</th>
-                                <th class="px-4 py-4 font-semibold">Reference</th>
-                                <th class="px-4 py-4 font-semibold">Actor</th>
-                                <th class="px-4 py-4 font-semibold">Time</th>
+                                <th class="px-4 py-4 font-semibold">Produk</th>
+                                <th class="px-4 py-4 font-semibold">Tipe</th>
+                                <th class="px-4 py-4 font-semibold">Sebelum</th>
+                                <th class="px-4 py-4 font-semibold">Perubahan</th>
+                                <th class="px-4 py-4 font-semibold">Sesudah</th>
+                                <th class="px-4 py-4 font-semibold">Referensi</th>
+                                <th class="px-4 py-4 font-semibold">Pelaku</th>
+                                <th class="px-4 py-4 font-semibold">Waktu</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 bg-white">
@@ -113,7 +113,7 @@
                                         <p class="mt-1 text-xs">{{ $log->reference ?? ($log->reference_id ? '#'.$log->reference_id : '-') }}</p>
                                     </td>
                                     <td class="px-4 py-4 text-slate-500">
-                                        {{ $log->user?->name ?? 'System' }}
+                                        {{ $log->user?->name ?? 'Sistem' }}
                                     </td>
                                     <td class="px-4 py-4 text-slate-500">
                                         {{ $log->created_at?->format('d M Y H:i') }}
@@ -138,14 +138,14 @@
 
         <div class="space-y-6">
             <article class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Manual Restock</p>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Restok Manual</p>
                 <h3 class="mt-2 text-2xl font-black tracking-tight text-slate-950">Tambahkan stok tanpa mengubah harga produk.</h3>
 
                 <form method="POST" action="{{ route('admin.inventory.restock') }}" class="mt-6 space-y-4">
                     @csrf
 
                     <div>
-                        <label for="restock_product_id" class="text-sm font-semibold text-slate-900">Product</label>
+                        <label for="restock_product_id" class="text-sm font-semibold text-slate-900">Produk</label>
                         <select id="restock_product_id" name="product_id" class="mt-2 block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0">
                             @foreach ($products as $product)
                                 <option value="{{ $product->id }}">{{ $product->name }} ({{ $product->sku }}) - stock {{ $product->stock }}</option>
@@ -154,12 +154,12 @@
                     </div>
 
                     <div>
-                        <label for="restock_quantity" class="text-sm font-semibold text-slate-900">Quantity</label>
+                        <label for="restock_quantity" class="text-sm font-semibold text-slate-900">Jumlah</label>
                         <input id="restock_quantity" type="number" min="1" name="quantity" value="1" class="mt-2 block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0">
                     </div>
 
                     <div>
-                        <label for="restock_note" class="text-sm font-semibold text-slate-900">Note</label>
+                        <label for="restock_note" class="text-sm font-semibold text-slate-900">Catatan</label>
                         <textarea id="restock_note" name="note" rows="3" class="mt-2 block w-full rounded-[1.4rem] border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none focus:ring-0" placeholder="Contoh: barang datang dari supplier batch April"></textarea>
                     </div>
 
@@ -170,14 +170,14 @@
             </article>
 
             <article class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-xl shadow-slate-900/10">
-                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Stock Sync</p>
+                <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Sinkronisasi Stok</p>
                 <h3 class="mt-2 text-2xl font-black tracking-tight">Sesuaikan stok aktual saat ada audit gudang.</h3>
 
                 <form method="POST" action="{{ route('admin.inventory.sync-stock') }}" class="mt-6 space-y-4">
                     @csrf
 
                     <div>
-                        <label for="sync_product_id" class="text-sm font-semibold text-white">Product</label>
+                        <label for="sync_product_id" class="text-sm font-semibold text-white">Produk</label>
                         <select id="sync_product_id" name="product_id" class="mt-2 block w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:border-white/30 focus:outline-none focus:ring-0">
                             @foreach ($products as $product)
                                 <option value="{{ $product->id }}" class="text-slate-900">{{ $product->name }} ({{ $product->sku }}) - stock {{ $product->stock }}</option>
@@ -186,12 +186,12 @@
                     </div>
 
                     <div>
-                        <label for="sync_stock" class="text-sm font-semibold text-white">Target Stock</label>
+                        <label for="sync_stock" class="text-sm font-semibold text-white">Target Stok</label>
                         <input id="sync_stock" type="number" min="0" name="stock" value="0" class="mt-2 block w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-white/30 focus:outline-none focus:ring-0">
                     </div>
 
                     <div>
-                        <label for="sync_note" class="text-sm font-semibold text-white">Note</label>
+                        <label for="sync_note" class="text-sm font-semibold text-white">Catatan</label>
                         <textarea id="sync_note" name="note" rows="3" class="mt-2 block w-full rounded-[1.4rem] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-white/30 focus:outline-none focus:ring-0" placeholder="Contoh: penyesuaian hasil stock opname"></textarea>
                     </div>
 

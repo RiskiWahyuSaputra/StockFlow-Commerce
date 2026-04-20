@@ -5,11 +5,11 @@
                 <div class="shrink-0">
                     <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('dashboard') }}" class="flex items-center gap-3">
                         <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-sm font-black text-white">
-                            EC
+                            SC
                         </span>
 
                         <span>
-                            <span class="block text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Authenticated Area</span>
+                            <span class="block text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Area Masuk</span>
                             <span class="block text-lg font-bold text-slate-900">{{ config('app.name') }}</span>
                         </span>
                     </a>
@@ -18,7 +18,7 @@
                 <div class="hidden items-center gap-2 rounded-full border border-slate-200 bg-white p-1.5 shadow-sm sm:flex">
                     @if (auth()->user()->isCustomer())
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            Dashboard
+                            Dasbor
                         </x-nav-link>
                         <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.*')">
                             Profil
@@ -66,7 +66,7 @@
 
                         @if (auth()->user()->isAdmin())
                             <x-dropdown-link :href="route('admin.dashboard')">
-                                Dashboard Admin
+                                Panel Admin
                             </x-dropdown-link>
                         @endif
 
@@ -80,7 +80,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                Logout
+                                Keluar
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -102,7 +102,7 @@
         <div class="space-y-1 border-t border-slate-200 px-4 pb-4 pt-3">
             @if (auth()->user()->isCustomer())
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    Dashboard
+                    Dasbor
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.*')">
                     Profil
@@ -111,7 +111,7 @@
 
             @if (auth()->user()->isAdmin())
                 <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                    Dashboard Admin
+                    Panel Admin
                 </x-responsive-nav-link>
             @endif
 
@@ -139,7 +139,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        Logout
+                        Keluar
                     </x-responsive-nav-link>
                 </form>
             </div>

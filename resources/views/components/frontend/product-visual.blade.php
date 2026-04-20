@@ -7,7 +7,7 @@
 @php
     $isModel = $product instanceof \App\Models\Product;
     $name = $isModel ? $product->name : $product['name'];
-    $categoryName = $isModel ? ($product->primary_category_name ?? 'Uncategorized') : ($product['category'] ?? 'Catalog');
+    $categoryName = $isModel ? ($product->primary_category_name ?? 'Tanpa Kategori') : ($product['category'] ?? 'Katalog');
     $themeKey = \Illuminate\Support\Str::slug($isModel ? ($product->category?->slug ?? $categoryName) : $categoryName);
 
     $palettes = match (true) {
@@ -64,7 +64,7 @@
         default => 'text-3xl',
     };
 
-    $label = $variant === 'hero' ? 'Product Preview' : $categoryName;
+    $label = $variant === 'hero' ? 'Pratinjau Produk' : $categoryName;
 @endphp
 
 <div {{ $attributes->class([$wrapperClasses, 'relative overflow-hidden border border-slate-200 shadow-sm']) }} style="{{ $style }}">

@@ -1,7 +1,7 @@
 @extends('layouts.storefront')
 
-@section('title', 'Product Listing')
-@section('meta_description', 'Daftar produk modern dan clean untuk E-Commerce Platform.')
+@section('title', 'Katalog Produk')
+@section('meta_description', 'Daftar produk modern dan rapi untuk StockFlow Commerce.')
 
 @section('content')
     @php
@@ -10,8 +10,8 @@
 
     <section class="rounded-[2.2rem] border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
         <x-frontend.section-heading
-            eyebrow="Product Catalog"
-            title="A searchable catalog built to feel clean, focused, and production-ready."
+            eyebrow="Katalog Produk"
+            title="Katalog yang mudah dicari, difilter, dan siap dipakai untuk alur belanja nyata."
             description="Listing ini sudah memakai search, filter kategori, sort harga, pagination, dan eager loading agar siap dipakai untuk katalog produk yang sebenarnya."
         />
 
@@ -19,7 +19,7 @@
             <aside class="space-y-6 rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
                 <form method="GET" action="{{ route('products.index') }}" class="space-y-5">
                     <div>
-                        <label for="search" class="text-sm font-semibold text-slate-900">Search Product</label>
+                        <label for="search" class="text-sm font-semibold text-slate-900">Cari Produk</label>
                         <input
                             id="search"
                             name="search"
@@ -31,7 +31,7 @@
                     </div>
 
                     <div>
-                        <label for="category" class="text-sm font-semibold text-slate-900">Category</label>
+                        <label for="category" class="text-sm font-semibold text-slate-900">Kategori</label>
                         <select
                             id="category"
                             name="category"
@@ -47,7 +47,7 @@
                     </div>
 
                     <div>
-                        <label for="sort" class="text-sm font-semibold text-slate-900">Sort</label>
+                        <label for="sort" class="text-sm font-semibold text-slate-900">Urutkan</label>
                         <select
                             id="sort"
                             name="sort"
@@ -61,7 +61,7 @@
 
                     <div class="flex gap-3">
                         <button type="submit" class="inline-flex flex-1 items-center justify-center rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                            Apply
+                            Terapkan
                         </button>
 
                         @if ($hasActiveFilters)
@@ -73,7 +73,7 @@
                 </form>
 
                 <div>
-                    <p class="text-sm font-semibold text-slate-900">Quick Category</p>
+                    <p class="text-sm font-semibold text-slate-900">Kategori Cepat</p>
                     <div class="mt-4 space-y-3">
                         @foreach ($categories as $category)
                             @php
@@ -99,9 +99,9 @@
             <div>
                 <div class="flex flex-col gap-4 rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Catalog Results</p>
+                        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">Hasil Katalog</p>
                         <h2 class="mt-2 text-2xl font-black tracking-tight">
-                            {{ $products->total() }} products found
+                            {{ $products->total() }} produk ditemukan
                         </h2>
                         <p class="mt-2 text-sm text-slate-300">
                             @if ($products->count())
@@ -116,19 +116,19 @@
                         <div class="flex flex-wrap gap-2">
                             @if (filled($filters['search']))
                                 <span class="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-slate-200">
-                                    Search: {{ $filters['search'] }}
+                                    Pencarian: {{ $filters['search'] }}
                                 </span>
                             @endif
 
                             @if ($selectedCategory)
                                 <span class="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-slate-200">
-                                    Category: {{ $selectedCategory->name }}
+                                    Kategori: {{ $selectedCategory->name }}
                                 </span>
                             @endif
 
                             @if (($sortOptions[$filters['sort']] ?? null) && $filters['sort'] !== 'latest')
                                 <span class="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-slate-200">
-                                    Sort: {{ $sortOptions[$filters['sort']] }}
+                                    Urutan: {{ $sortOptions[$filters['sort']] }}
                                 </span>
                             @endif
                         </div>
@@ -147,13 +147,13 @@
                     </div>
                 @else
                     <div class="mt-6 rounded-[2rem] border border-dashed border-slate-200 bg-slate-50 p-10 text-center">
-                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">No Products</p>
+                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Produk Tidak Ditemukan</p>
                         <h3 class="mt-4 text-2xl font-black tracking-tight text-slate-950">Tidak ada produk yang cocok.</h3>
                         <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-600">
                             Coba ubah keyword pencarian, ganti kategori, atau reset filter untuk melihat semua katalog yang tersedia.
                         </p>
                         <a href="{{ route('products.index') }}" class="mt-6 inline-flex rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                            Reset Catalog
+                            Reset Katalog
                         </a>
                     </div>
                 @endif

@@ -17,8 +17,35 @@
         'md' => 'px-4 py-2 text-sm',
         default => 'px-3 py-1.5 text-xs',
     };
+
+    $normalizedLabel = \Illuminate\Support\Str::of((string) $label)->lower()->trim()->value();
+    $translatedLabel = [
+        'pending' => 'menunggu',
+        'paid' => 'dibayar',
+        'processing' => 'diproses',
+        'shipped' => 'dikirim',
+        'completed' => 'selesai',
+        'cancelled' => 'dibatalkan',
+        'failed' => 'gagal',
+        'expired' => 'kedaluwarsa',
+        'refunded' => 'dikembalikan',
+        'unpaid' => 'belum dibayar',
+        'payment pending' => 'pembayaran menunggu',
+        'payment unpaid' => 'pembayaran belum dibayar',
+        'payment paid' => 'pembayaran dibayar',
+        'payment failed' => 'pembayaran gagal',
+        'payment expired' => 'pembayaran kedaluwarsa',
+        'payment refunded' => 'pembayaran dikembalikan',
+        'order pending' => 'pesanan menunggu',
+        'order paid' => 'pesanan dibayar',
+        'order processing' => 'pesanan diproses',
+        'order shipped' => 'pesanan dikirim',
+        'order completed' => 'pesanan selesai',
+        'order cancelled' => 'pesanan dibatalkan',
+        'order refunded' => 'pesanan dikembalikan',
+    ][$normalizedLabel] ?? $label;
 @endphp
 
 <span {{ $attributes->class([$toneClasses, $sizeClasses, 'inline-flex items-center rounded-full font-semibold uppercase tracking-[0.22em] ring-1']) }}>
-    {{ $label }}
+    {{ $translatedLabel }}
 </span>

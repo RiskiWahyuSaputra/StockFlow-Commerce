@@ -6,12 +6,12 @@
     $isModel = $product instanceof \App\Models\Product;
     $slug = $isModel ? $product->slug : $product['slug'];
     $name = $isModel ? $product->name : $product['name'];
-    $categoryName = $isModel ? $product->primary_category_name : ($product['category'] ?? 'Catalog');
+    $categoryName = $isModel ? $product->primary_category_name : ($product['category'] ?? 'Katalog');
     $priceLabel = $isModel ? $product->price_label : $product['price_label'];
     $summary = $isModel ? $product->summary : ($product['excerpt'] ?? null);
     $stock = $isModel ? (int) $product->stock : (int) ($product['stock'] ?? 0);
     $stockLabel = $isModel ? $product->stock_label : ($product['stock_label'] ?? ($stock > 0 ? $stock.' tersedia' : 'Stok habis'));
-    $eyebrow = $isModel ? ($product->is_featured ? 'Featured' : 'Catalog') : ($product['tag'] ?? 'Catalog');
+    $eyebrow = $isModel ? ($product->is_featured ? 'Unggulan' : 'Katalog') : ($product['tag'] ?? 'Katalog');
     $isOutOfStock = $stock < 1;
 @endphp
 
@@ -36,7 +36,7 @@
                     'bg-emerald-50 text-emerald-700' => ! $isOutOfStock,
                     'bg-rose-50 text-rose-700' => $isOutOfStock,
                 ])>
-                    {{ $isOutOfStock ? 'Stok Habis' : 'Ready' }}
+                    {{ $isOutOfStock ? 'Stok Habis' : 'Siap' }}
                 </span>
             </div>
 
@@ -51,7 +51,7 @@
                 </div>
 
                 <span class="text-sm font-semibold text-brand-700 transition group-hover:text-brand-600">
-                    View details
+                    Lihat detail
                 </span>
             </div>
         </div>
@@ -64,7 +64,7 @@
 
         @if (! $isModel)
             <span class="inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-500">
-                Preview
+                Pratinjau
             </span>
         @elseif ($isOutOfStock)
             <button type="button" disabled class="cursor-not-allowed rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-500">
@@ -76,7 +76,7 @@
                 <input type="hidden" name="product_id" value="{{ $isModel ? $product->id : '' }}">
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    Add to Cart
+                    Tambah ke Keranjang
                 </button>
             </form>
         @endif

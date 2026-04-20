@@ -33,22 +33,22 @@ class DashboardController extends Controller
         return view('admin.dashboard', [
             'stats' => [
                 [
-                    'label' => 'Total Products',
+                    'label' => 'Total Produk',
                     'value' => number_format($totalProducts),
                     'delta' => 'Katalog aktif dan draft tersinkron',
                 ],
                 [
-                    'label' => 'Total Orders',
+                    'label' => 'Total Pesanan',
                     'value' => number_format($totalOrders),
                     'delta' => 'Semua order customer yang tersimpan',
                 ],
                 [
-                    'label' => 'Total Revenue',
+                    'label' => 'Total Pendapatan',
                     'value' => 'Rp'.number_format((int) round((float) $totalRevenue), 0, ',', '.'),
                     'delta' => 'Akumulasi order dengan payment paid',
                 ],
                 [
-                    'label' => 'Low Stock',
+                    'label' => 'Stok Menipis',
                     'value' => number_format($lowStockProducts->count()),
                     'delta' => 'Produk yang sudah menyentuh threshold',
                 ],
