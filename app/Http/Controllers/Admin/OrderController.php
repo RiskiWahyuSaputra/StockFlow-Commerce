@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateOrderStatusRequest;
 use App\Models\Order;
 use App\Services\AdminOrderService;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -22,7 +23,16 @@ class OrderController extends Controller
         $status = trim((string) $request->query('status', ''));
 
         $orders = Order::query()
-            ->with(['user:id,name', 'latestPayment:id,order_id,status,payment_type,transaction_status'])
+            ->with([
+                'user:id,name',
+                'latestPayment' => fn (Builder $query) => $query->select([
+                    'payments.id',
+                    'payments.order_id',
+                    'payments.status',
+                    'payments.payment_type',
+                    'payments.transaction_status',
+                ]),
+            ])
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($builder) use ($search): void {
                     $builder

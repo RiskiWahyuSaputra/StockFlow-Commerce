@@ -167,7 +167,7 @@
                                     <div>
                                         <p class="text-base font-bold text-slate-950">Siap dimasukkan ke keranjang</p>
                                         <p class="mt-2 max-w-md text-sm leading-7 text-slate-500">
-                                            Atur jumlah produk, lalu lanjut belanja atau langsung menuju checkout.
+                                            Atur jumlah produk, lalu simpan ke keranjang atau siapkan checkout saat itu juga.
                                         </p>
                                     </div>
                                     <div class="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm ring-1 ring-slate-200">
@@ -191,9 +191,14 @@
                                         <button type="submit" class="inline-flex min-h-12 items-center justify-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
                                             Tambah ke Keranjang
                                         </button>
-                                        <a href="{{ route('checkout.index') }}" class="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
+                                        <button
+                                            type="submit"
+                                            name="intent"
+                                            value="checkout"
+                                            class="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900"
+                                        >
                                             Beli Sekarang
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -216,7 +221,7 @@
                 <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Catatan Belanja</p>
                 <div class="mt-4 grid gap-3">
                     <div class="rounded-[1.4rem] bg-slate-50 px-4 py-4 text-sm leading-7 text-slate-600">
-                        Produk aktif ini sudah terhubung dengan stok real-time dari cart dan checkout.
+                        Produk yang baru ditambahkan akan masuk ke keranjang dulu, lalu ikut checkout setelah flow checkout disiapkan.
                     </div>
                     <div class="rounded-[1.4rem] bg-slate-50 px-4 py-4 text-sm leading-7 text-slate-600">
                         Jumlah item yang ditambahkan akan otomatis tercermin pada badge FAB keranjang.

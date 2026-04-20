@@ -16,20 +16,54 @@ use Throwable;
 
 class CheckoutController extends Controller
 {
+    public const PREPARED_CHECKOUT_SESSION_KEY = 'checkout.prepared_items';
+
     public function __construct(
         protected CheckoutService $checkoutService,
         protected CustomerOrderService $customerOrderService,
         protected MidtransService $midtransService,
     ) {}
 
-    public function index(Request $request): RedirectResponse|View
+    public function prepare(Request $request): RedirectResponse
     {
-        $cart = $this->checkoutService->getCheckoutCart($request->user());
+        $cart = $this->checkoutService->getActiveCart($request->user());
 
         if ($cart->items->isEmpty()) {
             return redirect()
                 ->route('cart.index')
                 ->with('status', 'Cart masih kosong. Tambahkan produk sebelum checkout.');
+        }
+
+        $request->session()->put(
+            self::PREPARED_CHECKOUT_SESSION_KEY,
+            $this->checkoutService->makePreparedCheckoutSnapshot($cart)
+        );
+
+        return redirect()->route('checkout.index');
+    }
+
+    public function index(Request $request): RedirectResponse|View
+    {
+        $checkout = $this->checkoutService->getCheckoutCart(
+            $request->user(),
+            $this->getPreparedCheckoutItems($request),
+        );
+        $cart = $checkout['cart'];
+
+        if ($cart->items->isEmpty()) {
+            $this->forgetPreparedCheckout($request);
+
+            return redirect()
+                ->route('cart.index')
+                ->with('status', 'Produk di checkout baru diperbarui setelah kamu klik Lanjut ke Checkout dari halaman keranjang.');
+        }
+
+        if ($checkout['is_stale']) {
+            $this->forgetPreparedCheckout($request);
+
+            return redirect()
+                ->route('cart.index')
+                ->with('status', 'Isi keranjang berubah. Klik Lanjut ke Checkout lagi untuk memperbarui checkout.');
         }
 
         return view('frontend.checkout.index', [
@@ -54,7 +88,10 @@ class CheckoutController extends Controller
         $order = $this->checkoutService->placeOrder(
             $request->user(),
             $request->validated(),
+            $this->getPreparedCheckoutItems($request),
         );
+
+        $this->forgetPreparedCheckout($request);
 
         try {
             $this->midtransService->createSnapPayment($order);
@@ -84,5 +121,17 @@ class CheckoutController extends Controller
         return view('frontend.orders.show', [
             'order' => $this->customerOrderService->getUserOrderById($request->user(), $order->id),
         ]);
+    }
+
+    protected function getPreparedCheckoutItems(Request $request): array
+    {
+        $preparedItems = $request->session()->get(self::PREPARED_CHECKOUT_SESSION_KEY, []);
+
+        return is_array($preparedItems) ? $preparedItems : [];
+    }
+
+    protected function forgetPreparedCheckout(Request $request): void
+    {
+        $request->session()->forget(self::PREPARED_CHECKOUT_SESSION_KEY);
     }
 }

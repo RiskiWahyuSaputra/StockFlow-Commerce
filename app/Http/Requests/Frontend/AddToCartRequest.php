@@ -16,6 +16,7 @@ class AddToCartRequest extends CustomerFormRequest
                 Rule::exists('products', 'id')->where(fn ($query) => $query->where('status', Product::STATUS_ACTIVE)),
             ],
             'quantity' => ['required', 'integer', 'min:1', 'max:999'],
+            'intent' => ['nullable', 'string', Rule::in(['checkout'])],
         ];
     }
 
@@ -24,6 +25,7 @@ class AddToCartRequest extends CustomerFormRequest
         return [
             'product_id' => 'produk',
             'quantity' => 'quantity',
+            'intent' => 'aksi',
         ];
     }
 }

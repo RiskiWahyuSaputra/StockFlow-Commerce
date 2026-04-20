@@ -23,10 +23,43 @@
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-slate-900">Catatan Sistem</p>
-            <div class="mt-4 space-y-3 rounded-3xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-600">
-                <p>Antarmuka ini dibangun agar storefront, admin, checkout, dan riwayat pesanan terasa konsisten dalam satu alur.</p>
-                <p>Flow pembayaran Midtrans, manajemen stok, dan panel admin sudah terhubung agar cocok dipresentasikan sebagai project portfolio.</p>
+            <p class="text-sm font-semibold text-slate-900">Sosial Media</p>
+            <div class="mt-4 grid gap-3">
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" class="group flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-600 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white hover:text-slate-950">
+                    <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-slate-900 shadow-sm ring-1 ring-slate-200 transition group-hover:bg-slate-900 group-hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 fill-current" aria-hidden="true">
+                            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5a4.25 4.25 0 0 0 4.25 4.25h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5Zm8.75 2.25a1 1 0 1 1 0 2 1 1 0 0 1 0-2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5A3.5 3.5 0 1 0 12 15.5 3.5 3.5 0 0 0 12 8.5Z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="font-semibold text-slate-900 transition group-hover:text-slate-950">Instagram</p>
+                        <p class="mt-1 text-xs uppercase tracking-[0.24em] text-slate-400">@stockflowcommerce</p>
+                    </div>
+                </a>
+
+                <a href="https://facebook.com" target="_blank" rel="noreferrer" class="group flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-600 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white hover:text-slate-950">
+                    <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-slate-900 shadow-sm ring-1 ring-slate-200 transition group-hover:bg-slate-900 group-hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 fill-current" aria-hidden="true">
+                            <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.08c0-.9.28-1.5 1.58-1.5H16.8V4.9a23.1 23.1 0 0 0-2.57-.13c-2.54 0-4.28 1.55-4.28 4.4V11H7v3h2.95v8h3.55Z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="font-semibold text-slate-900 transition group-hover:text-slate-950">Facebook</p>
+                        <p class="mt-1 text-xs uppercase tracking-[0.24em] text-slate-400">StockFlow Commerce</p>
+                    </div>
+                </a>
+
+                <a href="https://x.com" target="_blank" rel="noreferrer" class="group flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-600 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white hover:text-slate-950">
+                    <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-slate-900 shadow-sm ring-1 ring-slate-200 transition group-hover:bg-slate-900 group-hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 fill-current" aria-hidden="true">
+                            <path d="M18.9 2H22l-6.77 7.73L23 22h-6.1l-4.77-6.24L6.67 22H3.55l7.24-8.27L1 2h6.25l4.32 5.72L18.9 2Zm-1.07 18.17h1.72L6.3 3.74H4.46l13.37 16.43Z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="font-semibold text-slate-900 transition group-hover:text-slate-950">X / Twitter</p>
+                        <p class="mt-1 text-xs uppercase tracking-[0.24em] text-slate-400">@stockflowco</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

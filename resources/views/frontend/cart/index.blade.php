@@ -287,8 +287,8 @@
         <p class="sf-eyebrow">Kelola Keranjang</p>
         <h1 class="mt-1 text-xl font-black tracking-tight text-slate-950">Keranjang Belanja</h1>
         <p class="mt-2 text-sm leading-7 text-slate-500">
-            Database-backed cart yang siap untuk flow checkout.
-            User bisa menambah produk, update quantity, hapus item, dan semua total dihitung ulang dari database.
+            Database-backed cart yang terpisah dari checkout aktif.
+            Item baru tetap aman di keranjang dan baru masuk ke checkout saat tombol lanjut ditekan.
         </p>
 
         @if ($cart->items->isNotEmpty())
@@ -444,12 +444,15 @@
         <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sf-anim sf-d4">
             <p class="text-sm font-bold text-slate-950">Langkah Berikutnya</p>
             <div class="mt-3 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-500">
-                Keranjang ini sudah siap dilanjutkan ke checkout berbasis database agar order bisa dibuat dan dibayar via Midtrans.
+                Checkout akan memakai snapshot terbaru dari keranjang saat tombol ini ditekan, jadi item yang baru ditambahkan tidak otomatis ikut.
             </div>
-            <a href="{{ route('checkout.index') }}" class="sf-checkout-btn">
-                Lanjut ke Checkout
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
+            <form method="POST" action="{{ route('checkout.prepare') }}">
+                @csrf
+                <button type="submit" class="sf-checkout-btn">
+                    Lanjut ke Checkout
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </form>
         </div>
     </div>
 </section>

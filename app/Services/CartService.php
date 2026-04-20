@@ -108,6 +108,13 @@ class CartService
         });
     }
 
+    public function refreshCart(Cart $cart): Cart
+    {
+        $this->refreshCartTotals($cart);
+
+        return $this->loadCartRelations($cart->fresh());
+    }
+
     protected function resolveActiveCartForUpdate(User $user): Cart
     {
         $cart = Cart::query()

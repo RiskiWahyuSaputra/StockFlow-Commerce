@@ -8,6 +8,7 @@ use App\Http\Requests\Frontend\UpdateCartItemRequest;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Services\CartService;
+use App\Services\CheckoutService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class CartItemController extends Controller
 {
     public function __construct(
         protected CartService $cartService,
+        protected CheckoutService $checkoutService,
     ) {
     }
 
@@ -25,6 +27,17 @@ class CartItemController extends Controller
             (int) $request->validated('product_id'),
             (int) $request->validated('quantity'),
         );
+
+        if ($request->validated('intent') === 'checkout') {
+            $request->session()->put(
+                CheckoutController::PREPARED_CHECKOUT_SESSION_KEY,
+                $this->checkoutService->makePreparedCheckoutSnapshot($cart)
+            );
+
+            return redirect()
+                ->route('checkout.index')
+                ->with('status', 'Produk berhasil ditambahkan ke cart dan checkout sudah disiapkan.');
+        }
 
         return redirect()
             ->route('products.index')

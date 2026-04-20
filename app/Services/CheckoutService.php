@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -16,14 +18,34 @@ class CheckoutService
         protected InventoryService $inventoryService,
     ) {}
 
-    public function getCheckoutCart(User $user): Cart
+    public function getCheckoutCart(User $user, array $preparedItems = []): array
+    {
+        $cart = $this->cartService->getActiveCart($user);
+
+        return $this->buildPreparedCheckoutCart($cart, $preparedItems);
+    }
+
+    public function getActiveCart(User $user): Cart
     {
         return $this->cartService->getActiveCart($user);
     }
 
-    public function placeOrder(User $user, array $payload): Order
+    public function makePreparedCheckoutSnapshot(Cart $cart): array
     {
-        return DB::transaction(function () use ($user, $payload): Order {
+        return $cart->items
+            ->map(fn (CartItem $item): array => [
+                'cart_item_id' => $item->id,
+                'quantity' => $item->quantity,
+            ])
+            ->values()
+            ->all();
+    }
+
+    public function placeOrder(User $user, array $payload, array $preparedItems): Order
+    {
+        $normalizedPreparedItems = $this->normalizePreparedItems($preparedItems);
+
+        return DB::transaction(function () use ($user, $payload, $normalizedPreparedItems): Order {
             $cart = Cart::query()
                 ->where('user_id', $user->id)
                 ->active()
@@ -40,18 +62,20 @@ class CheckoutService
                 'items.product' => fn ($query) => $query->withTrashed(),
             ]);
 
-            $this->ensureCartIsReady($cart);
+            $checkoutItems = $this->resolvePreparedCheckoutItems($cart, $normalizedPreparedItems);
+
+            $this->ensureCartIsReady($checkoutItems);
 
             $products = Product::query()
                 ->select(['id', 'name', 'slug', 'sku', 'price', 'stock', 'status'])
                 ->active()
-                ->whereIn('id', $cart->items->pluck('product_id'))
+                ->whereIn('id', $checkoutItems->pluck('product_id'))
                 ->orderBy('id')
                 ->lockForUpdate()
                 ->get()
                 ->keyBy('id');
 
-            if ($products->count() !== $cart->items->count()) {
+            if ($products->count() !== $checkoutItems->count()) {
                 throw ValidationException::withMessages([
                     'cart' => 'Ada produk di cart yang sudah tidak tersedia untuk checkout.',
                 ]);
@@ -59,7 +83,7 @@ class CheckoutService
 
             $subtotal = 0;
 
-            foreach ($cart->items as $item) {
+            foreach ($checkoutItems as $item) {
                 $product = $products->get($item->product_id);
 
                 if (! $product) {
@@ -76,11 +100,6 @@ class CheckoutService
 
                 $lineTotal = $item->quantity * (float) $product->price;
                 $subtotal += $lineTotal;
-
-                $item->forceFill([
-                    'unit_price' => $product->price,
-                    'subtotal' => $lineTotal,
-                ])->save();
             }
 
             $order = Order::create([
@@ -111,7 +130,7 @@ class CheckoutService
             ]);
 
             $order->items()->createMany(
-                $cart->items->map(function ($item) use ($products): array {
+                $checkoutItems->map(function ($item) use ($products): array {
                     $product = $products->get($item->product_id);
 
                     return [
@@ -127,26 +146,143 @@ class CheckoutService
                 })->all()
             );
 
-            $this->inventoryService->reserveOrderStock($order, $cart->items, $user);
+            $this->inventoryService->reserveOrderStock($order, $checkoutItems, $user);
 
-            $cart->items()->delete();
-            $cart->forceFill([
-                'status' => Cart::STATUS_CONVERTED,
-                'total_items' => 0,
-                'subtotal' => 0,
-                'converted_at' => now(),
-            ])->save();
+            $remainingItems = $cart->items->keyBy('id');
+
+            foreach ($normalizedPreparedItems as $preparedItem) {
+                /** @var CartItem|null $sourceItem */
+                $sourceItem = $remainingItems->get($preparedItem['cart_item_id']);
+
+                if (! $sourceItem) {
+                    continue;
+                }
+
+                $remainingQuantity = $sourceItem->quantity - $preparedItem['quantity'];
+
+                if ($remainingQuantity > 0) {
+                    $sourceItem->update([
+                        'quantity' => $remainingQuantity,
+                        'subtotal' => $remainingQuantity * (float) $sourceItem->unit_price,
+                    ]);
+
+                    continue;
+                }
+
+                $sourceItem->delete();
+            }
+
+            $this->cartService->refreshCart($cart);
 
             return $order->load('items');
         });
     }
 
-    protected function ensureCartIsReady(Cart $cart): void
+    protected function ensureCartIsReady(EloquentCollection $checkoutItems): void
     {
-        if ($cart->items->isEmpty()) {
+        if ($checkoutItems->isEmpty()) {
             throw ValidationException::withMessages([
-                'cart' => 'Cart masih kosong. Tambahkan produk sebelum checkout.',
+                'cart' => 'Checkout belum disiapkan. Klik Lanjut ke Checkout dari halaman keranjang.',
             ]);
         }
+    }
+
+    protected function buildPreparedCheckoutCart(Cart $cart, array $preparedItems): array
+    {
+        $normalizedPreparedItems = $this->normalizePreparedItems($preparedItems);
+        $preparedItemMap = collect($normalizedPreparedItems)->keyBy('cart_item_id');
+        $checkoutItems = [];
+        $isStale = false;
+
+        foreach ($cart->items as $item) {
+            $preparedItem = $preparedItemMap->get($item->id);
+
+            if (! $preparedItem) {
+                continue;
+            }
+
+            if ($item->quantity < $preparedItem['quantity']) {
+                $isStale = true;
+
+                continue;
+            }
+
+            $checkoutItem = clone $item;
+            $checkoutItem->quantity = $preparedItem['quantity'];
+            $checkoutItem->subtotal = $preparedItem['quantity'] * (float) $item->unit_price;
+            $checkoutItem->setRelation('product', $item->product);
+
+            $checkoutItems[] = $checkoutItem;
+        }
+
+        if (count($checkoutItems) !== count($normalizedPreparedItems)) {
+            $isStale = true;
+        }
+
+        $checkoutCart = clone $cart;
+        $checkoutCart->setRelation('items', new EloquentCollection($checkoutItems));
+        $checkoutCart->total_items = (int) collect($checkoutItems)->sum('quantity');
+        $checkoutCart->subtotal = (float) collect($checkoutItems)->sum('subtotal');
+
+        return [
+            'cart' => $checkoutCart,
+            'is_stale' => $isStale,
+        ];
+    }
+
+    protected function resolvePreparedCheckoutItems(Cart $cart, array $preparedItems): EloquentCollection
+    {
+        $preparedItemMap = collect($preparedItems)->keyBy('cart_item_id');
+        $checkoutItems = [];
+
+        foreach ($cart->items as $item) {
+            $preparedItem = $preparedItemMap->get($item->id);
+
+            if (! $preparedItem) {
+                continue;
+            }
+
+            if ($preparedItem['quantity'] < 1 || $item->quantity < $preparedItem['quantity']) {
+                throw ValidationException::withMessages([
+                    'cart' => 'Isi keranjang berubah setelah checkout disiapkan. Klik Lanjut ke Checkout lagi dari halaman keranjang.',
+                ]);
+            }
+
+            $checkoutItem = clone $item;
+            $checkoutItem->quantity = $preparedItem['quantity'];
+            $checkoutItem->subtotal = $preparedItem['quantity'] * (float) $item->unit_price;
+            $checkoutItem->setRelation('product', $item->product);
+
+            $checkoutItems[] = $checkoutItem;
+        }
+
+        if (count($checkoutItems) !== count($preparedItems)) {
+            throw ValidationException::withMessages([
+                'cart' => 'Isi keranjang berubah setelah checkout disiapkan. Klik Lanjut ke Checkout lagi dari halaman keranjang.',
+            ]);
+        }
+
+        return new EloquentCollection($checkoutItems);
+    }
+
+    protected function normalizePreparedItems(array $preparedItems): array
+    {
+        return collect($preparedItems)
+            ->map(function ($preparedItem): ?array {
+                $cartItemId = (int) data_get($preparedItem, 'cart_item_id');
+                $quantity = (int) data_get($preparedItem, 'quantity');
+
+                if ($cartItemId < 1 || $quantity < 1) {
+                    return null;
+                }
+
+                return [
+                    'cart_item_id' => $cartItemId,
+                    'quantity' => $quantity,
+                ];
+            })
+            ->filter()
+            ->values()
+            ->all();
     }
 }

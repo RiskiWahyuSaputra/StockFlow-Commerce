@@ -15,6 +15,7 @@ Route::middleware(['auth', 'customer'])->group(function (): void {
     Route::post('/cart/items', [CartItemController::class, 'store'])->name('cart.items.store');
     Route::patch('/cart/items/{cartItem}', [CartItemController::class, 'update'])->name('cart.items.update');
     Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.items.destroy');
+    Route::post('/checkout/prepare', [CheckoutController::class, 'prepare'])->name('checkout.prepare');
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');

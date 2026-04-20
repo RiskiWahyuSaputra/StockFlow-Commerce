@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Services\CustomerOrderService;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -32,7 +33,14 @@ class OrderHistoryController extends Controller
             ])
             ->with([
                 'items:id,order_id,product_name,quantity',
-                'latestPayment:id,order_id,payment_type,transaction_status,status,transaction_id',
+                'latestPayment' => fn (Builder $query) => $query->select([
+                    'payments.id',
+                    'payments.order_id',
+                    'payments.payment_type',
+                    'payments.transaction_status',
+                    'payments.status',
+                    'payments.transaction_id',
+                ]),
             ])
             ->orderByDesc('placed_at')
             ->orderByDesc('id')

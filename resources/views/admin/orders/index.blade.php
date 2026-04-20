@@ -27,7 +27,7 @@
 
         <div class="mt-6 overflow-hidden rounded-[1.6rem] border border-slate-200">
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-slate-200 text-sm">
+                <table class="w-full table-fixed divide-y divide-slate-200 text-sm">
                     <thead class="bg-slate-50 text-left text-slate-500">
                         <tr>
                             <th class="px-4 py-4 font-semibold">Pesanan</th>
