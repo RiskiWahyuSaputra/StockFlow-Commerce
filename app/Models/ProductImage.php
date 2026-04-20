@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Database\Factories\ProductImageFactory;
-use Illuminate\Database\Eloquent\Attributes\Computed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -39,8 +38,7 @@ class ProductImage extends Model
         return $this->belongsTo(Product::class);
     }
 
-    #[Computed]
-    public function imageUrl(): string
+    public function getImageUrlAttribute(): string
     {
         if (str_starts_with($this->path, 'http://') || str_starts_with($this->path, 'https://')) {
             return $this->path;

@@ -16,8 +16,6 @@
     </head>
     <body class="font-sans text-slate-900">
         <div class="relative min-h-screen overflow-hidden">
-            <div class="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_top_left,rgba(15,118,110,0.16),transparent_32%),radial-gradient(circle_at_top_right,rgba(249,115,22,0.1),transparent_28%)]"></div>
-
             <x-frontend.navbar />
 
             <x-shared.flash-messages class="mx-auto mt-4 flex w-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8" />

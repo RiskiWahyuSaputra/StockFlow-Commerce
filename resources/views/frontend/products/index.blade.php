@@ -128,7 +128,6 @@
 @section('content')
     @php
         $hasActiveFilters = filled($filters['search']) || filled($filters['category']) || $filters['sort'] !== 'latest';
-        $cartCount = session('cart_count', 0);
     @endphp
 
     {{-- ── Header ── --}}
@@ -270,21 +269,10 @@
                         <div class="sf-product-card sf-anim" style="animation-delay: {{ 0.04 + ($index % 6) * 0.07 }}s">
 
                             {{-- Gambar produk --}}
-                            @if ($product->image)
+                            @if ($product->primary_image_url)
                                 <img
                                     class="sf-product-img"
-                                    src="{{ Storage::url($product->image) }}"
-                                    alt="{{ $product->name }}"
-                                    loading="lazy"
-                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                >
-                                <div class="sf-product-img-placeholder" style="display:none;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                                </div>
-                            @elseif ($product->thumbnail)
-                                <img
-                                    class="sf-product-img"
-                                    src="{{ Storage::url($product->thumbnail) }}"
+                                    src="{{ $product->primary_image_url }}"
                                     alt="{{ $product->name }}"
                                     loading="lazy"
                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"

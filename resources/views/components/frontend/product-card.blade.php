@@ -57,28 +57,43 @@
         </div>
     </a>
 
-    <div class="flex items-center justify-between gap-3 border-t border-slate-100 px-6 pb-6 pt-5">
-        <a href="{{ route('products.show', $slug) }}" class="inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
-            Detail
-        </a>
+    <div class="border-t border-slate-100 px-6 pb-6 pt-5">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+            <a href="{{ route('products.show', $slug) }}" class="inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900">
+                Detail
+            </a>
 
-        @if (! $isModel)
-            <span class="inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-500">
-                Pratinjau
-            </span>
-        @elseif ($isOutOfStock)
-            <button type="button" disabled class="cursor-not-allowed rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-500">
-                Stok Habis
-            </button>
-        @else
-            <form method="POST" action="{{ route('cart.items.store') }}">
-                @csrf
-                <input type="hidden" name="product_id" value="{{ $isModel ? $product->id : '' }}">
-                <input type="hidden" name="quantity" value="1">
-                <button type="submit" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    Tambah ke Keranjang
+            @if (! $isModel)
+                <span class="inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-500">
+                    Pratinjau
+                </span>
+            @elseif ($isOutOfStock)
+                <button type="button" disabled class="cursor-not-allowed rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-500">
+                    Stok Habis
                 </button>
-            </form>
+            @else
+                <form method="POST" action="{{ route('cart.items.store') }}" class="flex items-center gap-2">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $isModel ? $product->id : '' }}">
+                    <x-frontend.quantity-picker
+                        name="quantity"
+                        :value="1"
+                        :min="1"
+                        :max="$stock"
+                        size="sm"
+                        :id="'product-card-qty-'.$product->id"
+                    />
+                    <button type="submit" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">
+                        Tambah
+                    </button>
+                </form>
+            @endif
+        </div>
+
+        @if ($isModel && ! $isOutOfStock)
+            <p class="mt-3 text-xs font-medium text-slate-500">
+                Pilih jumlah produk langsung dari kartu ini sebelum masuk ke keranjang.
+            </p>
         @endif
     </div>
 </article>

@@ -27,7 +27,7 @@ class CartItemController extends Controller
         );
 
         return redirect()
-            ->back()
+            ->route('products.index')
             ->with('status', 'Produk berhasil ditambahkan ke cart. Total item sekarang: '.$cart->total_items.'.');
     }
 

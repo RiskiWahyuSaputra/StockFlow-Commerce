@@ -65,25 +65,67 @@
     };
 
     $label = $variant === 'hero' ? 'Pratinjau Produk' : $categoryName;
+    $image = null;
+
+    if ($isModel) {
+        if ($product->relationLoaded('images')) {
+            $image = $product->images->firstWhere('is_primary', true) ?? $product->images->first();
+        } elseif ($product->relationLoaded('primaryImage')) {
+            $image = $product->primaryImage;
+        } elseif ($product->primary_image_url) {
+            $image = (object) [
+                'image_url' => $product->primary_image_url,
+                'alt_text' => $name,
+            ];
+        }
+    } else {
+        $image = ! empty($product['image_url'] ?? null)
+            ? (object) [
+                'image_url' => $product['image_url'],
+                'alt_text' => $name,
+            ]
+            : null;
+    }
+
+    $imageUrl = $image?->image_url;
+    $imageAlt = $image?->alt_text ?: $name;
+    $panelClasses = $imageUrl
+        ? str_replace(' backdrop-blur-sm', '', $panelClasses)
+        : $panelClasses;
 @endphp
 
 <div {{ $attributes->class([$wrapperClasses, 'relative overflow-hidden border border-slate-200 shadow-sm']) }} style="{{ $style }}">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.28),transparent_35%)]"></div>
+    @if ($imageUrl)
+        <img src="{{ $imageUrl }}" alt="{{ $imageAlt }}" class="absolute inset-0 h-full w-full object-contain bg-white">
+        <div class="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(180deg,rgba(15,23,42,0),rgba(15,23,42,0.6))]"></div>
 
-    <div class="{{ $panelClasses }} relative flex h-full flex-col justify-between">
-        <span class="inline-flex w-fit rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-700">
-            {{ $label }}
-        </span>
-
-        <div class="flex items-end justify-between gap-4">
-            <div class="max-w-[14rem]">
-                <p class="text-sm font-medium text-slate-800/80">{{ $categoryName }}</p>
-                <p class="mt-2 text-sm leading-6 text-slate-900/75">{{ \Illuminate\Support\Str::limit($name, 48) }}</p>
+        <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+            <div class="max-w-fit rounded-[1.25rem] border border-white/20 bg-slate-950/35 px-4 py-3 text-white shadow-lg backdrop-blur-[2px]">
+                <span class="inline-flex rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-white">
+                    {{ $label }}
+                </span>
+                <p class="mt-3 text-sm font-medium text-white/80">{{ $categoryName }}</p>
+                <p class="mt-1 text-sm leading-6 text-white">{{ \Illuminate\Support\Str::limit($name, 48) }}</p>
             </div>
-
-            <span class="{{ $headingSize }} font-black tracking-[0.18em] text-slate-950/90">
-                {{ $initials }}
-            </span>
         </div>
-    </div>
+    @else
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.28),transparent_35%)]"></div>
+
+        <div class="{{ $panelClasses }} relative flex h-full flex-col justify-between">
+            <span class="inline-flex w-fit rounded-full bg-white/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-700">
+                {{ $label }}
+            </span>
+
+            <div class="flex items-end justify-between gap-4">
+                <div class="max-w-[14rem]">
+                    <p class="text-sm font-medium text-slate-800/80">{{ $categoryName }}</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-900/75">{{ \Illuminate\Support\Str::limit($name, 48) }}</p>
+                </div>
+
+                <span class="{{ $headingSize }} font-black tracking-[0.18em] text-slate-950/90">
+                    {{ $initials }}
+                </span>
+            </div>
+        </div>
+    @endif
 </div>

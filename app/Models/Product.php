@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Database\Factories\ProductFactory;
-use Illuminate\Database\Eloquent\Attributes\Computed;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -46,6 +45,7 @@ class Product extends Model
     protected $appends = [
         'is_in_stock',
         'primary_image_path',
+        'primary_image_url',
     ];
 
     protected function casts(): array
@@ -139,8 +139,7 @@ class Product extends Model
         return $this->hasMany(InventoryLog::class);
     }
 
-    #[Computed]
-    public function isInStock(): bool
+    public function getIsInStockAttribute(): bool
     {
         return $this->stock > 0;
     }
@@ -170,13 +169,27 @@ class Product extends Model
         return $this->is_in_stock ? 'Stok '.$this->stock : 'Stok Habis';
     }
 
-    #[Computed]
-    public function primaryImagePath(): ?string
+    public function getPrimaryImagePathAttribute(): ?string
     {
         if ($this->relationLoaded('primaryImage')) {
             return $this->primaryImage?->path;
         }
 
         return $this->primaryImage()->value('path');
+    }
+
+    public function getPrimaryImageUrlAttribute(): ?string
+    {
+        $path = $this->primary_image_path;
+
+        if (blank($path)) {
+            return null;
+        }
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        return asset('storage/'.$path);
     }
 }

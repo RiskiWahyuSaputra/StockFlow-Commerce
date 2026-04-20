@@ -611,7 +611,7 @@
     <div class="sf-hero-main">
         <span class="sf-badge">
             <span class="sf-badge-dot"></span>
-            StockFlow Commerce
+            Platform Modern
         </span>
 
         <h1 class="sf-h1">
@@ -833,8 +833,6 @@
 {{-- ══════════════════════════════════════════════════════
      FAB — Floating Cart Button
 ══════════════════════════════════════════════════════ --}}
-@php $cartCount = session('cart_count', 0); @endphp
-
 <a href="{{ route('cart.index') }}" class="sf-fab" aria-label="Buka Keranjang">
     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
          fill="none" stroke="currentColor" stroke-width="2"
