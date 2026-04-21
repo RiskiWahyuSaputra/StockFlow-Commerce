@@ -5,7 +5,7 @@
         ['label' => 'Checkout', 'route' => 'checkout.index'],
     ];
 
-    $isTransparent = request()->routeIs('home');
+    $isTransparent = request()->routeIs('home') || request()->routeIs('products.*');
 @endphp
 
 <header @class([

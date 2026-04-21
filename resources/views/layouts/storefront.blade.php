@@ -15,15 +15,15 @@
         @stack('styles')
     </head>
     @php
-        $isHomeRoute = request()->routeIs('home');
+        $isDarkTheme = request()->routeIs('home') || request()->routeIs('products.*');
     @endphp
-    <body class="font-sans text-slate-900" style="{{ $isHomeRoute ? 'background:#000000;' : '' }}">
-        <div class="relative min-h-screen overflow-hidden" style="{{ $isHomeRoute ? 'background:#000000;' : '' }}">
+    <body class="font-sans text-slate-900" style="{{ $isDarkTheme ? 'background:#000000;' : '' }}">
+        <div class="relative min-h-screen overflow-hidden" style="{{ $isDarkTheme ? 'background:#000000;' : '' }}">
             <x-frontend.navbar />
 
-            <x-shared.flash-messages class="mx-auto {{ $isHomeRoute ? 'mt-24' : 'mt-4' }} flex w-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8" />
+            <x-shared.flash-messages class="mx-auto {{ $isDarkTheme ? 'mt-24' : 'mt-4' }} flex w-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8" />
 
-            @if($isHomeRoute)
+            @if($isDarkTheme)
                 <main class="relative w-full" style="background:#000000; padding:0; overflow:hidden;">
                     @yield('content')
                 </main>

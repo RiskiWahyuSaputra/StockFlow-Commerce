@@ -5,6 +5,7 @@
     'max' => null,
     'size' => 'md',
     'id' => null,
+    'dark' => false,
 ])
 
 @php
@@ -33,6 +34,8 @@
     ];
 
     $maxValue = $max !== null ? (int) $max : null;
+
+    $isDark = $dark || str_contains($attributes->get('class', ''), 'dark-theme');
 @endphp
 
 <div
@@ -48,7 +51,9 @@
         }
     }"
     {{ $attributes->class([
-        'inline-flex items-center border border-slate-200 bg-white shadow-sm',
+        'inline-flex items-center border shadow-sm',
+        'border-white/10 bg-white/5 shadow-black' => $isDark,
+        'border-slate-200 bg-white shadow-sm' => ! $isDark,
         $sizes['wrapper'],
     ]) }}
 >
@@ -56,7 +61,9 @@
         type="button"
         x-on:click="decrease()"
         @class([
-            'inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 font-bold leading-none text-slate-600 transition hover:border-slate-300 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50',
+            'inline-flex items-center justify-center rounded-full border font-bold leading-none transition disabled:cursor-not-allowed disabled:opacity-50',
+            'border-white/10 bg-white/10 text-white hover:border-white/20 hover:bg-white/15' => $isDark,
+            'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900' => ! $isDark,
             $sizes['button'],
         ])
         :disabled="qty <= min"
@@ -68,7 +75,9 @@
     <span
         x-text="qty"
         @class([
-            'text-center font-semibold text-slate-900',
+            'text-center font-semibold',
+            'text-white' => $isDark,
+            'text-slate-900' => ! $isDark,
             $sizes['value'],
         ])
     ></span>
@@ -85,7 +94,9 @@
         type="button"
         x-on:click="increase()"
         @class([
-            'inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 font-bold leading-none text-slate-600 transition hover:border-slate-300 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50',
+            'inline-flex items-center justify-center rounded-full border font-bold leading-none transition disabled:cursor-not-allowed disabled:opacity-50',
+            'border-white/10 bg-white/10 text-white hover:border-white/20 hover:bg-white/15' => $isDark,
+            'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900' => ! $isDark,
             $sizes['button'],
         ])
         :disabled="max !== null && qty >= max"
