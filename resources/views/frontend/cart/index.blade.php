@@ -458,33 +458,7 @@
 </section>
 
 {{-- ── FAB Keranjang (konsisten dengan home & katalog) ── --}}
-<a href="{{ route('cart.index') }}" class="sf-fab" aria-label="Buka Keranjang" style="
-    position: fixed; bottom: 32px; right: 32px; z-index: 100;
-    display: inline-flex; align-items: center; gap: 8px;
-    background: #0f172a; color: #fff; text-decoration: none;
-    border-radius: 9999px; padding: 13px 22px;
-    font-size: 14px; font-weight: 600;
-    box-shadow: 0 4px 20px rgba(15,23,42,.30), 0 1px 4px rgba(15,23,42,.15);
-    animation: sf-fab-in .6s cubic-bezier(.34,1.56,.64,1) .7s both;
-    transition: transform .2s, box-shadow .2s, background .15s;
-">
-    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-         fill="none" stroke="currentColor" stroke-width="2"
-         stroke-linecap="round" stroke-linejoin="round">
-        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <path d="M16 10a4 4 0 0 1-8 0"/>
-    </svg>
-    <span>Keranjang</span>
-    @if ($cartCount > 0)
-        <span style="
-            background: #10b981; color: #fff; border-radius: 9999px;
-            padding: 2px 7px; font-size: 11px; font-weight: 700;
-            min-width: 20px; height: 20px;
-            display: inline-flex; align-items: center; justify-content: center;
-        ">{{ $cartCount > 99 ? '99+' : $cartCount }}</span>
-    @endif
-</a>
+<x-frontend.cart-fab />
 
 @push('scripts')
 <script>

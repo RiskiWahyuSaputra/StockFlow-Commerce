@@ -54,7 +54,7 @@ class CartItemController extends Controller
         );
 
         return redirect()
-            ->route('cart.index')
+            ->back()
             ->with('status', 'Quantity cart berhasil diperbarui.');
     }
 
@@ -65,7 +65,7 @@ class CartItemController extends Controller
         $this->cartService->removeItem($cartItem);
 
         return redirect()
-            ->route('cart.index')
+            ->back()
             ->with('status', 'Item berhasil dihapus dari cart.');
     }
 

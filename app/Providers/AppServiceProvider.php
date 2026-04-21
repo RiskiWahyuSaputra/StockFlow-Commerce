@@ -21,17 +21,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view): void {
-            $cartCount = once(function (): int {
-                $user = auth()->user();
+            $user = auth()->user();
+            $isCustomer = $user && $user->isCustomer();
 
-                if (! $user || ! $user->isCustomer()) {
-                    return 0;
+            $cart = once(function () use ($user, $isCustomer) {
+                if (! $isCustomer) {
+                    return null;
                 }
 
-                return (int) ($user->activeCart()->value('total_items') ?? 0);
+                return app(\App\Services\CartService::class)->getActiveCart($user);
             });
 
-            $view->with('cartCount', $cartCount);
+            $view->with('cartCount', $cart?->total_items ?? 0);
+            $view->with('cart', $cart);
         });
     }
 }

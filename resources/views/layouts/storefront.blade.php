@@ -36,6 +36,8 @@
             <x-frontend.footer />
         </div>
 
+        <x-frontend.cart-drawer />
+
         @stack('scripts')
     </body>
 </html>
