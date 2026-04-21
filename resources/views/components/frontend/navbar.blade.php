@@ -5,40 +5,41 @@
         ['label' => 'Checkout', 'route' => 'checkout.index'],
     ];
 
-    $isTransparent = request()->routeIs('home') || request()->routeIs('products.*');
+    $isTransparent = request()->routeIs('home') || 
+                     request()->routeIs('products.*') || 
+                     request()->routeIs('cart.*') || 
+                     request()->routeIs('checkout.*') ||
+                     request()->routeIs('dashboard') ||
+                     request()->routeIs('profile.*');
 @endphp
 
 <header @class([
     'inset-x-0 top-0 z-30',
     'absolute' => $isTransparent,
-    'sticky border-b border-white/60 bg-white/75 backdrop-blur-xl' => ! $isTransparent,
+    'sticky border-b border-white/10 bg-black/80 backdrop-blur-xl' => ! $isTransparent,
 ])>
-    <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+    <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:grid lg:grid-cols-[15rem_minmax(0,1fr)_15rem] lg:gap-6 lg:px-8">
         <a
             href="{{ route('home') }}"
             @class([
-                'flex items-center',
+                'flex items-center shrink-0',
                 'bg-transparent px-0 py-0 shadow-none backdrop-blur-none' => $isTransparent,
             ])
         >
-            <img src="/img/stock-icon.png" alt="{{ config('app.name') }}" class="h-14 w-48 object-contain drop-shadow-md">
+            <img src="/img/stock-icon.png" alt="{{ config('app.name') }}" class="h-[3.9rem] w-48 object-contain drop-shadow-md lg:h-[4.1rem] lg:w-52">
         </a>
 
-        <nav class="flex-1 flex justify-center items-center max-w-md">
+        <nav class="hidden justify-center lg:flex">
             <div @class([
-                'hidden items-center gap-2 rounded-full p-1.5 lg:flex',
-                'bg-transparent shadow-none backdrop-blur-none' => $isTransparent,
-                'border border-slate-200/80 bg-white shadow-sm' => ! $isTransparent,
+                'flex items-center gap-12 xl:gap-16',
             ])>
                 @foreach ($navItems as $item)
                     <a
                         href="{{ route($item['route']) }}"
                         @class([
-                            'rounded-full px-4 py-2 text-sm font-medium transition',
-                            'bg-transparent text-white' => $isTransparent && request()->routeIs($item['route']),
-                            'bg-transparent text-white hover:text-white/80' => $isTransparent && ! request()->routeIs($item['route']),
-                            'bg-slate-900 text-white' => ! $isTransparent && request()->routeIs($item['route']),
-                            'text-slate-600 hover:bg-slate-100 hover:text-slate-900' => ! $isTransparent && ! request()->routeIs($item['route']),
+                            'px-4 text-sm font-medium transition',
+                            'text-white' => request()->routeIs($item['route']),
+                            'text-white hover:text-white/80' => ! request()->routeIs($item['route']),
                         ])
                     >
                         {{ $item['label'] }}
@@ -47,7 +48,7 @@
             </div>
         </nav>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center justify-end gap-3">
             @auth
                 <a
                     href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('dashboard') }}"

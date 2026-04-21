@@ -102,7 +102,7 @@
                         <p class="mt-1 text-xs text-slate-500 font-medium">Pengiriman dihitung di halaman berikutnya.</p>
                         <div class="mt-8">
                             <a href="{{ route('cart.index') }}" class="flex items-center justify-center rounded-2xl bg-slate-950 px-6 py-4 text-sm font-black text-white shadow-xl shadow-slate-950/20 transition hover:bg-slate-800">
-                                Lanjut ke Keranjang
+                                Lanjut ke keranjang
                             </a>
                         </div>
                         <button type="button" @click="open = false" class="mt-4 w-full text-center text-xs font-bold text-slate-500 hover:text-slate-950">

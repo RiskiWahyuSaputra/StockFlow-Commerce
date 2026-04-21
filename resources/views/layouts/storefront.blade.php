@@ -15,13 +15,18 @@
         @stack('styles')
     </head>
     @php
-        $isDarkTheme = request()->routeIs('home') || request()->routeIs('products.*');
+        $isDarkTheme = request()->routeIs('home') || 
+                       request()->routeIs('products.*') || 
+                       request()->routeIs('cart.*') || 
+                       request()->routeIs('checkout.*') ||
+                       request()->routeIs('dashboard') ||
+                       request()->routeIs('profile.*');
     @endphp
     <body class="font-sans text-slate-900" style="{{ $isDarkTheme ? 'background:#000000;' : '' }}">
         <div class="relative min-h-screen overflow-hidden" style="{{ $isDarkTheme ? 'background:#000000;' : '' }}">
             <x-frontend.navbar />
 
-            <x-shared.flash-messages class="mx-auto {{ $isDarkTheme ? 'mt-24' : 'mt-4' }} flex w-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8" />
+            <x-shared.flash-messages class="mx-auto {{ request()->routeIs('home') ? 'mt-28 lg:mt-32' : 'mt-4' }} flex w-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8" />
 
             @if($isDarkTheme)
                 <main class="relative w-full" style="background:#000000; padding:0; overflow:hidden;">
