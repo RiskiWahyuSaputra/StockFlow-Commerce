@@ -26,14 +26,14 @@
         <div class="relative min-h-screen overflow-hidden" style="{{ $isDarkTheme ? 'background:#000000;' : '' }}">
             <x-frontend.navbar />
 
-            <x-shared.flash-messages class="mx-auto {{ request()->routeIs('home') ? 'mt-28 lg:mt-32' : 'mt-4' }} flex w-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8" />
+            <x-shared.flash-messages class="mx-auto {{ request()->routeIs('home') ? 'mt-28 lg:mt-32' : 'mt-24' }} flex w-full max-w-7xl flex-col gap-3 px-4 sm:px-6 lg:px-8" />
 
             @if($isDarkTheme)
                 <main class="relative w-full" style="background:#000000; padding:0; overflow:hidden;">
                     @yield('content')
                 </main>
             @else
-                <main class="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
+                <main class="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
                     @yield('content')
                 </main>
             @endif

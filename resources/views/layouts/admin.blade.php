@@ -13,8 +13,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @stack('styles')
     </head>
-    <body class="font-sans text-slate-900">
-        <div class="min-h-screen bg-[linear-gradient(180deg,#e2e8f0_0%,#f8fafc_100%)]">
+    <body class="font-sans text-white" style="background:#000000;">
+        <div class="min-h-screen">
             <div class="mx-auto grid min-h-screen max-w-[1600px] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:px-8">
                 <x-admin.sidebar />
 

@@ -13,11 +13,54 @@
                      request()->routeIs('profile.*');
 @endphp
 
+<style>
+@keyframes sf-navbar-drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-34px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sf-navbar-drop {
+    animation: sf-navbar-drop 1.15s cubic-bezier(.22, 1, .36, 1);
+}
+</style>
+
 <header @class([
-    'inset-x-0 top-0 z-30',
-    'absolute' => $isTransparent,
-    'sticky border-b border-white/10 bg-black/80 backdrop-blur-xl' => ! $isTransparent,
-])>
+    'fixed inset-x-0 top-0 z-30 transform-gpu will-change-transform transition-[background-color,backdrop-filter,border-color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)]',
+    'border-b border-white/10 bg-black/80 backdrop-blur-xl shadow-[0_16px_40px_rgba(0,0,0,0.28)]' => ! $isTransparent,
+])
+    x-data="{
+        scrolled: false,
+        animating: false,
+        syncNavbar() {
+            const next = window.scrollY > 24;
+
+            if (next && !this.scrolled) {
+                this.animating = false;
+                requestAnimationFrame(() => {
+                    this.animating = true;
+                    setTimeout(() => this.animating = false, 1150);
+                });
+            }
+
+            this.scrolled = next;
+        }
+    }"
+    x-init="
+        syncNavbar();
+        window.addEventListener('scroll', () => syncNavbar(), { passive: true });
+    "
+    :class="{
+        'border-b border-white/10 bg-black/85 backdrop-blur-xl shadow-[0_16px_40px_rgba(0,0,0,0.28)]': scrolled,
+        'border-b border-transparent bg-transparent shadow-none backdrop-blur-none': !scrolled && {{ $isTransparent ? 'true' : 'false' }},
+        'sf-navbar-drop': animating
+    }"
+>
     <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:grid lg:grid-cols-[15rem_minmax(0,1fr)_15rem] lg:gap-6 lg:px-8">
         <a
             href="{{ route('home') }}"
