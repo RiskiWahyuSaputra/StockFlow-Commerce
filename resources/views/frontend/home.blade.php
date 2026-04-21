@@ -48,7 +48,7 @@
     background:
         radial-gradient(circle at top left, rgba(45, 212, 191, 0.28), transparent 24%),
         radial-gradient(circle at 88% 18%, rgba(251, 146, 60, 0.22), transparent 18%),
-        linear-gradient(145deg, #020617 0%, #0f172a 46%, #111827 100%);
+        linear-gradient(145deg, #000000 0%, #0a0a0a 46%, #111111 100%);
     box-shadow: none;
 }
 .sf-carousel-slide {
@@ -96,7 +96,7 @@
     letter-spacing: -0.06em;
     font-weight: 900;
     color: #f8fafc;
-    text-shadow: 0 14px 40px rgba(2, 6, 23, 0.38);
+    text-shadow: 0 14px 40px rgba(0,0,0,0.5);
 }
 .sf-carousel-copy .sf-badge {
     margin-top: 26px;
@@ -109,7 +109,7 @@
     max-width: 34rem;
     color: #cbd5e1;
     font-size: 16px;
-    text-shadow: 0 12px 30px rgba(2, 6, 23, 0.34);
+    text-shadow: 0 12px 30px rgba(0,0,0,0.5);
 }
 .sf-carousel-copy .sf-cta-row {
     margin-top: 30px;
@@ -141,7 +141,7 @@
     overflow: hidden;
     border-radius: 0;
     border: 0;
-    background: #0f172a;
+    background: #000000;
     box-shadow: none;
 }
 .sf-carousel-visual-media {
@@ -156,9 +156,9 @@
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(90deg, rgba(2,6,23,0.72) 0%, rgba(2,6,23,0.34) 36%, rgba(2,6,23,0.18) 60%, rgba(2,6,23,0.7) 100%),
-        linear-gradient(180deg, rgba(15,23,42,0.08) 0%, rgba(2,6,23,0.5) 100%),
-        radial-gradient(circle at top right, rgba(255,255,255,0.16), transparent 24%);
+        linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.36) 36%, rgba(0,0,0,0.20) 60%, rgba(0,0,0,0.72) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.52) 100%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 24%);
 }
 .sf-carousel-visual-content {
     position: relative;
@@ -254,15 +254,9 @@
     background: #e2e8f0;
     transform: translateY(-1px);
 }
-.sf-carousel-arrows {
-    display: none;
-}
-.sf-carousel-arrow {
-    display: none;
-}
-.sf-carousel-arrow:hover {
-    display: none;
-}
+.sf-carousel-arrows { display: none; }
+.sf-carousel-arrow { display: none; }
+.sf-carousel-arrow:hover { display: none; }
 .sf-carousel-hotspot-next {
     position: absolute;
     inset: 0 0 0 auto;
@@ -329,8 +323,8 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    background: #0f172a;
-    color: #ffffff;
+    background: #ffffff;
+    color: #000000;
     border: none;
     border-radius: 9999px;
     padding: 10px 22px;
@@ -340,14 +334,14 @@
     cursor: pointer;
     transition: background 0.18s;
 }
-.sf-btn-primary:hover { background: #1e293b; }
+.sf-btn-primary:hover { background: #e2e8f0; }
 .sf-btn-outline {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    background: #ffffff;
-    color: #475569;
-    border: 1px solid #cbd5e1;
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid rgba(255,255,255,0.15);
     border-radius: 9999px;
     padding: 10px 22px;
     font-size: 13px;
@@ -356,7 +350,7 @@
     cursor: pointer;
     transition: border-color 0.18s, color 0.18s;
 }
-.sf-btn-outline:hover { border-color: #94a3b8; color: #0f172a; }
+.sf-btn-outline:hover { border-color: rgba(255,255,255,0.30); color: #f8fafc; }
 
 /* ─── Metrics ─── */
 .sf-metrics {
@@ -365,10 +359,10 @@
     gap: 10px;
     margin-top: 28px;
     padding-top: 24px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid rgba(255,255,255,0.08);
 }
 .sf-metric {
-    background: #f8fafc;
+    background: rgba(255,255,255,0.04);
     border-radius: 14px;
     padding: 14px 16px;
 }
@@ -377,12 +371,12 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #94a3b8;
+    color: #64748b;
 }
 .sf-metric-value {
     font-size: 24px;
     font-weight: 700;
-    color: #0f172a;
+    color: #f8fafc;
     margin-top: 5px;
     line-height: 1;
 }
@@ -410,8 +404,6 @@
     font-weight: 500;
     letter-spacing: 0.1em;
 }
-
-/* Gambar spotlight dengan glass overlay */
 .sf-aside-img-wrap {
     margin: 0 14px;
     border-radius: 14px;
@@ -426,21 +418,17 @@
     border-radius: 14px;
     transition: transform 0.4s ease;
 }
-.sf-aside-img-wrap:hover .sf-aside-img {
-    transform: scale(1.04);
-}
+.sf-aside-img-wrap:hover .sf-aside-img { transform: scale(1.04); }
 .sf-aside-img-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, rgba(15,23,42,.5) 0%, rgba(15,23,42,.05) 60%);
+    background: linear-gradient(160deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 60%);
     border-radius: 14px;
     pointer-events: none;
 }
 .sf-aside-glass {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0; left: 0; right: 0;
     background: rgba(255,255,255,0.76);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -448,13 +436,7 @@
     border-radius: 0 0 14px 14px;
     padding: 14px 16px;
 }
-
-/* Fallback jika gambar gagal dimuat */
-.sf-aside-cover {
-    margin: 0 14px;
-    border-radius: 14px;
-    overflow: hidden;
-}
+.sf-aside-cover { margin: 0 14px; border-radius: 14px; overflow: hidden; }
 .sf-aside-cover-inner {
     background: rgba(255,255,255,0.72);
     backdrop-filter: blur(12px);
@@ -463,25 +445,9 @@
     border-radius: 14px;
     padding: 20px;
 }
-.sf-aside-cover-cat {
-    font-size: 11px;
-    font-weight: 600;
-    color: #64748b;
-}
-.sf-aside-cover-name {
-    font-size: 20px;
-    font-weight: 800;
-    color: #0f172a;
-    margin-top: 6px;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-}
-.sf-aside-cover-desc {
-    font-size: 13px;
-    line-height: 1.65;
-    color: #475569;
-    margin-top: 8px;
-}
+.sf-aside-cover-cat { font-size: 11px; font-weight: 600; color: #64748b; }
+.sf-aside-cover-name { font-size: 20px; font-weight: 800; color: #0f172a; margin-top: 6px; line-height: 1.2; letter-spacing: -0.02em; }
+.sf-aside-cover-desc { font-size: 13px; line-height: 1.65; color: #475569; margin-top: 8px; }
 .sf-aside-price-row {
     display: flex;
     align-items: center;
@@ -492,22 +458,11 @@
     border-radius: 14px;
     padding: 14px 16px;
 }
-.sf-aside-price-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #64748b;
-}
-.sf-aside-price-value {
-    font-size: 22px;
-    font-weight: 800;
-    color: #f8fafc;
-    margin-top: 4px;
-}
+.sf-aside-price-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #64748b; }
+.sf-aside-price-value { font-size: 22px; font-weight: 800; color: #f8fafc; margin-top: 4px; }
 .sf-aside-price-btn {
     background: #ffffff;
-    color: #0f172a;
+    color: #000000;
     border: none;
     border-radius: 9999px;
     padding: 9px 18px;
@@ -518,7 +473,22 @@
     transition: background 0.15s;
     white-space: nowrap;
 }
-.sf-aside-price-btn:hover { background: #f1f5f9; }
+.sf-aside-price-btn:hover { background: #e2e8f0; }
+
+/* ─── Dark Wrapper — Section 2 ─── */
+.sf-dark-wrapper {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    background:
+        radial-gradient(circle at top center, rgba(245, 158, 11, 0.18), transparent 18%),
+        linear-gradient(180deg, #050505 0%, #0b0b0b 34%, #050505 100%);
+    padding: 68px 0 72px;
+}
+.sf-dark-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
 
 /* ─── Section Heading ─── */
 .sf-section-header {
@@ -526,250 +496,535 @@
     align-items: flex-end;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 18px;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 .sf-eyebrow {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #94a3b8;
-    margin-bottom: 6px;
+    color: #fbbf24;
+    margin-bottom: 10px;
 }
 .sf-eyebrow::before {
     content: '';
     display: block;
     width: 18px;
     height: 2px;
-    background: #0f172a;
-    border-radius: 2px;
+    background: #f59e0b;
+    border-radius: 9999px;
     flex-shrink: 0;
 }
 .sf-section-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #0f172a;
-    letter-spacing: -0.015em;
-    line-height: 1.3;
+    max-width: 16ch;
+    font-size: clamp(1.8rem, 2.6vw, 2.7rem);
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+}
+.sf-section-copy {
+    margin-top: 12px;
+    max-width: 42rem;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #94a3b8;
 }
 .sf-link-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 9999px;
-    padding: 8px 16px;
+    padding: 10px 16px;
     font-size: 13px;
     font-weight: 600;
-    color: #64748b;
+    color: #e2e8f0;
     text-decoration: none;
-    transition: border-color 0.15s, color 0.15s;
+    transition: border-color 0.18s, color 0.18s, background 0.18s, transform 0.18s;
     white-space: nowrap;
 }
-.sf-link-pill:hover { border-color: #94a3b8; color: #0f172a; }
-
-/* ─── Product Grid ─── */
-.sf-product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
+.sf-link-pill:hover {
+    border-color: rgba(245,158,11,0.34);
+    background: rgba(245,158,11,0.12);
+    color: #ffffff;
+    transform: translateY(-1px);
 }
-.sf-product-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
+
+/* ─── Promo Intro ─── */
+.sf-promo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.95fr);
+    gap: 18px;
+    align-items: stretch;
+}
+.sf-sale-hero {
+    position: relative;
     overflow: hidden;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-    cursor: pointer;
+    border-radius: 34px;
+    border: 1px solid rgba(245,158,11,0.16);
+    padding: clamp(2rem, 4vw, 3.25rem);
+    background:
+        radial-gradient(circle at top right, rgba(245,158,11,0.24), transparent 24%),
+        linear-gradient(135deg, #221003 0%, #14110f 48%, #050505 100%);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45);
 }
-.sf-product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 36px rgba(0,0,0,0.10);
-}
-
-/* Gambar produk */
-.sf-product-img {
-    width: 100%;
-    height: 130px;
-    object-fit: cover;
-    display: block;
-    background: #f8fafc;
-    transition: transform 0.35s ease;
-}
-.sf-product-card:hover .sf-product-img {
-    transform: scale(1.05);
-}
-.sf-product-img-placeholder {
-    width: 100%;
-    height: 130px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    font-size: 40px;
-}
-
-.sf-product-body {
-    padding: 16px 18px;
-}
-.sf-product-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.3;
-}
-.sf-product-price {
-    margin-top: 4px;
-    font-size: 13px;
-    color: #94a3b8;
-}
-.sf-product-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 14px;
-}
-.sf-stock-green {
-    background: #f1f5f9;
-    color: #0f172a;
+.sf-sale-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto -10% -28% auto;
+    width: min(34vw, 300px);
+    aspect-ratio: 1;
     border-radius: 9999px;
-    padding: 3px 10px;
-    font-size: 11px;
-    font-weight: 600;
+    background: radial-gradient(circle, rgba(245,158,11,0.24) 0%, rgba(245,158,11,0) 72%);
+    pointer-events: none;
 }
-.sf-stock-amber {
-    background: #e2e8f0;
-    color: #0f172a;
-    border-radius: 9999px;
-    padding: 3px 10px;
-    font-size: 11px;
-    font-weight: 600;
-}
-.sf-stock-red {
-    background: #0f172a;
-    color: #ffffff;
-    border-radius: 9999px;
-    padding: 3px 10px;
-    font-size: 11px;
-    font-weight: 600;
-}
-.sf-arrow-btn {
-    width: 30px;
-    height: 30px;
-    background: #0f172a;
-    border: none;
-    border-radius: 50%;
+.sf-sale-badge {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.15s, transform 0.15s;
-    flex-shrink: 0;
-}
-.sf-arrow-btn:hover { background: #334155; transform: scale(1.1); }
-
-/* ─── Bottom Section ─── */
-.sf-bottom-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    align-items: start;
-}
-.sf-card-white {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    padding: 28px 30px;
-}
-.sf-cat-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 18px;
-}
-.sf-cat-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #fafafa;
-    border: 1px solid #e5e5e5;
+    gap: 10px;
     border-radius: 9999px;
-    padding: 7px 14px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #262626;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s, transform 0.15s;
-}
-.sf-cat-chip:hover { background: #ffffff; border-color: #171717; transform: translateY(-1px); }
-.sf-cat-count {
-    background: #0f172a;
-    color: #ffffff;
-    border-radius: 9999px;
-    padding: 1px 7px;
-    font-size: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 14px;
+    font-size: 11px;
     font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #ffffff;
 }
-
-/* Flow cards */
-.sf-flow-grid {
+.sf-sale-badge span {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fbbf24;
+}
+.sf-sale-title {
+    position: relative;
+    z-index: 1;
+    max-width: 7ch;
+    margin-top: 20px;
+    font-size: clamp(3.1rem, 7vw, 6.4rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.07em;
+    color: #ffffff;
+}
+.sf-sale-copy {
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+    max-width: 34rem;
+    font-size: 16px;
+    line-height: 1.85;
+    color: #cbd5e1;
+}
+.sf-sale-actions {
+    position: relative;
+    z-index: 1;
+    margin-top: 30px;
+}
+.sf-sale-metrics {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 34px;
 }
-.sf-flow-card {
-    background: #ffffff;
-    border: 1px solid #e5e5e5;
-    border-radius: 18px;
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
+.sf-sale-metric {
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    padding: 18px;
+    backdrop-filter: blur(10px);
 }
-.sf-flow-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(0,0,0,0.07);
-}
-.sf-flow-icon {
-    width: 38px;
-    height: 38px;
-    background: #fafafa;
-    border: 1px solid #e5e5e5;
-    color: #0f172a;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-.sf-flow-eyebrow {
+.sf-sale-metric-label {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #737373;
-    margin-top: 14px;
+    color: #94a3b8;
 }
-.sf-flow-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.35;
-    margin-top: 6px;
-    flex: 1;
-}
-.sf-flow-desc {
-    font-size: 13px;
-    line-height: 1.65;
-    color: #525252;
+.sf-sale-metric-value {
     margin-top: 8px;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    color: #ffffff;
+}
+.sf-promo-stack {
+    display: grid;
+    gap: 18px;
+}
+.sf-promo-note,
+.sf-spotlight-panel {
+    overflow: hidden;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: #111111;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+}
+.sf-promo-note {
+    padding: 28px;
+    background:
+        radial-gradient(circle at top left, rgba(248, 113, 113, 0.18), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+}
+.sf-note-title {
+    margin-top: 14px;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+}
+.sf-note-copy {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #cbd5e1;
+}
+.sf-promo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+.sf-promo-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.05);
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #f8fafc;
+    text-decoration: none;
+    transition: border-color 0.18s, background 0.18s, transform 0.18s;
+}
+.sf-promo-tag span {
+    border-radius: 9999px;
+    background: rgba(245,158,11,0.14);
+    padding: 2px 8px;
+    font-size: 10px;
+    color: #fbbf24;
+}
+.sf-promo-tag:hover {
+    border-color: rgba(245,158,11,0.3);
+    background: rgba(245,158,11,0.08);
+    transform: translateY(-1px);
+}
+.sf-promo-note .sf-link-pill {
+    margin-top: 22px;
+}
+.sf-spotlight-media {
+    position: relative;
+    min-height: 232px;
+    background: #151515;
+}
+.sf-spotlight-image,
+.sf-deal-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.sf-spotlight-media::after,
+.sf-deal-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.52) 100%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 26%);
+    pointer-events: none;
+}
+.sf-spotlight-placeholder,
+.sf-deal-placeholder {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    min-height: 232px;
+    padding: 22px;
+    color: rgba(255,255,255,0.94);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+.sf-deal-placeholder {
+    min-height: 0;
+    aspect-ratio: 5 / 4;
+}
+.sf-spotlight-body {
+    padding: 24px 28px 28px;
+}
+.sf-spotlight-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fbbf24;
+}
+.sf-spotlight-title {
+    margin-top: 10px;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+}
+.sf-spotlight-copy {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #cbd5e1;
+}
+.sf-spotlight-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 20px;
+}
+.sf-spotlight-price {
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+}
+
+/* ─── Deals Grid ─── */
+.sf-deals-section {
+    margin-top: 72px;
+}
+.sf-deals-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+.sf-deal-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(180deg, #101010 0%, #090909 100%);
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.sf-deal-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245,158,11,0.24);
+    box-shadow: 0 18px 46px rgba(0,0,0,0.45);
+}
+.sf-deal-discount {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: #fbbf24;
+    color: #111827;
+    padding: 7px 12px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+.sf-deal-media {
+    position: relative;
+    aspect-ratio: 5 / 4;
+    background: #161616;
+}
+.sf-deal-body {
+    padding: 20px;
+}
+.sf-deal-category {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fbbf24;
+}
+.sf-deal-name {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+}
+.sf-deal-text {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.78;
+    color: #94a3b8;
+}
+.sf-deal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 22px;
+}
+.sf-deal-price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+.sf-deal-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #f8fafc;
+    text-decoration: none;
+    transition: border-color 0.18s, background 0.18s, transform 0.18s;
+}
+.sf-deal-button:hover {
+    border-color: rgba(245,158,11,0.3);
+    background: rgba(245,158,11,0.12);
+    transform: translateY(-1px);
+}
+
+/* ─── Category Offers ─── */
+.sf-category-offers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 72px;
+}
+.sf-category-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+    border-radius: 32px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 18px 44px rgba(0,0,0,0.32);
+}
+.sf-category-sale {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.82);
+}
+.sf-category-title {
+    max-width: 12ch;
+    margin-top: 12px;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    color: #ffffff;
+}
+.sf-category-copy {
+    max-width: 28rem;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.82;
+    color: rgba(255,255,255,0.78);
+}
+.sf-category-card .sf-link-pill {
+    margin-top: auto;
+    align-self: flex-start;
+    border-color: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+}
+
+/* ─── Benefits ─── */
+.sf-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 72px;
+}
+.sf-benefit-card {
+    border-radius: 26px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.025));
+    padding: 24px;
+}
+.sf-benefit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    border: 1px solid rgba(245,158,11,0.18);
+    background: rgba(245,158,11,0.08);
+    color: #fbbf24;
+}
+.sf-benefit-title {
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #f8fafc;
+}
+.sf-benefit-copy {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #94a3b8;
+}
+
+/* ─── Closing CTA ─── */
+.sf-closing-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 72px;
+    border-radius: 34px;
+    border: 1px solid rgba(245,158,11,0.16);
+    background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.16), transparent 18%),
+        linear-gradient(135deg, #271301 0%, #a16207 52%, #78350f 100%);
+    padding: clamp(1.75rem, 3vw, 2.6rem);
+}
+.sf-closing-title {
+    max-width: 14ch;
+    font-size: clamp(2rem, 4.2vw, 3.6rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    color: #ffffff;
+}
+.sf-closing-copy {
+    max-width: 36rem;
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.82);
+}
+
+/* ─── Footer bridge ─── */
+.sf-footer-bridge {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    height: 1px;
+    background: rgba(255,255,255,0.06);
 }
 
 /* ─── FAB ─── */
@@ -781,14 +1036,15 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #0f172a;
+    background: #111111;
     color: #ffffff;
     text-decoration: none;
     border-radius: 9999px;
     padding: 13px 22px;
     font-size: 14px;
     font-weight: 600;
-    box-shadow: 0 4px 20px rgba(15,23,42,.30), 0 1px 4px rgba(15,23,42,.15);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.6);
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.15s;
     animation: sf-fab-in .6s cubic-bezier(.34,1.56,.64,1) .8s both;
 }
@@ -797,14 +1053,14 @@
     to   { transform: none; opacity: 1; }
 }
 .sf-fab:hover {
-    background: #1e293b;
+    background: #1a1a1a;
     transform: translateY(-3px);
-    box-shadow: 0 12px 36px rgba(15,23,42,.35), 0 2px 6px rgba(15,23,42,.18);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.7);
 }
 .sf-fab:active { transform: translateY(-1px); }
 .sf-fab-badge {
-    background: #ffffff;
-    color: #0f172a;
+    background: #5eead4;
+    color: #000000;
     border-radius: 9999px;
     padding: 2px 7px;
     font-size: 11px;
@@ -819,70 +1075,44 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
-    .sf-hero-grid {
-        min-height: auto;
-        padding-top: 0;
-    }
-    .sf-carousel-shell,
-    .sf-carousel-slide {
-        min-height: auto;
-    }
-    .sf-carousel-slide {
-        padding: 6.5rem 2rem 2rem;
-    }
-    .sf-carousel-visual {
-        inset: 0;
-    }
-    .sf-carousel-copy {
-        min-height: calc(100vh - 8.5rem);
-        max-width: 36rem;
-    }
-    .sf-carousel-visual-content {
-        min-height: 100vh;
-        padding: 6.5rem 2rem 2rem;
-    }
-    .sf-product-grid { grid-template-columns: repeat(2, 1fr); }
-    .sf-bottom-grid { grid-template-columns: 1fr; }
+    .sf-hero-grid { min-height: auto; padding-top: 0; }
+    .sf-carousel-shell, .sf-carousel-slide { min-height: auto; }
+    .sf-carousel-slide { padding: 6.5rem 2rem 2rem; }
+    .sf-carousel-visual { inset: 0; }
+    .sf-carousel-copy { min-height: calc(100vh - 8.5rem); max-width: 36rem; }
+    .sf-carousel-visual-content { min-height: 100vh; padding: 6.5rem 2rem 2rem; }
+    .sf-promo-grid,
+    .sf-category-offers { grid-template-columns: 1fr; }
+    .sf-deals-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sf-benefits-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sf-closing-banner { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 640px) {
-    .sf-hero-grid {
-        padding-top: 0;
-    }
-    .sf-carousel-slide {
-        padding: 6rem 1.2rem 1.2rem;
-        gap: 1.25rem;
-    }
-    .sf-carousel-title {
-        font-size: 42px;
-        max-width: 100%;
-    }
-    .sf-carousel-copy .sf-lead {
-        font-size: 15px;
-    }
-    .sf-carousel-copy {
-        min-height: calc(100vh - 7.2rem);
-        max-width: 100%;
-    }
-    .sf-carousel-visual-content {
-        min-height: 100vh;
-        padding: 6rem 1.2rem 1.2rem;
-    }
-    .sf-carousel-product {
-        max-width: 100%;
-    }
-    .sf-carousel-product-footer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .sf-carousel-arrows {
-        right: 14px;
-        bottom: 14px;
-    }
+    .sf-hero-grid { padding-top: 0; }
+    .sf-carousel-slide { padding: 6rem 1.2rem 1.2rem; gap: 1.25rem; }
+    .sf-carousel-title { font-size: 42px; max-width: 100%; }
+    .sf-carousel-copy .sf-lead { font-size: 15px; }
+    .sf-carousel-copy { min-height: calc(100vh - 7.2rem); max-width: 100%; }
+    .sf-carousel-visual-content { min-height: 100vh; padding: 6rem 1.2rem 1.2rem; }
+    .sf-carousel-product { max-width: 100%; }
+    .sf-carousel-product-footer { flex-direction: column; align-items: flex-start; }
     .sf-h1 { font-size: 30px; }
     .sf-metrics { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .sf-product-grid { grid-template-columns: repeat(2, 1fr); }
-    .sf-flow-grid { grid-template-columns: 1fr; }
     .sf-fab { bottom: 20px; right: 20px; padding: 11px 18px; font-size: 13px; }
+    .sf-dark-inner { padding: 0 1.2rem; }
+    .sf-dark-wrapper { padding: 42px 0 48px; }
+    .sf-sale-hero,
+    .sf-promo-note,
+    .sf-spotlight-panel,
+    .sf-category-card,
+    .sf-closing-banner { border-radius: 24px; }
+    .sf-sale-title { font-size: 54px; }
+    .sf-sale-metrics,
+    .sf-deals-grid,
+    .sf-benefits-grid { grid-template-columns: 1fr; }
+    .sf-spotlight-footer { flex-direction: column; align-items: flex-start; }
+    .sf-section-title,
+    .sf-closing-title { max-width: 100%; }
 }
 </style>
 @endpush
@@ -895,52 +1125,52 @@
 @php
     $heroSlides = collect([
         [
-            'kicker' => 'Kurasi Minggu Ini',
-            'badge' => 'Platform Modern',
-            'title' => 'Pengalaman belanja modern yang rapi dan siap dipresentasikan.',
-            'description' => 'Fondasi visual untuk katalog, detail produk, keranjang, dan checkout. Semua komponen dirancang reusable agar mudah di-scale.',
-            'primary_label' => 'Jelajahi Produk',
-            'primary_href' => route('products.index'),
-            'secondary_label' => 'Lihat Checkout',
+            'kicker'         => 'Kurasi Minggu Ini',
+            'badge'          => 'Platform Modern',
+            'title'          => 'Pengalaman belanja modern yang rapi dan siap dipresentasikan.',
+            'description'    => 'Fondasi visual untuk katalog, detail produk, keranjang, dan checkout. Semua komponen dirancang reusable agar mudah di-scale.',
+            'primary_label'  => 'Jelajahi Produk',
+            'primary_href'   => route('products.index'),
+            'secondary_label'=> 'Lihat Checkout',
             'secondary_href' => route('checkout.index'),
-            'feature_label' => $spotlightProduct['category'] ?? 'Sorotan',
-            'feature_title' => $spotlightProduct['name'] ?? 'StockFlow Commerce',
-            'feature_text' => $spotlightProduct['description'] ?? 'Kurasi produk siap pakai dengan presentasi visual yang terasa premium sejak layar pertama.',
-            'price_label' => $spotlightProduct['price_label'] ?? 'Mulai dari sekarang',
-            'product_href' => filled($spotlightProduct['slug'] ?? null) ? route('products.show', $spotlightProduct['slug']) : route('products.index'),
-            'image_url' => asset('img/parfum.jpg'),
+            'feature_label'  => $spotlightProduct['category'] ?? 'Sorotan',
+            'feature_title'  => $spotlightProduct['name'] ?? 'StockFlow Commerce',
+            'feature_text'   => $spotlightProduct['description'] ?? 'Kurasi produk siap pakai dengan presentasi visual yang terasa premium sejak layar pertama.',
+            'price_label'    => $spotlightProduct['price_label'] ?? 'Mulai dari sekarang',
+            'product_href'   => filled($spotlightProduct['slug'] ?? null) ? route('products.show', $spotlightProduct['slug']) : route('products.index'),
+            'image_url'      => asset('img/parfum.jpg'),
         ],
         [
-            'kicker' => 'Footwear Edit',
-            'badge' => 'Highlight Produk',
-            'title' => 'Slide besar yang langsung membawa fokus ke kategori favorit.',
-            'description' => 'Header carousel ini dibuat untuk menampilkan koleksi unggulan dengan ritme visual yang lebih hidup daripada hero statis biasa.',
-            'primary_label' => 'Lihat Katalog',
-            'primary_href' => route('products.index'),
-            'secondary_label' => 'Buka Keranjang',
+            'kicker'         => 'Footwear Edit',
+            'badge'          => 'Highlight Produk',
+            'title'          => 'Slide besar yang langsung membawa fokus ke kategori favorit.',
+            'description'    => 'Header carousel ini dibuat untuk menampilkan koleksi unggulan dengan ritme visual yang lebih hidup daripada hero statis biasa.',
+            'primary_label'  => 'Lihat Katalog',
+            'primary_href'   => route('products.index'),
+            'secondary_label'=> 'Buka Keranjang',
             'secondary_href' => route('cart.index'),
-            'feature_label' => 'Shoes',
-            'feature_title' => 'Pilihan sepatu yang tampil editorial sejak landing pertama.',
-            'feature_text' => 'Cocok untuk menonjolkan campaign, kategori baru, atau produk dengan foto yang ingin benar-benar dijual lewat visual.',
-            'price_label' => 'Explore now',
-            'product_href' => route('products.index'),
-            'image_url' => asset('img/soes.jpg'),
+            'feature_label'  => 'Shoes',
+            'feature_title'  => 'Pilihan sepatu yang tampil editorial sejak landing pertama.',
+            'feature_text'   => 'Cocok untuk menonjolkan campaign, kategori baru, atau produk dengan foto yang ingin benar-benar dijual lewat visual.',
+            'price_label'    => 'Explore now',
+            'product_href'   => route('products.index'),
+            'image_url'      => asset('img/soes.jpg'),
         ],
         [
-            'kicker' => 'Fashion Rail',
-            'badge' => 'Visual Display',
-            'title' => 'Hero satu layar dengan transisi halus bikin beranda terasa lebih premium.',
-            'description' => 'Navbar transparan dan carousel full-screen memberi kesan lebih modern saat halaman pertama kali dibuka, tanpa mengganggu flow katalog di bawahnya.',
-            'primary_label' => 'Mulai Belanja',
-            'primary_href' => route('products.index'),
-            'secondary_label' => 'Lihat Detail',
+            'kicker'         => 'Fashion Rail',
+            'badge'          => 'Visual Display',
+            'title'          => 'Hero satu layar dengan transisi halus bikin beranda terasa lebih premium.',
+            'description'    => 'Navbar transparan dan carousel full-screen memberi kesan lebih modern saat halaman pertama kali dibuka, tanpa mengganggu flow katalog di bawahnya.',
+            'primary_label'  => 'Mulai Belanja',
+            'primary_href'   => route('products.index'),
+            'secondary_label'=> 'Lihat Detail',
             'secondary_href' => filled($spotlightProduct['slug'] ?? null) ? route('products.show', $spotlightProduct['slug']) : route('products.index'),
-            'feature_label' => 'Clothes',
-            'feature_title' => 'Area hero sekarang punya ritme presentasi yang lebih dinamis.',
-            'feature_text' => 'Setiap slide bisa dipakai untuk memperlihatkan karakter produk yang berbeda, dari fashion sampai fragrance.',
-            'price_label' => 'New collection',
-            'product_href' => route('products.index'),
-            'image_url' => asset('img/chlotes.jpeg'),
+            'feature_label'  => 'Clothes',
+            'feature_title'  => 'Area hero sekarang punya ritme presentasi yang lebih dinamis.',
+            'feature_text'   => 'Setiap slide bisa dipakai untuk memperlihatkan karakter produk yang berbeda, dari fashion sampai fragrance.',
+            'price_label'    => 'New collection',
+            'product_href'   => route('products.index'),
+            'image_url'      => asset('img/chlotes.jpeg'),
         ],
     ])->values();
 @endphp
@@ -978,9 +1208,7 @@
                     <div class="sf-carousel-visual-card">
                         <img src="{{ $slide['image_url'] }}" alt="{{ $slide['feature_title'] }}" class="sf-carousel-visual-media" loading="eager">
                         <div class="sf-carousel-visual-overlay"></div>
-
-                        <div class="sf-carousel-visual-content">
-                        </div>
+                        <div class="sf-carousel-visual-content"></div>
                     </div>
                 </div>
             </article>
@@ -996,23 +1224,13 @@
 </section>
 
 <section class="hidden">
-
-    {{-- Konten Utama --}}
     <div class="sf-hero-main">
         <span class="sf-badge">
             <span class="sf-badge-dot"></span>
             Platform Modern
         </span>
-
-        <h1 class="sf-h1">
-            Pengalaman belanja modern yang rapi dan siap dipresentasikan.
-        </h1>
-
-        <p class="sf-lead">
-            Fondasi visual untuk katalog, detail produk, keranjang, dan checkout.
-            Semua komponen dirancang reusable agar mudah di-scale.
-        </p>
-
+        <h1 class="sf-h1">Pengalaman belanja modern yang rapi dan siap dipresentasikan.</h1>
+        <p class="sf-lead">Fondasi visual untuk katalog, detail produk, keranjang, dan checkout. Semua komponen dirancang reusable agar mudah di-scale.</p>
         <div class="sf-cta-row">
             <a href="{{ route('products.index') }}" class="sf-btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -1023,7 +1241,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
         </div>
-
         <div class="sf-metrics">
             @foreach ($stats as $stat)
                 <div class="sf-metric">
@@ -1034,22 +1251,14 @@
         </div>
     </div>
 
-    {{-- Spotlight Card --}}
     <aside class="sf-hero-aside sf-anim sf-d2">
         <div class="sf-aside-header">
             <span class="sf-aside-eyebrow">Sorotan</span>
             <span class="sf-aside-cat-pill">{{ $spotlightProduct['category'] }}</span>
         </div>
-
-        {{-- Gunakan image jika ada, fallback ke glass card --}}
         @if (!empty($spotlightProduct['image_url']))
             <div class="sf-aside-img-wrap">
-                <img
-                    class="sf-aside-img"
-                    src="{{ $spotlightProduct['image_url'] }}"
-                    alt="{{ $spotlightProduct['name'] }}"
-                    loading="lazy"
-                >
+                <img class="sf-aside-img" src="{{ $spotlightProduct['image_url'] }}" alt="{{ $spotlightProduct['name'] }}" loading="lazy">
                 <div class="sf-aside-img-gradient"></div>
                 <div class="sf-aside-glass">
                     <p class="sf-aside-cover-cat">{{ $spotlightProduct['category'] }}</p>
@@ -1065,168 +1274,285 @@
                 </div>
             </div>
         @endif
-
         <div class="sf-aside-price-row">
             <div>
                 <p class="sf-aside-price-label">Harga</p>
                 <p class="sf-aside-price-value">{{ $spotlightProduct['price_label'] }}</p>
             </div>
-            <a href="{{ route('products.show', $spotlightProduct['slug']) }}" class="sf-aside-price-btn">
-                Lihat →
-            </a>
+            <a href="{{ route('products.show', $spotlightProduct['slug']) }}" class="sf-aside-price-btn">Lihat →</a>
         </div>
     </aside>
 </section>
 
 
 {{-- ══════════════════════════════════════════════════════
-     SECTION 2 — FEATURED PRODUCTS
+     DARK WRAPPER — SECTION 2 & 3
 ══════════════════════════════════════════════════════ --}}
-<section class="sf-anim sf-d3" style="margin-top: 28px;">
-    <div class="sf-section-header">
-        <div>
-            <p class="sf-eyebrow">Pilihan Unggulan</p>
-            <h2 class="sf-section-title">Produk disusun rapi untuk kesan profesional sejak tampilan pertama.</h2>
-        </div>
-        <a href="{{ route('products.index') }}" class="sf-link-pill">
-            Lihat semua
-            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-    </div>
+@php
+    $featuredDeals = collect($featuredProducts)
+        ->values()
+        ->map(function (array $product, int $index): array {
+            $discounts = [55, 48, 42, 35];
+            $product['deal_label'] = $discounts[$index] ?? 30;
 
-    <div class="sf-product-grid">
-        @foreach ($featuredProducts as $index => $product)
-            <div class="sf-product-card sf-anim sf-d{{ min($index + 4, 7) }}">
+            return $product;
+        });
 
-                {{-- Gambar produk --}}
-                @if (!empty($product['image_url']))
-                    <img
-                        class="sf-product-img"
-                        src="{{ $product['image_url'] }}"
-                        alt="{{ $product['name'] }}"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="sf-product-img-placeholder" style="display:none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                    </div>
-                @elseif (!empty($product['image']))
-                    {{-- Support gambar dari relasi model Product --}}
-                    <img
-                        class="sf-product-img"
-                        src="{{ Storage::url($product['image']) }}"
-                        alt="{{ $product['name'] }}"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
-                    <div class="sf-product-img-placeholder" style="display:none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                    </div>
-                @else
-                    <div class="sf-product-img-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                    </div>
-                @endif
+    $promoCategories = collect($categories)
+        ->reject(fn (array $category): bool => ($category['slug'] ?? null) === 'all')
+        ->take(3)
+        ->values();
 
-                <div class="sf-product-body">
-                    <p class="sf-product-name">{{ $product['name'] }}</p>
-                    <p class="sf-product-price">{{ $product['price_label'] }}</p>
+    $categoryOffers = collect($categories)
+        ->reject(fn (array $category): bool => ($category['slug'] ?? null) === 'all')
+        ->take(2)
+        ->values()
+        ->map(function (array $category, int $index): array {
+            $themes = [
+                [
+                    'discount' => 'Up to 65% Off',
+                    'headline' => 'Unlock exclusive Black Friday deals for '.$category['name'].'.',
+                    'copy' => 'Kurasi kategori '.$category['name'].' dibuat lebih menonjol agar campaign terasa kuat sejak scroll pertama.',
+                    'gradient' => 'linear-gradient(135deg, #241102 0%, #5b2a04 52%, #140a03 100%)',
+                ],
+                [
+                    'discount' => 'Today only',
+                    'headline' => 'Shop '.$category['name'].' picks before they sell out.',
+                    'copy' => 'Blok promo sekunder ini mengikuti ritme template referensi: lebih clean, besar, dan fokus ke CTA kategori.',
+                    'gradient' => 'linear-gradient(135deg, #111827 0%, #1f2937 46%, #020617 100%)',
+                ],
+            ];
 
-                    <div class="sf-product-footer">
-                        @if(isset($product['stock']))
-                            @if($product['stock'] > 10)
-                                <span class="sf-stock-green">Stok {{ $product['stock'] }}</span>
-                            @elseif($product['stock'] > 0)
-                                <span class="sf-stock-amber">Stok {{ $product['stock'] }}</span>
-                            @else
-                                <span class="sf-stock-red">Habis</span>
-                            @endif
-                        @else
-                            <span></span>
-                        @endif
+            return array_merge($category, $themes[$index] ?? end($themes));
+        });
 
-                        <a href="{{ route('products.show', $product['slug']) }}" class="sf-arrow-btn" aria-label="Lihat {{ $product['name'] }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
+    $spotlightHref = filled($spotlightProduct['slug'] ?? null)
+        ? route('products.show', $spotlightProduct['slug'])
+        : route('products.index');
+@endphp
+<div class="sf-dark-wrapper">
+    <div class="sf-dark-inner">
+        <section class="sf-promo-grid sf-anim sf-d3">
+            <article class="sf-sale-hero">
+                <div class="sf-sale-badge">
+                    Save up to
+                    <span>50%</span>
                 </div>
+                <h2 class="sf-sale-title">Discover Deals That Feel Like a Real Campaign.</h2>
+                <p class="sf-sale-copy">
+                    Section setelah carousel sekarang dibuat lebih dekat dengan ritme template referensi:
+                    ada promo utama, kartu sorotan, dan jalur belanja yang terasa lebih editorial.
+                </p>
+                <div class="sf-cta-row sf-sale-actions">
+                    <a href="{{ route('products.index') }}" class="sf-btn-primary">
+                        Shop now
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="{{ route('checkout.index') }}" class="sf-btn-outline">
+                        Explore offers
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="sf-sale-metrics">
+                    @foreach ($stats as $stat)
+                        <div class="sf-sale-metric">
+                            <p class="sf-sale-metric-label">{{ $stat['label'] }}</p>
+                            <p class="sf-sale-metric-value">{{ $stat['value'] }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </article>
+
+            <div class="sf-promo-stack">
+                <article class="sf-promo-note">
+                    <p class="sf-eyebrow">Flash Categories</p>
+                    <h3 class="sf-note-title">Lebih clean, lebih terarah, dan langsung terasa seperti halaman promo.</h3>
+                    <p class="sf-note-copy">
+                        Carousel tetap saya biarkan, lalu area bawahnya saya susun ulang supaya scroll berikutnya
+                        terasa lebih kuat dan rapi seperti demo referensi.
+                    </p>
+                    <div class="sf-promo-tags">
+                        @foreach ($promoCategories as $category)
+                            <a href="{{ route('products.index', ['category' => $category['slug'] ?? null]) }}" class="sf-promo-tag">
+                                {{ $category['name'] }}
+                                <span>{{ $category['count'] }}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                    <a href="{{ route('products.index') }}" class="sf-link-pill">
+                        Browse all collections
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+
+                <article class="sf-spotlight-panel">
+                    <div class="sf-spotlight-media">
+                        @if (!empty($spotlightProduct['image_url']))
+                            <img src="{{ $spotlightProduct['image_url'] }}" alt="{{ $spotlightProduct['name'] }}" class="sf-spotlight-image" loading="lazy">
+                        @elseif (!empty($spotlightProduct['image']))
+                            <img src="{{ Storage::url($spotlightProduct['image']) }}" alt="{{ $spotlightProduct['name'] }}" class="sf-spotlight-image" loading="lazy">
+                        @else
+                            <div class="sf-spotlight-placeholder" style="{{ $spotlightProduct['cover_style'] ?? 'background:linear-gradient(135deg,#1f2937 0%,#0f172a 100%);' }}">
+                                Spotlight edit
+                            </div>
+                        @endif
+                    </div>
+                    <div class="sf-spotlight-body">
+                        <p class="sf-spotlight-label">{{ $spotlightProduct['category'] ?? 'Spotlight' }}</p>
+                        <h3 class="sf-spotlight-title">{{ $spotlightProduct['name'] ?? config('app.name') }}</h3>
+                        <p class="sf-spotlight-copy">
+                            {{ $spotlightProduct['description'] ?? 'Kurasi produk tetap jadi sorotan utama tanpa membuat layout terasa padat.' }}
+                        </p>
+                        <div class="sf-spotlight-footer">
+                            <span class="sf-spotlight-price">{{ $spotlightProduct['price_label'] ?? 'Mulai sekarang' }}</span>
+                            <a href="{{ $spotlightHref }}" class="sf-link-pill">
+                                View highlight
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
             </div>
-        @endforeach
-    </div>
-</section>
+        </section>
 
-
-{{-- ══════════════════════════════════════════════════════
-     SECTION 3 — KATEGORI + FLOW CARDS
-══════════════════════════════════════════════════════ --}}
-<section class="sf-bottom-grid sf-anim sf-d6" style="margin-top: 28px;">
-
-    {{-- Kategori --}}
-    <div class="sf-card-white">
-        <p class="sf-eyebrow">Kategori</p>
-        <h3 class="sf-section-title">Katalog yang tetap nyaman dibaca saat produk makin banyak.</h3>
-        <p style="margin-top:10px; font-size:14px; line-height:1.7; color:#525252;">
-            Chip kategori dirancang ringan dan editorial — jauh dari kesan panel admin.
-        </p>
-
-        <div class="sf-cat-chips">
-            @foreach ($categories as $category)
-                <a href="{{ route('products.index', ['category' => $category['slug'] ?? '']) }}" class="sf-cat-chip">
-                    {{ $category['name'] }}
-                    <span class="sf-cat-count">{{ $category['count'] }}</span>
+        <section class="sf-deals-section sf-anim sf-d4">
+            <div class="sf-section-header">
+                <div>
+                    <p class="sf-eyebrow">Featured Deals</p>
+                    <h2 class="sf-section-title">Flash deals yang langsung terasa seperti landing promo Black Friday.</h2>
+                    <p class="sf-section-copy">
+                        Grid produk saya perbesar dan saya beri ritme promo, supaya pengunjung langsung dapat
+                        konteks harga, kategori, dan aksi belanja tanpa terasa seperti daftar produk biasa.
+                    </p>
+                </div>
+                <a href="{{ route('products.index') }}" class="sf-link-pill">
+                    View all products
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
+            </div>
+
+            <div class="sf-deals-grid">
+                @foreach ($featuredDeals as $product)
+                    <article class="sf-deal-card">
+                        <span class="sf-deal-discount">{{ $product['deal_label'] }}% Off</span>
+                        <div class="sf-deal-media">
+                            @if (!empty($product['image_url']))
+                                <img src="{{ $product['image_url'] }}" alt="{{ $product['name'] }}" loading="lazy">
+                            @elseif (!empty($product['image']))
+                                <img src="{{ Storage::url($product['image']) }}" alt="{{ $product['name'] }}" loading="lazy">
+                            @else
+                                <div class="sf-deal-placeholder" style="{{ $product['cover_style'] ?? 'background:linear-gradient(135deg,#111827 0%,#1f2937 100%);' }}">
+                                    {{ $product['tag'] ?? 'Hot deal' }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="sf-deal-body">
+                            <p class="sf-deal-category">{{ $product['category'] }}</p>
+                            <h3 class="sf-deal-name">{{ $product['name'] }}</h3>
+                            <p class="sf-deal-text">{{ $product['excerpt'] ?? $product['description'] }}</p>
+                            <div class="sf-deal-footer">
+                                <span class="sf-deal-price">{{ $product['price_label'] }}</span>
+                                <a href="{{ route('products.show', $product['slug']) }}" class="sf-deal-button">
+                                    Shop now
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        </section>
+
+        <section class="sf-category-offers sf-anim sf-d5">
+            @foreach ($categoryOffers as $category)
+                <article class="sf-category-card" style="background: {{ $category['gradient'] }};">
+                    <p class="sf-category-sale">{{ $category['discount'] }}</p>
+                    <h3 class="sf-category-title">{{ $category['headline'] }}</h3>
+                    <p class="sf-category-copy">{{ $category['copy'] }}</p>
+                    <a href="{{ route('products.index', ['category' => $category['slug'] ?? null]) }}" class="sf-link-pill">
+                        Shop {{ $category['name'] }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
             @endforeach
-        </div>
-    </div>
+        </section>
 
-    {{-- Cart & Checkout --}}
-    <div class="sf-flow-grid">
+        <section class="sf-benefits-grid sf-anim sf-d6">
+            <article class="sf-benefit-card">
+                <div class="sf-benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="16" height="13" x="4" y="5" rx="2"/>
+                        <path d="M16 18h2a2 2 0 0 0 2-2v-3.34a2 2 0 0 0-.59-1.41l-1.66-1.66A2 2 0 0 0 16.34 9H14"/>
+                        <circle cx="7.5" cy="18.5" r="1.5"/>
+                        <circle cx="16.5" cy="18.5" r="1.5"/>
+                    </svg>
+                </div>
+                <h3 class="sf-benefit-title">Pengiriman cepat</h3>
+                <p class="sf-benefit-copy">Area promo tetap kuat tanpa menghilangkan informasi praktis seperti kecepatan kirim dan kesiapan checkout.</p>
+            </article>
 
-        {{-- Cart --}}
-        <article class="sf-flow-card">
-            <div class="sf-flow-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
+            <article class="sf-benefit-card">
+                <div class="sf-benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 7h-9"/>
+                        <path d="M14 17H5"/>
+                        <circle cx="17" cy="17" r="3"/>
+                        <circle cx="7" cy="7" r="3"/>
+                    </svg>
+                </div>
+                <h3 class="sf-benefit-title">Kurasi terarah</h3>
+                <p class="sf-benefit-copy">Blok produk, kategori, dan CTA disusun supaya halaman utama terasa lebih fokus dan tidak pecah ke terlalu banyak arah.</p>
+            </article>
+
+            <article class="sf-benefit-card">
+                <div class="sf-benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2 4 5v6c0 5 3.4 9.74 8 11 4.6-1.26 8-6 8-11V5l-8-3Z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                </div>
+                <h3 class="sf-benefit-title">Checkout lebih aman</h3>
+                <p class="sf-benefit-copy">Narasi visual baru tetap mengarahkan user ke alur beli yang jelas, dari katalog hingga pembayaran.</p>
+            </article>
+
+            <article class="sf-benefit-card">
+                <div class="sf-benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        <path d="M8 10h8"/>
+                        <path d="M8 7h5"/>
+                    </svg>
+                </div>
+                <h3 class="sf-benefit-title">Support lebih jelas</h3>
+                <p class="sf-benefit-copy">Footer dan area penutup saya buat lebih clean supaya informasi penting tetap terbaca tanpa rasa penuh.</p>
+            </article>
+        </section>
+
+        <section class="sf-closing-banner sf-anim sf-d7">
+            <div>
+                <p class="sf-eyebrow" style="color: rgba(255,255,255,0.84);">Final Call</p>
+                <h2 class="sf-closing-title">Don't miss out, shop the strongest deals now.</h2>
+                <p class="sf-closing-copy">
+                    Penutup halaman saya ubah jadi CTA besar agar transisi dari section promo ke footer terasa lebih halus,
+                    lebih rapi, dan tetap punya tenaga sampai bagian paling bawah.
+                </p>
             </div>
-            <p class="sf-flow-eyebrow">Keranjang</p>
-            <h3 class="sf-flow-title">Review pesanan sebelum lanjut ke pembayaran.</h3>
-            <p class="sf-flow-desc">Review jumlah, input promo, dan ringkasan pesanan tanpa terasa padat.</p>
-            <a href="{{ route('cart.index') }}" class="sf-btn-primary" style="margin-top: 18px; width: fit-content;">
-                Buka
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <a href="{{ route('products.index') }}" class="sf-btn-primary">
+                Shop deals
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-        </article>
-
-        {{-- Checkout --}}
-        <article class="sf-flow-card">
-            <div class="sf-flow-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                    <rect width="20" height="14" x="2" y="5" rx="2"/>
-                    <line x1="2" y1="10" x2="22" y2="10"/>
-                </svg>
-            </div>
-            <p class="sf-flow-eyebrow">Checkout</p>
-            <h3 class="sf-flow-title">Siap integrasi Midtrans payment gateway.</h3>
-            <p class="sf-flow-desc">Summary tetap terlihat, form dan pilihan bayar nyaman dibaca.</p>
-            <a href="{{ route('checkout.index') }}" class="sf-btn-outline" style="margin-top: 18px; width: fit-content;">
-                Buka
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-        </article>
+        </section>
     </div>
-</section>
+</div>
+
+<div class="sf-footer-bridge"></div>
 
 
 {{-- ══════════════════════════════════════════════════════
      FAB — Floating Cart Button
 ══════════════════════════════════════════════════════ --}}
 <a href="{{ route('cart.index') }}" class="sf-fab" aria-label="Buka Keranjang">
-    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-         fill="none" stroke="currentColor" stroke-width="2"
-         stroke-linecap="round" stroke-linejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
         <line x1="3" y1="6" x2="21" y2="6"/>
         <path d="M16 10a4 4 0 0 1-8 0"/>
@@ -1238,3 +1564,6 @@
 </a>
 
 @endsection
+
+
+
