@@ -66,7 +66,6 @@
     min-width: 0;
     flex-direction: column;
     justify-content: center;
-    min-height: calc(100vh - 10.25rem);
     max-width: 44rem;
 }
 .sf-carousel-copy-top {
@@ -166,7 +165,7 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 7.25rem 4.5rem 3rem;
 }
 .sf-carousel-visual-tag {
@@ -193,9 +192,12 @@
     background: #5eead4;
 }
 .sf-carousel-product {
+    position: absolute;
+    top: 50%;
+    right: 4.5rem;
+    transform: translateY(-50%);
     width: 100%;
     max-width: 25rem;
-    margin-left: auto;
     border-radius: 1.5rem;
     background: rgba(255,255,255,0.12);
     border: 1px solid rgba(255,255,255,0.12);
@@ -1076,11 +1078,13 @@
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
     .sf-hero-grid { min-height: auto; padding-top: 0; }
-    .sf-carousel-shell, .sf-carousel-slide { min-height: auto; }
+    .sf-carousel-shell { min-height: 100dvh; }
+    .sf-carousel-slide { min-height: auto; }
     .sf-carousel-slide { padding: 6.5rem 2rem 2rem; }
     .sf-carousel-visual { inset: 0; }
     .sf-carousel-copy { min-height: calc(100vh - 8.5rem); max-width: 36rem; }
-    .sf-carousel-visual-content { min-height: 100vh; padding: 6.5rem 2rem 2rem; }
+    .sf-carousel-visual-content { min-height: 100vh; padding: 6.5rem 2rem 2rem; justify-content: flex-start; }
+    .sf-carousel-product { display: none; }
     .sf-promo-grid,
     .sf-category-offers { grid-template-columns: 1fr; }
     .sf-deals-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1094,8 +1098,7 @@
     .sf-carousel-copy .sf-lead { font-size: 15px; }
     .sf-carousel-copy { min-height: calc(100vh - 7.2rem); max-width: 100%; }
     .sf-carousel-visual-content { min-height: 100vh; padding: 6rem 1.2rem 1.2rem; }
-    .sf-carousel-product { max-width: 100%; }
-    .sf-carousel-product-footer { flex-direction: column; align-items: flex-start; }
+    .sf-carousel-product { display: none; }
     .sf-h1 { font-size: 30px; }
     .sf-metrics { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .sf-fab { bottom: 20px; right: 20px; padding: 11px 18px; font-size: 13px; }
@@ -1208,7 +1211,25 @@
                     <div class="sf-carousel-visual-card">
                         <img src="{{ $slide['image_url'] }}" alt="{{ $slide['feature_title'] }}" class="sf-carousel-visual-media" loading="eager">
                         <div class="sf-carousel-visual-overlay"></div>
-                        <div class="sf-carousel-visual-content"></div>
+                        <div class="sf-carousel-visual-content">
+                            <div class="sf-carousel-copy">
+                                <p class="sf-carousel-kicker">{{ $slide['kicker'] }}</p>
+                                <span class="sf-badge">{{ $slide['badge'] }}</span>
+                                <h2 class="sf-carousel-title">{{ $slide['title'] }}</h2>
+                                <p class="sf-lead">{{ $slide['description'] }}</p>
+
+                            </div>
+
+                            <div class="sf-carousel-product">
+                                <p class="sf-carousel-product-label">{{ $slide['feature_label'] }}</p>
+                                <h3 class="sf-carousel-product-title">{{ $slide['feature_title'] }}</h3>
+                                <p class="sf-carousel-product-text">{{ $slide['feature_text'] }}</p>
+                                <div class="sf-carousel-product-footer">
+                                    <span class="sf-carousel-product-price">{{ $slide['price_label'] }}</span>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -1222,68 +1243,6 @@
         ></button>
     </div>
 </section>
-
-<section class="hidden">
-    <div class="sf-hero-main">
-        <span class="sf-badge">
-            <span class="sf-badge-dot"></span>
-            Platform Modern
-        </span>
-        <h1 class="sf-h1">Pengalaman belanja modern yang rapi dan siap dipresentasikan.</h1>
-        <p class="sf-lead">Fondasi visual untuk katalog, detail produk, keranjang, dan checkout. Semua komponen dirancang reusable agar mudah di-scale.</p>
-        <div class="sf-cta-row">
-            <a href="{{ route('products.index') }}" class="sf-btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                Jelajahi Produk
-            </a>
-            <a href="{{ route('checkout.index') }}" class="sf-btn-outline">
-                Lihat Checkout
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-        </div>
-        <div class="sf-metrics">
-            @foreach ($stats as $stat)
-                <div class="sf-metric">
-                    <p class="sf-metric-label">{{ $stat['label'] }}</p>
-                    <p class="sf-metric-value">{{ $stat['value'] }}</p>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-    <aside class="sf-hero-aside sf-anim sf-d2">
-        <div class="sf-aside-header">
-            <span class="sf-aside-eyebrow">Sorotan</span>
-            <span class="sf-aside-cat-pill">{{ $spotlightProduct['category'] }}</span>
-        </div>
-        @if (!empty($spotlightProduct['image_url']))
-            <div class="sf-aside-img-wrap">
-                <img class="sf-aside-img" src="{{ $spotlightProduct['image_url'] }}" alt="{{ $spotlightProduct['name'] }}" loading="lazy">
-                <div class="sf-aside-img-gradient"></div>
-                <div class="sf-aside-glass">
-                    <p class="sf-aside-cover-cat">{{ $spotlightProduct['category'] }}</p>
-                    <h2 class="sf-aside-cover-name">{{ $spotlightProduct['name'] }}</h2>
-                </div>
-            </div>
-        @else
-            <div class="sf-aside-cover" style="{{ $spotlightProduct['cover_style'] ?? '' }}">
-                <div class="sf-aside-cover-inner">
-                    <p class="sf-aside-cover-cat">{{ $spotlightProduct['category'] }}</p>
-                    <h2 class="sf-aside-cover-name">{{ $spotlightProduct['name'] }}</h2>
-                    <p class="sf-aside-cover-desc">{{ $spotlightProduct['description'] }}</p>
-                </div>
-            </div>
-        @endif
-        <div class="sf-aside-price-row">
-            <div>
-                <p class="sf-aside-price-label">Harga</p>
-                <p class="sf-aside-price-value">{{ $spotlightProduct['price_label'] }}</p>
-            </div>
-            <a href="{{ route('products.show', $spotlightProduct['slug']) }}" class="sf-aside-price-btn">Lihat →</a>
-        </div>
-    </aside>
-</section>
-
 
 {{-- ══════════════════════════════════════════════════════
      DARK WRAPPER — SECTION 2 & 3
