@@ -1211,25 +1211,6 @@
                     <div class="sf-carousel-visual-card">
                         <img src="{{ $slide['image_url'] }}" alt="{{ $slide['feature_title'] }}" class="sf-carousel-visual-media" loading="eager">
                         <div class="sf-carousel-visual-overlay"></div>
-                        <div class="sf-carousel-visual-content">
-                            <div class="sf-carousel-copy">
-                                <p class="sf-carousel-kicker">{{ $slide['kicker'] }}</p>
-                                <span class="sf-badge">{{ $slide['badge'] }}</span>
-                                <h2 class="sf-carousel-title">{{ $slide['title'] }}</h2>
-                                <p class="sf-lead">{{ $slide['description'] }}</p>
-
-                            </div>
-
-                            <div class="sf-carousel-product">
-                                <p class="sf-carousel-product-label">{{ $slide['feature_label'] }}</p>
-                                <h3 class="sf-carousel-product-title">{{ $slide['feature_title'] }}</h3>
-                                <p class="sf-carousel-product-text">{{ $slide['feature_text'] }}</p>
-                                <div class="sf-carousel-product-footer">
-                                    <span class="sf-carousel-product-price">{{ $slide['price_label'] }}</span>
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </article>
